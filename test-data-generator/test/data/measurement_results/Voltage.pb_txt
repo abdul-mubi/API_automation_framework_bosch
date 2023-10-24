@@ -1,0 +1,78 @@
+series_group {
+  series {
+    key: 0
+    name: "SupplyVoltage"
+    value_type: DOUBLE
+    uid: "CTP-SupplyVoltage"
+  }
+  time_point {
+    timestamp: 1641204721701
+    data_point {
+      series_ref: 0
+      value {
+        scalar_value {
+          number_value {
+            double_value: 13.002272605895996
+          }
+        }
+      }
+    }
+  }
+  time_point {
+    timestamp: 1641204721800
+    data_point {
+      series_ref: 0
+      value {
+        scalar_value {
+          number_value {
+            double_value: 13.002272605895996
+          }
+        }
+      }
+    }
+  }
+  time_point {
+    timestamp: 1641204721990
+    data_point {
+      series_ref: 0
+      value {
+        scalar_value {
+          number_value {
+            double_value: 13.093181610107422
+          }
+        }
+      }
+    }
+  }
+  time_point {
+    timestamp: 1641204722101
+    data_point {
+      series_ref: 0
+      value {
+        scalar_value {
+          number_value {
+            double_value: 13.04772663116455
+          }
+        }
+      }
+    }
+  }
+  time_point {
+    timestamp: 1641204722290
+    data_point {
+      series_ref: 0
+      value {
+        scalar_value {
+          number_value {
+            double_value: 13.04772663116455
+          }
+        }
+      }
+    }
+  }
+}
+marker {
+  timestamp: 1641204721418
+  label: "Job Installation"
+  type: JOB_INSTALLATION
+}

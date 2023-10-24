@@ -1,0 +1,179 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: 
+
+BO_ 2633940052 J1939Message: 40 Vector__XXX
+ SG_ Signal_01 : 0|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_02 : 8|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_03 : 16|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_04 : 24|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_05 : 32|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_06 : 40|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_07 : 48|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_08 : 56|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_09 : 64|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_10 : 72|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_11 : 80|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_12 : 88|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_13 : 96|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_14 : 104|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_15 : 112|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_16 : 120|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_17 : 128|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_18 : 136|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_19 : 144|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_20 : 152|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_21 : 160|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_22 : 168|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_23 : 176|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_24 : 184|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_25 : 192|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_26 : 200|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_27 : 208|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_28 : 216|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_29 : 224|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_30 : 232|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_31 : 240|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_32 : 248|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_33 : 256|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_34 : 264|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_35 : 272|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_36 : 280|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_37 : 288|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_38 : 296|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_39 : 304|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_40 : 312|8@1+ (1,0) [0|255] "Num" Vector__XXX
+
+
+CM_ BO_ 2633940052 "J1939 Message";
+CM_ SG_ 2633940052 Signal_01 "Signal 01 of J1939 message";
+CM_ SG_ 2633940052 Signal_02 "Signal 02 of J1939 message";
+CM_ SG_ 2633940052 Signal_03 "Signal 03 of J1939 message";
+CM_ SG_ 2633940052 Signal_04 "Signal 04 of J1939 message";
+CM_ SG_ 2633940052 Signal_05 "Signal 05 of J1939 message";
+CM_ SG_ 2633940052 Signal_06 "Signal 06 of J1939 message";
+CM_ SG_ 2633940052 Signal_07 "Signal 07 of J1939 message";
+CM_ SG_ 2633940052 Signal_08 "Signal 08 of J1939 message";
+CM_ SG_ 2633940052 Signal_09 "Signal 09 of J1939 message";
+CM_ SG_ 2633940052 Signal_10 "Signal 10 of J1939 message";
+CM_ SG_ 2633940052 Signal_11 "Signal 11 of J1939 message";
+CM_ SG_ 2633940052 Signal_12 "Signal 12 of J1939 message";
+CM_ SG_ 2633940052 Signal_13 "Signal 13 of J1939 message";
+CM_ SG_ 2633940052 Signal_14 "Signal 14 of J1939 message";
+CM_ SG_ 2633940052 Signal_15 "Signal 15 of J1939 message";
+CM_ SG_ 2633940052 Signal_16 "Signal 16 of J1939 message";
+CM_ SG_ 2633940052 Signal_17 "Signal 17 of J1939 message";
+CM_ SG_ 2633940052 Signal_18 "Signal 18 of J1939 message";
+CM_ SG_ 2633940052 Signal_19 "Signal 19 of J1939 message";
+CM_ SG_ 2633940052 Signal_20 "Signal 20 of J1939 message";
+CM_ SG_ 2633940052 Signal_21 "Signal 21 of J1939 message";
+CM_ SG_ 2633940052 Signal_22 "Signal 22 of J1939 message";
+CM_ SG_ 2633940052 Signal_23 "Signal 23 of J1939 message";
+CM_ SG_ 2633940052 Signal_24 "Signal 24 of J1939 message";
+CM_ SG_ 2633940052 Signal_25 "Signal 25 of J1939 message";
+CM_ SG_ 2633940052 Signal_26 "Signal 26 of J1939 message";
+CM_ SG_ 2633940052 Signal_27 "Signal 27 of J1939 message";
+CM_ SG_ 2633940052 Signal_28 "Signal 28 of J1939 message";
+CM_ SG_ 2633940052 Signal_29 "Signal 29 of J1939 message";
+CM_ SG_ 2633940052 Signal_30 "Signal 30 of J1939 message";
+CM_ SG_ 2633940052 Signal_31 "Signal 31 of J1939 message";
+CM_ SG_ 2633940052 Signal_32 "Signal 32 of J1939 message";
+CM_ SG_ 2633940052 Signal_33 "Signal 33 of J1939 message";
+CM_ SG_ 2633940052 Signal_34 "Signal 34 of J1939 message";
+CM_ SG_ 2633940052 Signal_35 "Signal 35 of J1939 message";
+CM_ SG_ 2633940052 Signal_36 "Signal 36 of J1939 message";
+CM_ SG_ 2633940052 Signal_37 "Signal 37 of J1939 message";
+CM_ SG_ 2633940052 Signal_38 "Signal 38 of J1939 message";
+CM_ SG_ 2633940052 Signal_39 "Signal 39 of J1939 message";
+CM_ SG_ 2633940052 Signal_40 "Signal 40 of J1939 message";
+
+BA_DEF_ SG_  "SPN" INT 0 524287;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG";
+BA_DEF_ "DatabaseVersion" STRING ;
+BA_DEF_ "BusType" STRING ;
+BA_DEF_ "ProtocolType" STRING ;
+BA_DEF_ "DatabaseCompiler" STRING ;
+BA_DEF_DEF_ "SPN" 0;
+BA_DEF_DEF_ "VFrameFormat" "J1939PG";
+
+
+BA_ "VFrameFormat" BO_ 2633940052 3;
+
+BA_ "SPN" SG_ 2633940052 Signal_01 1001;
+BA_ "SPN" SG_ 2633940052 Signal_02 1002;
+BA_ "SPN" SG_ 2633940052 Signal_03 1003;
+BA_ "SPN" SG_ 2633940052 Signal_04 1004;
+BA_ "SPN" SG_ 2633940052 Signal_05 1005;
+BA_ "SPN" SG_ 2633940052 Signal_06 1006;
+BA_ "SPN" SG_ 2633940052 Signal_07 1007;
+BA_ "SPN" SG_ 2633940052 Signal_08 1008;
+
+BA_ "SPN" SG_ 2633940052 Signal_09 1009;
+BA_ "SPN" SG_ 2633940052 Signal_10 1010;
+BA_ "SPN" SG_ 2633940052 Signal_11 1011;
+BA_ "SPN" SG_ 2633940052 Signal_12 1012;
+BA_ "SPN" SG_ 2633940052 Signal_13 1013;
+BA_ "SPN" SG_ 2633940052 Signal_14 1014;
+BA_ "SPN" SG_ 2633940052 Signal_15 1015;
+BA_ "SPN" SG_ 2633940052 Signal_16 1016;
+
+BA_ "SPN" SG_ 2633940052 Signal_17 1017;
+BA_ "SPN" SG_ 2633940052 Signal_18 1018;
+BA_ "SPN" SG_ 2633940052 Signal_19 1019;
+BA_ "SPN" SG_ 2633940052 Signal_20 1020;
+BA_ "SPN" SG_ 2633940052 Signal_21 1021;
+BA_ "SPN" SG_ 2633940052 Signal_22 1022;
+BA_ "SPN" SG_ 2633940052 Signal_23 1023;
+BA_ "SPN" SG_ 2633940052 Signal_24 1024;
+
+BA_ "SPN" SG_ 2633940052 Signal_25 1025;
+BA_ "SPN" SG_ 2633940052 Signal_26 1026;
+BA_ "SPN" SG_ 2633940052 Signal_27 1027;
+BA_ "SPN" SG_ 2633940052 Signal_28 1028;
+BA_ "SPN" SG_ 2633940052 Signal_29 1029;
+BA_ "SPN" SG_ 2633940052 Signal_30 1030;
+BA_ "SPN" SG_ 2633940052 Signal_31 1031;
+BA_ "SPN" SG_ 2633940052 Signal_32 1032;
+
+BA_ "SPN" SG_ 2633940052 Signal_33 1032;
+BA_ "SPN" SG_ 2633940052 Signal_34 1034;
+BA_ "SPN" SG_ 2633940052 Signal_35 1035;
+BA_ "SPN" SG_ 2633940052 Signal_36 1036;
+BA_ "SPN" SG_ 2633940052 Signal_37 1037;
+BA_ "SPN" SG_ 2633940052 Signal_38 1038;
+BA_ "SPN" SG_ 2633940052 Signal_39 1039;
+BA_ "SPN" SG_ 2633940052 Signal_40 1040;
+

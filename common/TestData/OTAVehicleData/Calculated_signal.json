@@ -1,0 +1,71 @@
+{
+    "Addcalsignal2andconstant":{
+        "name": "Calculated_Signal_1",
+        "unit": "S",
+        "description": "",
+        "downsamplingRate": 0,
+        "formula": {
+          "anchor": {
+            "type": "ADDITION",
+            "operand1": {
+              "type": "CALCULATED_SIGNAL_REFERENCE",
+              "signalName": "Calculated_Signal_2",
+              "signalId": "Calculated_Signal_2"
+            },
+            "operand2": {
+              "type": "VALUE",
+              "value": 10
+            },
+            "factor1": 1,
+            "factor2": 1
+          },
+          "valid": true
+        }
+    },
+    "Addcalsignal1andconstant":{
+        "name": "Calculated_Signal_2",
+        "unit": "S",
+        "description": "",
+        "downsamplingRate": 0,
+        "formula": {
+          "anchor": {
+            "type": "ADDITION",
+            "operand1": {
+              "type": "CALCULATED_SIGNAL_REFERENCE",
+              "signalName": "Calculated_Signal_1",
+              "signalId": "Calculated_Signal_1"
+            },
+            "operand2": {
+              "type": "VALUE",
+              "value": 20
+            },
+            "factor1": 1,
+            "factor2": 1
+          },
+          "valid": true
+        }
+    },
+    "Addscalarandconstant":{
+      "name": "Calculated_Signal_2",
+      "unit": "S",
+      "description": "",
+      "downsamplingRate": 0,
+      "formula": {
+        "anchor": {
+          "type": "ADDITION",
+          "operand1": {
+            "type": "CALCULATED_SIGNAL_REFERENCE",
+            "signalName": "Matrix_operator",
+            "signalId": "Matrix_operator"
+          },
+          "operand2": {
+            "type": "VALUE",
+            "value": 20
+          },
+          "factor1": 1,
+          "factor2": 1
+        },
+        "valid": true
+        }
+    }
+}

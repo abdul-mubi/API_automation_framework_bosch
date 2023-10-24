@@ -1,0 +1,46 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: Node1 Node2 Node3
+
+BO_ 2181038088 ComOBU_1000ms_0: 8 CAN_IO
+ SG_ ComOBU_ctLrnZFC2 : 32|16@0+ (1,0) [0|65535] "-" Node2
+ SG_ ComOBU_ctLrnZFC1 : 16|16@0+ (1,0) [0|65535] "-" Node2
+ SG_ ComOBU_ctLrnZFC0 : 0|16@1- (1,0) [0|65535] "-" Node2
+
+BO_ 769 ZomOBU_1000ms_0: 8 CAN_IO
+ SG_ ZomOBU_ctLrnZFC2 : 32|16@1+ (1,0) [0|65535] "-" Vector__XX2
+ SG_ ZomOBU_ctLrnZFC1 : 16|16@1+ (1,0) [0|65535] "-" Vector__XX2
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "BusType" "CAN";

@@ -1,0 +1,77 @@
+pipeline {
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+    }
+
+    agent {node "LB-C-00026"}
+
+    parameters {
+        gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/execution', description: 'Select the Git branch to execute tests using branch.\n Default - execution branch', listSize: '0', name: 'GITBranch', quickFilterEnabled: false, selectedValue: 'DEFAULT', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH', useRepository: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git'
+        string(name: 'VC1_Filter_id', defaultValue:'', description:'Enter Prio1 Filter Id for execution, no DEFAULT value')
+        string(name: 'Test_PC', defaultValue:'', description:'Enter Machine / Node name to execute Test on..')
+    }
+    
+    stages(){
+        stage('Stage - GIT checkout'){
+            steps{
+                echo "GIT checkout of selected branch - ${params.GITBranch}"
+                checkout([$class: 'GitSCM', branches: [[name: "${params.GITBranch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '816c4b91-f2e7-431c-95a4-f9de22721f2a', url: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git']]])
+            }
+        }
+        stage('XRay - Update Tests from repo'){
+            steps{
+                script {
+                    echo 'Updating JIRA tests from repository'                  
+                }
+                
+            }
+            post{
+                always{
+                    echo 'post of Xray stage'
+                }
+                
+            }
+            
+        }
+        stage('Test Execution - Prio_1 Filter Tests'){
+            // execute using VC1 Jenkins Filter ${currentBuild.result}
+            when {
+                expression {params.VC1_Filter_id}   
+            }
+            steps{
+                catchError{
+                    echo "----- Starting execution using Filter ID - ${params.VC1_Filter_id} on machine - ${params.Test_PC}"
+                    build(job: 'Pipeline_TestFilter_Executor', parameters: [string(name:'JIRA_FILTER_ID', value:"${params.VC1_Filter_id}"), string(name:'MACHINE', value:"${params.Test_PC}")])
+                }
+            }
+            post{
+                always{
+                    echo 'Stage VC1 post action: We may skip stage - VC2 in case VC1 has FAILED'
+                }
+            } 
+        }
+
+        // stage('Test Execution - Prio_2 Filter Tests'){
+        //     when {
+        //         expression {params.VC2_Filter_id}
+        //     }
+        //     steps{
+        //         catchError{
+        //             //println(params.VC1_Filter_id ==~ /[0-9]+/)
+        //             echo "----- Starting execution using Filter ID - ${params.VC2_Filter_id}"
+        //             build(job: 'PL_TestFilter_Executor', parameters: [string(name:'JIRA_FILTER_ID', value:"${params.VC2_Filter_id}"), string(name:'MACHINE', value:'LB-C-00022')])
+        //         }
+        //     }
+        //     post{
+        //         always{
+        //             echo 'Stage VC2 post action:'
+        //         }
+        //     } 
+        // }
+    }
+    post{
+        always{
+            echo "final post code block"
+        }
+    }
+}

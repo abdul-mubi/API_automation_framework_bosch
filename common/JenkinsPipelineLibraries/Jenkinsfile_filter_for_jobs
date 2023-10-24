@@ -1,0 +1,152 @@
+DEVICE_VERSION=''
+EXECUTION_DETAILS=''
+def test_plan_ids=''
+def execution_id=''
+def TP_maps = [:]
+TP_maps["TP_29102"] = "ETEMC-3109"
+TP_maps["TP_28917"] = "ETEMC-3110"
+TP_maps["TP_28918"] = "ETEMC-3111"
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+    }
+    parameters {
+        gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/execution', description: 'Select the Git branch to execute tests using branch.', listSize: '0', name: 'GITBranch', quickFilterEnabled: false, selectedValue: 'DEFAULT', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH', useRepository: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git'
+        string (name:'JIRA_FILTER_ID', description: 'Enter Filter id for test execution.\n Example: ETEMC-1346')
+        choice choices: ['No','Yes'], description: 'Do you like to create new Test Execution for current Test trigger? (Yes/No)\nDefault - No', name: 'New_Test_Execution'
+        string name:'Desired_FW_Version', description: 'Enter the desired device FW to execute the test.\n If kept empty, test will execute on already installed Device FW', defaultValue:''
+    }
+    agent {node "${MACHINE}"}
+
+    stages {
+        stage('Stage - GIT checkout'){
+            steps{
+                echo "GIT checkout of selected branch - ${params.GITBranch}"
+                checkout([$class: 'GitSCM', branches: [[name: "${params.GITBranch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '816c4b91-f2e7-431c-95a4-f9de22721f2a', url: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git']]])
+            }
+        }
+        stage('JIRA - Prepare test suite for execution from test execution'){
+            steps {
+                script{
+                    test_suite = params.JIRA_FILTER_ID
+                    test_plan_key = "TP_${test_suite}"
+                    test_plan_ids = TP_maps[test_plan_key] 
+                    command = "python jira_rest_apis.py ${test_suite} ${params.New_Test_Execution} ${test_plan_ids}"
+                    def output = bat(script: "cd API_Test/features/steps/utils && ${command}",returnStdout: true).trim()
+                    def execution_id_details = (output =~ /\[(.*?)]/)
+                    execution_id = execution_id_details[0][1].replace("\'","")
+                    echo "${execution_id}"
+                }
+            }
+        }  
+    
+        stage('Export features from Xray'){
+            steps {
+                script{
+                    echo 'exporting tests from GIT repo to JIRA'
+                    echo "${execution_id}"
+                    step([$class: 'XrayExportBuilder', filePath: './API_Test/features/xRay', issues: execution_id, serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f'])
+                }
+            }
+        }
+
+        stage('Build'){
+            steps {
+                catchError{
+                    script{
+                        bat '''cd API_Test
+pip install -r requirements.txt --proxy=https://rb-proxy-in.bosch.com:8080'''
+                        command = "behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay --no-logcapture --no-capture"     
+                        bat(script: "cd API_Test/features && ${command}")    
+                    }
+                }
+            }
+        }
+
+        stage('Post build actions'){
+            steps{
+                catchError{
+                    script{
+                        DEVICE_VERSION = bat returnStdout: true, script: '''@ECHO OFF
+setlocal enableextensions enabledelayedexpansion
+for /f "delims=" %%x in (version.json) do set "string=!string!%%x"
+
+set DEVICE_VERSION=%string:"=\\\'%
+
+echo %DEVICE_VERSION%'''
+                    
+                        EXECUTION_DETAILS = bat returnStdout: true, script: '''@ECHO OFF
+
+setlocal enableextensions enabledelayedexpansion
+for /f "delims=" %%x in (version.json) do set "string=!string!%%x"
+
+set string=%string:"=\\\'%
+
+python execution_title.py version.json %JOB_BASE_NAME%> Output
+SET /p MYVAR=<Output
+
+ECHO %MYVAR%'''
+                    
+                        bat '''python report.py
+ForFiles /p "..\\Logs" /s /d -8 /c "cmd /c del /q @file"
+if not exist Logs mkdir Logs
+for /f "eol=: delims=" %%f in (\'dir "..\\Logs\\API*.log" /b /od\') do @set "latestlog=%%f"
+copy ..\\Logs\\%latestlog% Logs /y
+echo check the logs at %JOB_URL%ws/Logs/%latestlog%
+echo "Updating cucumber result json file"
+python cucumber_result_update.py'''
+                    }
+                }
+            }
+        }
+        
+        stage('Import results to Xray (multipart)') {
+            steps {
+                step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importToSameExecution: 'true',importFilePath: 'cucumber_formated_result.json', projectKey: 'ETEMC', serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f',inputInfoSwitcher:"fileContent", 
+                importInfo:"""{
+                "fields": {
+                    "project": {
+                        "key": "ETEMC"
+                    },
+                    "summary": "${EXECUTION_DETAILS}",
+                    "description":"Device details in the machine: \n${DEVICE_VERSION}",
+                    "issuetype": {
+                        "name":"Test Execution"
+                    },
+                    "customfield_10627":[${test_plan_ids}]
+                    }
+                }"""])
+            }
+        }
+
+        stage('Report email'){
+            when{
+                    expression { params.JIRA_FILTER_ID == '26911'}
+                }     
+            steps{
+                script{
+                    def sub = "${JOB_NAME} - Build ${BUILD_NUMBER}: PC - ${NODE_NAME}"
+                    emailext body: '$DEFAULT_CONTENT', replyTo: '$DEFAULT_REPLYTO', subject: "${sub}", to: '$DEFAULT_RECIPIENTS'
+                }
+            }
+        }
+
+        stage('Generate Cucumber report'){
+            steps{
+                cucumber buildStatus: 'UNSTABLE',
+                fileIncludePattern: '**/cucumber_formated_result.json',
+                sortingMethod: 'ALPHABETICAL'
+            }
+        }
+
+        stage('Update test execution with defects'){
+            steps {
+                script{
+                    command = "python update_test_execution_with_defects.py ${execution_id}"     
+                    bat(script: "${command}")    
+                }
+            }
+        }
+    }
+}

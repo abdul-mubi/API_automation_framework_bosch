@@ -1,0 +1,17 @@
+{
+    "Regression-HINO"               :"ETEMC-4212",
+    "Regression-PACCAR"             :"ETEMC-1346",
+    "Smoke-HINO"                    :"ETEMC-1351",
+    "Smoke-PACCAR"                  :"ETEMC-1347",
+    "Load-HINO"                     :"ETEMC-2865",
+    "Load-PACCAR"                   :"ETEMC-2866",
+    "Installation-HINO"             :"ETEMC-3114",
+    "Installation-PACCAR"           :"ETEMC-3113",
+    "Smoke-Team_Mercur"             :"ETEMC-3109",
+    "Smoke-Team_BEts"               :"ETEMC-3110",
+    "Smoke-Team_BEts2"              :"ETEMC-3111",
+    "Smoke-TCU2_NA_PACR"            :"ETEMC-8113",
+    "Smoke-TCU2_EU_PACR"            :"ETEMC-8112",
+    "Regression-TCU2_EU_PACR"       :"ETEMC-8577",
+    "Regression-TCU2_NA_PACR"       :"ETEMC-8578"
+}

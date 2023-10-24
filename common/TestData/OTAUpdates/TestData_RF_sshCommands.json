@@ -1,0 +1,6 @@
+{
+    "remoteButton": {
+        "flashApproval": "echo 'fake_high' | nc -U /run/din0 -N",
+        "LEDstatusCheck": "echo 'readback; unlock;' | nc -U /run/dout0 -w 1"
+    }
+}

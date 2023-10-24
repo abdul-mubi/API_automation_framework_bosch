@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import public "backend_to_device_message_meta.proto";
+
+message SetGpsStatusCommand {
+
+  BackendToDeviceMessageMeta meta = 3347973;
+
+  // Disable or enable sending of GPS positions
+  bool gpsState = 111665659;
+
+}

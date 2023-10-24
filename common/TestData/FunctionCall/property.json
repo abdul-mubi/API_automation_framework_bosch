@@ -1,0 +1,54 @@
+{
+    "remote_tacho_download": {
+        "enable": {
+            "name": "remote_tacho_download.set_enabled",
+            "inArguments": {
+                "enabled": true
+            }
+        },
+        "disable": {
+            "name": "remote_tacho_download.set_enabled",
+            "inArguments": {
+                "enabled": false
+            }
+        },
+        "get_status": {
+            "name": "remote_tacho_download.get_enabled",
+            "inArguments": {}
+        }
+    },
+    "security": {
+        "ids_csg_logs": {
+            "name": "security.ids.csg.logs",
+            "inArguments": {
+                "correlationId":"test_correlation_id"
+            }
+        }
+    },
+    "remotesettings":{ 
+        "remotesettings_precondition": {
+            "name":"remotesettings.configure",
+            "inArguments":{
+               "config":""
+            }
+         }
+    },
+     "remote_download": {
+        "enable": {
+            "name": "remote_download.set_enabled",
+            "inArguments": {
+                "enabled": true
+            }
+        },
+        "disable": {
+            "name": "remote_download.set_enabled",
+            "inArguments": {
+                "enabled": false
+            }
+        },
+        "get_status": {
+            "name": "remote_download.get_enabled",
+            "inArguments": {}
+        }
+    }
+}

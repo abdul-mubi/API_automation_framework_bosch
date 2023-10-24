@@ -1,0 +1,53 @@
+from steps.constantfiles.constants import * # NOSONAR
+
+SN_NAME = "?search=name=={}"
+
+# FleetManagement_Class
+# EndPoints
+FM_DEVICES = "/fleet-management/devices/"
+FM_DEVICES_ID = FM_DEVICES + "{}"
+FM_UNDISPATCH = FM_DEVICES_ID + "/undispatch"
+FM_LOG_ENTRIES = FM_DEVICES_ID + "/logEntries"
+FM_LOG_TRIGGERS = FM_DEVICES_ID + "/logTriggers"
+FM_LOG_TRIGGERS_ID = FM_LOG_TRIGGERS + "/{}"
+FM_LOG_ENTRIES_INDEX = FM_LOG_ENTRIES + "/{}"
+FM_LOG_ENTRIES_ID_FILE = FM_LOG_ENTRIES_INDEX + "/file"
+FM_VEHICLES = "/fleet-management/vehicles"
+FM_VEHICLES_ID = FM_VEHICLES + "/{}"
+FM_VEHICLES_GPSCONFIG = FM_VEHICLES + "/gpsConfig"
+FM_VEHICLES_POSITIONS = FM_VEHICLES + "/positions"
+FM_VEHICLES_ID_POSITIONS = FM_VEHICLES_ID + "/positions"
+FM_VEHICLES_SEARCH_VIN = FM_VEHICLES + "?search=VIN=={}"
+FM_VEHICLES_SEARCH_NAME = FM_VEHICLES + SN_NAME
+FM_VEHICLES_DEVICE_SLOT = FM_VEHICLES_ID + "/deviceSlots"
+FM_VEHICLES_DEVICE_SLOT_NAME = FM_VEHICLES_DEVICE_SLOT + "/{}"
+FM_VEHICLES_DEVICE_SLOT_NAME_ID = FM_VEHICLES_DEVICE_SLOT_NAME + "/{}"
+FM_VEHICLES_DEVICE_SLOT_NAME_SMS = FM_VEHICLES_DEVICE_SLOT_NAME + "/sms"
+FM_VEHICLES_ID_LATEST_POSITION = FM_VEHICLES_ID + "/latestPosition"
+FM_DEVICE_SLOT_NAME_WAKEUPCONFIG = FM_VEHICLES_DEVICE_SLOT_NAME + "/wakeUpConfigurations"
+FM_DEVICE_SLOT_NAME_WAKEUPCONFIG_ID = FM_DEVICE_SLOT_NAME_WAKEUPCONFIG + "/{}"
+FM_VEHICLES_POSITION_X_Y = FM_VEHICLES_POSITIONS + "?search=x1=={};y1=={};x2=={};y2=={}"
+FM_MANUFACTURERS = "/fleet-management/manufacturers"
+FM_MANUFACTURERS_ID_MODELS = FM_MANUFACTURERS + "/{}/models"
+FM_MANUFACTURERS_SEARCH_NAME = FM_MANUFACTURERS + SN_NAME
+FM_MANUFACTURERS_ID_MODELS_SEARCH_NAME = FM_MANUFACTURERS_ID_MODELS + SN_NAME
+FM_VSG = "/fleet-management/vehicleSetupGroups"
+FM_VSG_ID = FM_VSG + "/{}"
+FM_VSG_ID_DEVICE_SLOT = FM_VSG_ID + "/deviceSlots"
+FM_VSG_ID_DEVICE_SLOT_NAME = FM_VSG_ID_DEVICE_SLOT + "/{}"
+FM_VSG_SEARCH_NAME = FM_VSG + "?search=name=co={}"
+FM_VSG_ID_ASSIGNEDVEHICLE = FM_VSG_ID + "/assignedVehicles"
+FM_VSG_ID_ASSIGNEDVEHICLE_NAME = FM_VSG_ID_ASSIGNEDVEHICLE + "/{}"
+TEST_DATA_FM = "\\..\\..\\..\\..\\common\\TestData\\FleetManagement"
+FM_GPS_DATA_PATH = "\\..\\..\\..\\common\\TestData\\FleetManagement\\GPSDATA.txt"
+DEVICE_LOG_PATH = "\\..\\..\\..\\common\\Device_logs"
+
+# Messages
+FM_UNABLE_TO_FIND_VEHICLE_NAME =  "Unable to find vehicle with name {}"
+FM_DATE_AND_TIME = "%d-%m-%Y, %H:%M"
+FM_IDS_REPORT_RESULT = "ABCD"
+
+#Self mapping endpoints
+SM = "/self-mapping"
+SM_CONFIG = SM + "/config"
+SM_DEVICE_ID = SM + "/devices/{}"

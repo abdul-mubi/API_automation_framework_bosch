@@ -1,0 +1,131 @@
+{
+  "rebootDevice" :
+  {
+    "CCU": ["reboot.sh 0"]
+  },
+  "deleteAllJobs":
+  { 
+    "CCU":
+    [
+      "rm -rf /vappdata/cdp_app/*/*",
+      "rm -rf /vappdata/rda_app/*/*",      
+      "rm -rf /data/otaupdate/obu_app/FOTA/DATA/TASKS/*",
+      "rm -rf /vappdata/rda_app/pending-requests.pb_txt",
+      "rm -rf /vappdata/sua_app/task_control_installation_request.txt",
+      "rm -rf /data/signed/sw_update/state_files/*"
+    ]
+  },
+  "getKeystorePath":{
+    "CCU":["cat /media/bosch/mbs/mprm.prs | grep -w 'javax.net.ssl.keyStore' | cut -d '=' -f  2"]
+  },
+  "accessToModifyDeviceFiles":{
+    "CCU":""
+  },
+
+  "stopGSMConnection":{
+    "CCU":["systemctl stop cellularnetwork.service"]
+  },
+
+  "startGSMConnection":{
+    "CCU":["systemctl start cellularnetwork.service"]
+  },
+
+  "stopGSM_MBS_Connection":{
+    "CCU":["systemctl stop mbs"]
+  },
+
+  "startGSM_MBS_Connection":{
+    "CCU":["systemctl start mbs"]
+  },
+
+  "getPairingDeviceStatus":{
+    "CCU":"tdr_get_config_value integer BACKEND_VEHICLE_PAIRING_STATUS"
+  },
+
+  "readCCUVersionLineCTPGVersionJSONFile":{
+    "CCU":"cat /boschapp/app_version.json | grep 'ccu6430_main'"
+  },
+
+  "readMBSLineCTPGVersionJSONFile":{
+    "CCU":"cat /etc/topas/ctpg_version.json | grep 'mbs'"
+  },
+
+  "readDeviceCustomer":{
+    "CCU":"cfgclient -r -t CS -p 0x03F0"
+  },
+  
+  "deleteDeviceLogs":{
+    "CCU":
+    [
+      "rm -rf /var/log/syslog.log*"
+    ]
+  },
+
+  "getSelfUpdateStatus":{
+    "CCU":"awk '/remove new version folder/,/seconds/' /var/log/syslog.log"
+  },
+
+  "getFullUpdateStatus":{
+    "CCU":"cat /data/signed/sw_update/state_files/UpdateResultFile"
+  },
+
+  "peaSelfUpdateDatabase":{
+    "CCU" : "cat /data/encrypted/pea_app/STORE/database.xml"
+  },
+
+  "peaSelfUpdateConfig":{
+    "CCU" : "cat /data/encrypted/pea_app/CONFIGS/config.xml"
+  },
+
+  "zipCrtFolder":{
+    "CCU" : "zip -r /data/encrypted/crt.zip /data/encrypted/crt"
+  },
+
+  "getCrtFolder":{
+    "CCU" : "/data/encrypted/crt.zip"
+  },
+
+  "implantDeviceProfileIdPACCAR":{
+    "CCU" : "cfgclient -w -t CS -p 0x03F0 -v 0x50 0x01"
+  },
+
+  "implantDeviceProfileIdHINO":{
+    "CCU" : "cfgclient -w -t CS -p 0x03F0 -v 0x48 0x01"
+  },
+
+  "implantDeviceProfileIdPACCAR_NON_NGD":{
+    "CCU" : "cfgclient -w -t CS -p 0x03F0 -v 0x50 0x02"
+  },
+
+  "implantEsim":{
+    "CCU" : "cfgclient -w -t CS -p 0x1210 -v 01"
+  },
+
+  "implantLTEAntenna":{
+    "CCU" : "cfgclient -w -t CS -p 0x1267 -v 02"
+  },
+
+  "implantDeviceSerialNumber":{
+    "CCU" : "cfgclient -w -t CS -p 0x3E87 -v "
+  },
+
+  "getmprmFile":{
+    "CCU" : "cat /data/unsigned/mbs/mprm.prs"
+  },
+
+  "getCCUVersion":{
+    "CCU":"cat /boschapp/app_version.json | grep 'Short_Version'"
+  },
+  "stop_ota_client":{
+    "CCU":"systemctl stop ota_client.service"
+  },
+  "start_ota_client":{
+    "CCU":"sh /home/topas/ota_client/start-ota-client.sh &>/dev/null & "
+  },
+  "setDate":{
+    "CCU":"date -s '{device_time}Z'"
+  },
+  "implantDeviceVIN":{
+    "CCU" : "cfgclient -w -t CS -p 0x1304 -v "
+  }
+}

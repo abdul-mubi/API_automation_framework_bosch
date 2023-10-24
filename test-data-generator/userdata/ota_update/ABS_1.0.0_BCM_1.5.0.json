@@ -1,0 +1,16 @@
+{
+    "softwareNodes": [
+        {
+            "id": "ABS",
+            "name": "Anti-lock braking system",
+            "type": 1,
+            "version": "1.0.0"
+        },
+        {
+            "id": "BCM",
+            "name": "Body Control Module",
+            "type": 1,
+            "version": "1.5.0"
+        }
+    ]
+}

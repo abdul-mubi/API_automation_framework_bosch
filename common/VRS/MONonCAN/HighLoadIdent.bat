@@ -1,0 +1,1 @@
+start MONonCAN.exe --start --hardware-device="ETAS://ETH/ES910.3:102008/CAN:1" --mode="highloadidents" --ini="D:\SilkTest\Tests_INCA_SerialProts\_COMMON\VRS\MONonCAN\Data\MONonCAN_1000k.ini"

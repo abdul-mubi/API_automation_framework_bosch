@@ -1,0 +1,85 @@
+{
+    "positions": {
+        "Hawaii": {
+            "latitude": "19.8968",
+            "latitude_dir": "N",
+            "longitude": "155.5828",
+            "longitude_dir": "W",
+            "altitude": "4205.0"
+        },
+        "Kathmandu": {
+            "latitude": "2742.06900",
+            "latitude_dir": "N",
+            "longitude": "08519.4130",
+            "longitude_dir": "E",
+            "altitude": "1400.0"
+        },
+        "Bengaluru": {
+            "latitude": "12.9716",
+            "latitude_dir": "N",
+            "longitude": "77.5946",
+            "longitude_dir": "E",
+            "altitude": "826.0"
+        },
+        "Stuttgart": {
+            "latitude": "48.7758",
+            "latitude_dir": "N",
+            "longitude": "9.1829",
+            "longitude_dir": "E",
+            "altitude": "247.0"
+        },
+        "Ludwigsburg_Bosch": {
+            "latitude": "48.8933",
+            "latitude_dir": "N",
+            "longitude": "9.1788",
+            "longitude_dir": "E"
+        },
+        "London": {
+            "latitude": "51.5074",
+            "latitude_dir": "N",
+            "longitude": "0.1278",
+            "longitude_dir": "W",
+            "altitude": "11.0"
+        },
+        "Sydney": {
+            "latitude": "33.8688",
+            "latitude_dir": "S",
+            "longitude": "151.2093",
+            "longitude_dir": "E",
+            "altitude": "590.0"
+        },
+        "Blank": {
+            "latitude": "",
+            "latitude_dir": "",
+            "longitude": "",
+            "longitude_dir": "",
+            "altitude": "0.0"
+        }
+    },
+    "speeds": {
+        "halt": "0.000",
+        "average": "60.000",
+        "fast": "120.000",
+        "slow": "10.000"
+    },
+    "boundary_positions": {
+        "Entire_Globe": {
+            "latitude_x1": "90.0000",
+            "longitude_y1": "-180.0000",
+            "latitude_x2": "-90.0000",
+            "longitude_y2": "180.0000"
+        },
+        "Arctic_Region": {
+            "latitude_x1": "84.2609",
+            "longitude_y1": "-171.9165",
+            "latitude_x2": "81.2723",
+            "longitude_y2": "-131.3969"
+        },
+        "Bengaluru": {
+            "latitude_x1": "90.0000",
+            "longitude_y1": "-180.0000",
+            "latitude_x2": "-90.0000",
+            "longitude_y2": "180.0000"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "azure_eu": {
+        "mqtt_url":"mqtt.connect.devices.eu.bosch-mobility-cloud.com",
+        "port_no":15443,
+        "proxy_required":true,
+        "proxy_address":"127.0.0.1",
+        "proxy_port": 3128
+    },
+    "azure_na": {
+        "mqtt_url":"mqtt.connect.devices.na.bosch-mobility-cloud.com",
+        "port_no":15443,
+        "proxy_required":false,
+        "proxy_address":"",
+        "proxy_port": 0
+    }
+}

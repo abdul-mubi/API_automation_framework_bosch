@@ -1,0 +1,7 @@
+{
+    "geopositioning": {
+        "killGnss": "killall gnss-ublox",
+        "fakeFix": "cat /home/GPSDATA.txt | nc -u -w 0 127.0.0.1 2946",
+        "printAttributes": "printf \"?WATCH=\\n?POLL;\" | nc -i 1 -w 1 127.0.0.1 2947"
+    }
+}

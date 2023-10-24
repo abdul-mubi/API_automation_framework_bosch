@@ -1,0 +1,180 @@
+name: Installation Suite Executor
+on:
+  workflow_dispatch:
+    inputs:
+      device_type:
+        description: Device Type
+        type: choice
+        options:
+        - HINO
+        - PACCAR
+        default: PACCAR
+        required: true
+      machine_name:
+        description: Machine Name
+        required: true
+        type: choice
+        options:
+          - FE-Z1O03
+          - FE2Z00XT
+          - FE2Z00SN
+          - FE-Z1VCG
+          - LB-C-00027
+          - LB-C-00024
+          - LB-C-00022
+          - LB-C-00023
+        default: FE2Z00SN
+      SU_Up_version:
+        description: Device Up Version (Example:5.5.1)
+        required: true
+        type: string
+        default: ""
+      SU_Down_version:
+        description: Device Down Version (Example:5.5.0)
+        required: true
+        type: string
+        default: ""
+      Desired_FW_Version:
+        description: Desired device version (Example:5.5.1)
+        required: false
+        type: string
+        default: ""
+      Type_of_update:
+        description: Type of update
+        type: choice
+        required: false
+        options:
+        - Delta_Update
+        - Full_Update
+        - USB_Update
+        default: Delta_Update
+      new_test_execution:
+        description: New Test Execution
+        type: choice
+        options:
+        - Required
+        - Not_Required
+        default: Not_Required
+        required: true
+      test_plan_id:
+        description: Test Plan Id (Example:ETEMC-1347)
+        required: false
+        type: string
+
+jobs:
+  Installation_Suite:
+    runs-on: 
+      - self-hosted
+      - TT-Automation
+      - ${{ inputs.machine_name }}
+    timeout-minutes: 1440
+    env:
+      HTTP_PROXY: ${{ secrets.PROXY_URL }}
+      HTTPS_PROXY: ${{ secrets.PROXY_URL }}
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com
+      CUSTOMERS: HINO,PACCAR
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Install Prerequisites
+        id: install_prerequisites
+        shell: bash
+        run: |
+          cd API_Test
+          pip install -r requirements.txt
+
+      - name: Prepare Test suite for Execution
+        id: test_suite_data
+        shell: bash
+        run: |
+          echo "Update JIRA Test Execution for ${{inputs.device_type}} Installation suite" 
+          cd API_Test/features
+          OUTPUT=$(python jira_operations.py prepare_data_for_github_actions --suite Installation --device_type ${{inputs.device_type}} --new_test_execution ${{inputs.new_test_execution }} --matrix="False" --test_plan="${{inputs.test_plan_id}}")
+          echo $OUTPUT
+          echo "out_data=$OUTPUT" >> $GITHUB_OUTPUT
+    
+      - name: Import Tests from JIRA (Xray)
+        shell: bash
+        run: |
+          echo  Test execution ID = '${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }}'
+          cd API_Test/features
+          python jira_operations.py import_test_from_jira --jira_id="${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }}"
+      
+      - name: Check device version
+        id: check_device_version
+        shell: bash
+        run: |
+          echo 'Checking device FW version with Desired_FW_Version'
+          cd API_Test/features
+          behave API_check_device_version.feature -D Desired_FW_Version=${{ inputs.Desired_FW_Version }} -D Type_of_update=${{ inputs.Type_of_update }} -D device_type=${{ inputs.device_type }} --no-capture --no-capture-stderr --no-logcapture
+
+      - name: Execute Tests
+        id: test_executor
+        shell: bash
+        continue-on-error: true
+        run: |
+          echo "start_time=$(date +%s)" >> $GITHUB_OUTPUT
+          cd API_Test/features
+
+          version_file="../../version.json"
+          if test -f "$version_file"; then
+            python jira_operations.py update_test_execution_summary --test_exec_key="${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }}" --run_id=${{github.run_id}} --job_name="${{inputs.device_type}}_${{github.job}}"
+          fi
+          
+          behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D rerun_failed_test='true' -D jira_test="true" -D TEST_EXECUTION_ID=${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }} -D SU_Up_version=${{ inputs.SU_Up_version }} -D SU_Down_version=${{ inputs.SU_Down_version }} --no-capture --no-logcapture
+      
+      - name: Post build actions
+        if: ${{ always() }}
+        shell: bash
+        id: post_execution_actions
+        run: |
+          python report.py
+          
+          end_time=$(date +%s)
+          total_time=$(date -u -d "0 $end_time seconds - ${{steps.test_executor.outputs.start_time}} seconds" +"%H:%M:%S")
+
+          report_data=$(cat << EOF
+          Execution Time: $total_time
+          <br>
+          Check console output at ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+          <br>
+          Check Test Execution in JIRA
+          <a href="https://rb-tracker.bosch.com/tracker15/browse/${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }}", showTruncatedLines=false, substText="ETEMC-$1"}">${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }} </a>
+          <br>
+          EOF)
+          echo "$(echo -n $report_data; cat report.html)" > report.html
+
+          cd API_Test/features
+          python jira_operations.py update_test_execution_summary --test_exec_key="${{ fromJSON(steps.test_suite_data.outputs.out_data).test_execution }}" --run_id=${{github.run_id}} --job_name="${{inputs.device_type}}_${{github.job}}"
+     
+      - name: Email Test Execution Report
+        if: ${{ always() }}
+        id: Email_Publisher
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{secrets.SMTP_SERVER}}
+          server_port: 25
+          username: ${{secrets.JIRA_USERNAME}}
+          password: ${{secrets.JIRA_PASSWORD}}
+          subject: ${{fromJSON(steps.test_suite_data.outputs.out_data).customer}}_${{fromJSON(steps.test_suite_data.outputs.out_data).suite}} suite result on ${{runner.name}}
+          to: Be18_CS_CS_MC_TEAM_E2EGAME@bcn.bosch.com
+          from: Github actions <Serv01.Serviceaccount@etas.com>
+          html_body: file://report.html
+          ignore_cert: true
+      
+      - name: Upload Result Data
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: execution_report
+          if-no-files-found: ignore
+          retention-days: 10
+          path: |
+            cucumber_formated_result.json
+            temp/test_with_defects.json
+            API_Test/features/Test_Execution.log
+          

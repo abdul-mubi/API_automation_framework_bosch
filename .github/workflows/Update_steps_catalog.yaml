@@ -1,0 +1,40 @@
+name: Update_steps_cataloge
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  security-events: write
+  actions: read
+jobs:
+  Test_Execution:
+    runs-on: 
+      - self-hosted
+      - TT-Automation
+    strategy:
+      max-parallel: 1
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+      - name: Fetch steps catalog
+        shell: bash
+        run: |
+          cd API_Test/features
+          for i in "E2E-RM" "E2E-RF" "E2E-RD"
+          do  
+            Output=$(behave --steps-catalog --tags $i)
+            cd ../Steps_cataloge
+            echo $Output > Steps_cataloge_for_$i.txt
+            cd ../features
+          done || exit 1
+      - name : reset and commit
+        shell: bash
+        run: |
+          git add .
+          cd API_Test/features
+          git reset -- failed_tests.txt
+          git clean -df
+          git commit -m "Updated steps cataloge"
+          git push

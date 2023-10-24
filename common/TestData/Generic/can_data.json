@@ -1,0 +1,11 @@
+{
+    "can_message_data": {
+        "short_message_byte":{
+            "1CFFEE2B":["DF 40 35 04 1D 80"]
+        },
+        "long_message_byte":{
+            "1CECFF2B":["20 0C 00 02 FF EE FF 00"],
+            "1CEBFF2B":["01 DF 40 35 04 1D 80 DF","02 40 35 04 1D 80 FF FF"] 
+        }      
+    }
+}

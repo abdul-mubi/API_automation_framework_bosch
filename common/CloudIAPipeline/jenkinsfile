@@ -1,0 +1,70 @@
+def workflow_id = "7466" // Workflow ID
+def int execution_timeout_min = 10 // Timeout time for the workflow once its triggered (Including Queue time in GitHub)
+def token = "" // PAT to Trigger the workflow
+def workflow_endpoint = "https://github.boschdevcloud.com/api/v3/repos/MC/tedtitans-automation-repo/actions/workflows/$workflow_id"
+def runs_endpoint = "https://github.boschdevcloud.com/api/v3/repos/MC/tedtitans-automation-repo/actions/runs"
+def trigger_endpoint = "$workflow_endpoint/dispatches"
+def get_latest_trigger = "$workflow_endpoint/runs?per_page=1&page=1"
+
+def data = '{"ref":"master","inputs":{"Issue_ID":"ETEMC-6411","machine_name":"LB-C-00027"}}' // Workflow Disptatch Data
+def String run_id = ""
+pipeline {
+    agent any
+    stages {
+        stage("Trigger Test Via GitHub") {
+            steps {
+                script {
+                    def String response = sh(script: "curl -s -w '\\n%{response_code}' -X POST -L '$trigger_endpoint' --header 'Accept: application/vnd.github+json' --header 'Content-Type: application/json' --header 'Authorization: Bearer $token' --data '$data'", returnStdout: true).trim()
+                    echo response
+                    if (response == "204") {
+                        echo "Build Triggered Successfully"
+                        sleep 3
+                    } else {
+                        echo "Build Trigger Failed"
+                        echo "Response: $response"
+                        error "Failed to Trigger GitHub Actions, exiting now..."
+                    }
+                    def result_json = null
+                    try {
+                        response = sh(script: "curl -s --header 'Authorization: Bearer $token' $get_latest_trigger", returnStdout: true).trim()
+                        result_json = readJSON(text: response)
+                    } catch(Exception ex) {
+                        echo "Failed to get Latest Trigger ID, Retrying"
+                        response = sh(script: "curl -s --header 'Authorization: Bearer $token' $get_latest_trigger", returnStdout: true).trim()
+                        result_json = readJSON(text: response)
+                    }
+                    int run_id_int = result_json['workflow_runs'][0]['id']
+                    run_id = "$run_id_int"
+                    echo "Latest Run ID: $run_id"
+                }
+            }
+        }
+        stage("Monitor Test Execution") {
+            steps {
+                script {
+                    def String run_url = "$runs_endpoint/$run_id"
+                    echo run_url
+                    timeout(time: execution_timeout_min, unit: 'MINUTES') {
+                        while (true){
+                            def String response = sh(script: "curl -s --header 'Authorization: Bearer $token' $run_url", returnStdout: true).trim()
+                            def result_json = readJSON(text: response)
+                            def String status = result_json['status']
+                            def String conclusion = result_json['conclusion']
+                            def html_url = result_json['html_url']
+                            if (status.equals( "completed" )){
+                                echo "Workflow execution is completed with state: $conclusion"
+                                if(!conclusion.equals( "success" )){
+                                    error "Workflow is execution is Failed URL: $html_url"
+                                }
+                                break
+                            } else {
+                                echo "Workflow execution is still in progress curent state: $status, sub state: $conclusion"
+                            }
+                            sleep 5
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

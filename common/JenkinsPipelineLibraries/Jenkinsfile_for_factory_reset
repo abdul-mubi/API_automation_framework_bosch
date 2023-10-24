@@ -1,0 +1,137 @@
+DEVICE_VERSION=''
+EXECUTION_DETAILS=''
+def output = ''
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+    }
+    parameters {
+        gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/ARTMC-17350-Create-a-pipeline-to-execute-factory-reset-script-with-self-update-tests', description: 'Select the Git branch to execute tests using branch.', listSize: '0', name: 'GITBranch', quickFilterEnabled: false, selectedValue: 'DEFAULT', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH', useRepository: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git'
+        string name:'Device_id', description: 'Enter the device id\nExample: E2E_OTA_DEVICE_001'
+        choice choices: ['CCU','CCU2','CCU3'], name: 'specimen_device'
+        string name:'Hostname', description: 'Enter the device hostname.\nNote : Not mandatory to send hostname if its value is 192.168.1.40\n Example: 192.168.1.40', defaultValue:'192.168.1.40'
+        string name:'To_FW_Version', description: 'Enter the device FW version needs to be installed in the device.\nExample: 5.1.2'
+        string name:'Self_Update_FW_Version', description: 'Enter the Self_Update_FW_Version to perform self-update after factory reset.\nExample: 4.11.1'
+        choice choices: ['NO','YES'], description: 'Choose - "Yes" if you want to perform factory reset\nChoose - "No" if you want to perform device reset from zero\nDefault - No', name: 'Factory_Reset'
+    }
+    agent {node "${MACHINE}"}
+
+    stages {
+        stage('Stage - GIT checkout'){
+            steps{
+                echo "GIT checkout of selected branch - ${params.GITBranch}"
+                checkout([$class: 'GitSCM', branches: [[name: "${params.GITBranch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '816c4b91-f2e7-431c-95a4-f9de22721f2a', url: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git']]])
+            }
+        }
+        stage('Factory Reset - Execute python script to perform factory reset'){
+            steps {
+                catchError{
+                    script{
+                        command = "python start_factory_reset.py --device ${params.Device_id} --hostname ${params.Hostname} --to_version ${params.To_FW_Version} --factory_reset ${params.Factory_Reset}"
+                        output = bat(script: "cd Device_reboot_from_zero && ${command}",returnStdout: true).trim()
+                        echo "${output}"
+                    }
+                }
+            }
+        }
+        stage('Check facory reset'){
+            when {
+                expression { output.contains("Factory reset completed")}
+            }
+            stages('Start testing the device after facory reset'){
+                stage('Export features from Xray'){
+                    steps {
+                        script{
+                            echo 'exporting tests from GIT repo to JIRA'
+                            step([$class: 'XrayExportBuilder', filePath: './API_Test/features/xRay', filter: '29235', serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f'])
+                        }
+                    }
+                }
+                stage('Build'){
+                    steps {
+                        catchError{
+                            script{
+                                bat '''cd API_Test
+pip install -r requirements.txt --proxy=https://rb-proxy-in.bosch.com:8080'''
+                                command = "behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D specimen_device=%specimen_device% -D To_FW_Version=%To_FW_Version% -D Device_id=%Device_id% -D Self_Update_FW_Version=%Self_Update_FW_Version% --no-logcapture --no-capture"     
+                                bat(script: "cd API_Test/features && ${command}")    
+                            }
+                        }
+                    }
+                }
+                stage('Post build actions'){
+                    steps{
+                        catchError{
+                            script{
+                                DEVICE_VERSION = bat returnStdout: true, script: '''@ECHO OFF
+        setlocal enableextensions enabledelayedexpansion
+        for /f "delims=" %%x in (version.json) do set "string=!string!%%x"
+
+        set DEVICE_VERSION=%string:"=\\\'%
+
+        echo %DEVICE_VERSION%'''
+                            
+                                EXECUTION_DETAILS = bat returnStdout: true, script: '''@ECHO OFF
+
+        setlocal enableextensions enabledelayedexpansion
+        for /f "delims=" %%x in (version.json) do set "string=!string!%%x"
+
+        set string=%string:"=\\\'%
+
+        python execution_title.py version.json %JOB_BASE_NAME%> Output
+        SET /p MYVAR=<Output
+
+        ECHO %MYVAR%'''
+                            
+                                bat '''python report.py
+        ForFiles /p "..\\Logs" /s /d -8 /c "cmd /c del /q @file"
+        if not exist Logs mkdir Logs
+        for /f "eol=: delims=" %%f in (\'dir "..\\Logs\\API*.log" /b /od\') do @set "latestlog=%%f"
+        copy ..\\Logs\\%latestlog% Logs /y
+        echo check the logs at %JOB_URL%ws/Logs/%latestlog%
+        echo "Updating cucumber result json file"
+        python cucumber_result_update.py'''
+                            }
+                        }
+                    }
+                }
+                stage('Import results to Xray (multipart)') {
+                    steps {
+                        step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importToSameExecution: 'true',importFilePath: 'cucumber_formated_result.json', projectKey: 'ETEMC', serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f',inputInfoSwitcher:"fileContent", 
+                        importInfo:"""{
+                        "fields": {
+                            "project": {
+                                "key": "ETEMC"
+                            },
+                            "summary": "${EXECUTION_DETAILS}",
+                            "description":"Device details in the machine: \n${DEVICE_VERSION}",
+                            "issuetype": {
+                                "name":"Test Execution"
+                            }
+                            }
+                        }"""])
+                    }
+                }
+            }
+        }
+        stage('Report email'){    
+            steps{
+                script{
+                    def sub = "${JOB_NAME} - Build ${BUILD_NUMBER}: PC - ${NODE_NAME}"
+                    if (output.contains("Factory reset completed"))
+                        emailext body: '$DEFAULT_CONTENT', replyTo: '$DEFAULT_REPLYTO', subject: "${sub}", to: '$DEFAULT_RECIPIENTS', attachLog: true
+                    else 
+                        emailext body: 'Script was not successful, Please find the log.', replyTo: '$DEFAULT_REPLYTO', subject: "${sub}", to: '$DEFAULT_RECIPIENTS', attachLog: true
+                }
+            }
+        }
+        stage('Generate Cucumber report'){
+            steps{
+                cucumber buildStatus: 'UNSTABLE',
+                fileIncludePattern: '**/cucumber_formated_result.json',
+                sortingMethod: 'ALPHABETICAL'
+            }
+        }    
+    }
+}

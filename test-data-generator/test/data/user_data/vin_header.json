@@ -1,0 +1,8 @@
+{
+    "device_sequence_counter": 1,
+    "timestamp": 1234,
+    "serialization": "protobuf",
+    "version": 1,
+    "apiSection": "deviceVehicleMapping",
+    "messageType": "vinUpdateEvent"
+}

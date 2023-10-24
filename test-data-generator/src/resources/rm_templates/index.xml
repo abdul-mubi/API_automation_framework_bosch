@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config:config schemaMajor="2" schemaMinor="21" xmlns:config="http://bosch.de/AA_AS/Telediag/Configuration" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <config:content xsi:type="config:TaskIndex">
+    <config:taskIndexEntry>
+      <config:file>JOB_RESULT_XML</config:file>
+      <config:signature>00</config:signature>
+      <config:type>JOB_RESULT</config:type>
+    </config:taskIndexEntry>
+    <config:taskIndexEntry>
+      <config:file>PROTOBUF_DATA</config:file>
+      <config:signature>00</config:signature>
+      <config:type>DATA_FILE</config:type>
+    </config:taskIndexEntry>
+    <config:taskIndexEntry>
+      <config:file>PROTOBUF_INFO</config:file>
+      <config:signature>00</config:signature>
+      <config:type>DATA_FILE</config:type>
+    </config:taskIndexEntry>
+    <config:taskIndexEntry>
+      <config:file>METADATA_XML</config:file>
+      <config:signature>00</config:signature>
+      <config:type>VEHICLE_DATA</config:type>
+    </config:taskIndexEntry>
+  </config:content>
+</config:config>

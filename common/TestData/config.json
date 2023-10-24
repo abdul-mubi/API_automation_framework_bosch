@@ -1,0 +1,122 @@
+{
+    "default_properties":{
+        "baud_rate": "500K",
+        "ssh_available": true,
+        "vin_seed_and_key": false,
+        "command_file": "common/TestData/CommandMap.json",
+        "implantation_method" : "",
+        "network_availability":"PPP0",
+        "artifactory" : "TCU_artifactory",
+        "artifact_customer" : "",
+        "su_security_option" : "ENCRYPTION",
+        "firmware_type" : "",
+        "su_driver_approval": false,
+        "jira_customer_type": "",
+        "ssh_key": "developerKeyCCU",
+        "RPM_VIN_impl": false
+    },
+    "PACCAR_TCU_DEBUG": 
+    {
+        "vin_seed_and_key": true,
+        "implantation_method" : "UDS",
+        "artifact_customer" : "Paccar",
+        "firmware_type" : "Debug",
+        "jira_customer_type": "PCAR1"
+    },
+    "PACCAR_TCU_PROD": 
+    {
+        "ssh_available": false,
+        "vin_seed_and_key": true,
+        "implantation_method" : "UDS",
+        "artifact_customer" : "Paccar",
+        "firmware_type" : "Production",
+        "jira_customer_type": "PCAR1"
+    },
+    "PACCAR_TCU2_EU_DEBUG": 
+    {
+        "vin_seed_and_key": true,
+        "command_file": "common/TestData/CommandMap_TCU2.json",
+        "implantation_method" : "UDS",
+        "network_availability": "ccmni0",
+        "artifactory" : "TCU2_artifactory",
+        "artifact_customer" : "tcu2-eu-c",
+        "su_security_option" : "ENCRYPTION",
+        "su_driver_approval":false,
+        "firmware_type" : "Debug",
+        "jira_customer_type": "PCAR2 EU",
+        "ssh_key": "developerKeyTCU2",
+        "gps_exp_data": {"18FEE82Bx" : [6,7], "18FEF32Bx" : [0,1,2,3,4,5,6,7], "18FBF62Bx" : [2]}
+    },
+    "PACCAR_TCU2_EU_PROD":
+    {
+        "ssh_available": true,
+        "vin_seed_and_key": true,
+        "command_file": "common/TestData/CommandMap_TCU2.json",
+        "implantation_method" : "UDS",
+        "network_availability": "ccmni0",
+        "artifactory" : "TCU2_artifactory",
+        "artifact_customer" : "tcu2-eu-c",
+        "su_security_option" : "ENCRYPTION",
+        "su_driver_approval":false,
+        "firmware_type" : "Validation/dev-signed",
+        "jira_customer_type": "PCAR2 EU",
+        "ssh_key": "developerKeyTCU2",
+        "gps_exp_data": {"18FEE82Bx" : [6,7], "18FEF32Bx" : [0,1,2,3,4,5,6,7], "18FBF62Bx" : [2]}
+        
+    },
+    "PACCAR_TCU2_NA_DEBUG": 
+    {
+        "vin_seed_and_key": false,
+        "command_file": "common/TestData/CommandMap_TCU2.json",
+        "implantation_method" : "CAN_PACCAR",
+        "network_availability": "ccmni0",
+        "artifactory" : "TCU2_artifactory",
+        "artifact_customer" : "tcu2-na-c",
+        "su_security_option" : "ENCRYPTION",
+        "su_driver_approval": false,
+        "firmware_type" : "Debug",
+        "jira_customer_type": "PCAR2 NA",
+        "ssh_key": "developerKeyTCU2",
+        "RPM_VIN_impl": true,
+        "gps_exp_data": {"18FEE82Bx" : [6,7], "18FEF32Bx" : [0,1,2,3,4,5,6,7], "18FBF62Bx" : [0,1,2,3]}
+    },
+    "PACCAR_TCU2_NA_PROD":
+    {
+        "ssh_available": true,
+        "vin_seed_and_key": false,
+        "command_file": "common/TestData/CommandMap_TCU2.json",
+        "implantation_method" : "CAN_PACCAR",
+        "network_availability": "ccmni0",
+        "artifactory" : "TCU2_artifactory",
+        "artifact_customer" : "tcu2-na-c",
+        "su_security_option" : "ENCRYPTION",
+        "su_driver_approval": false,
+        "firmware_type" : "Cust-rel/dev-signed",
+        "jira_customer_type": "PCAR2 NA",
+        "ssh_key": "developerKeyTCU2",
+        "RPM_VIN_impl": true,
+        "gps_exp_data": {"18FEE82Bx" : [6,7], "18FEF32Bx" : [0,1,2,3,4,5,6,7], "18FBF62Bx" : [0,1,2,3]}
+    },
+    "PACCAR_TCU_NON_NGD": 
+    {
+        "baud_rate": "250K",
+        "baud_rate_ini_value": "Baudrate = 250000",
+        "vin_seed_and_key": true,
+        "implantation_method" : "UDS",
+        "artifact_customer" : "Paccar",
+        "firmware_type" : "Debug",
+        "jira_customer_type": "PCAR1"
+    },
+    "HINO_TCU_DEBUG": 
+    {
+        "implantation_method" : "CAN_HINO",
+        "artifact_customer" : "Hino",
+        "firmware_type" : "Debug",
+        "jira_customer_type": "Hino"
+    },
+    "VIRTUAL_DEVICE": 
+    {
+        "ssh_available":false,
+        "command_file": ""
+    }
+}

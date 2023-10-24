@@ -1,0 +1,1 @@
+CANalization development-snapshot-r41296 [https://etassvn.de.bosch.com/Quality.ReferenceSystems/PC/branches/VRS-CCP-609394] - VRS for CAN bus recording and playback

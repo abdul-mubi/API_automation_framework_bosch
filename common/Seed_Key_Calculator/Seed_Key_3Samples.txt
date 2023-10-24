@@ -1,0 +1,42 @@
+1)
+Tx	[15:27:48] - Tx	PACCAR Configuration Seed Request
+Info	[15:27:48]	PACCAR_TCU
+Info	[15:27:48]	Seed: "0xE9 0xFB 0x85 0xD1"
+Rx	[15:27:48] - Rx	Positive response:
+Rx	    SecuritySeed	    0xE9FB85D1
+Info	[15:27:50]	Seed&Key DLL: "C:\CANoe_Config_etc\32_Simulation_All\Seed_Key\paccar_seedkey_CANoe.dll"
+Info		
+Tx	[15:27:50] - Tx	PACCAR Configuration Key Send
+Tx	    SecurityKey	    0x2254C5A4
+Info	[15:27:50]	PACCAR_TCU
+Rx	[15:27:50] - Rx	Positive response.
+
+2)
+Tx	[15:30:28] - Tx	PACCAR Configuration Seed Request
+Info	[15:30:29]	PACCAR_TCU
+Info	[15:30:29]	Seed: "0x32 0x7A 0xBB 0x06"
+Rx	[15:30:29] - Rx	Positive response:
+Rx	    SecuritySeed	    0x327ABB06
+Info	[15:30:31]	Seed&Key DLL: "C:\CANoe_Config_etc\32_Simulation_All\Seed_Key\paccar_seedkey_CANoe.dll"
+Info		
+Tx	[15:30:31] - Tx	PACCAR Configuration Key Send
+Tx	    SecurityKey	    0x6980437E
+Info	[15:30:31]	PACCAR_TCU
+Rx	[15:30:31] - Rx	Positive response.
+
+
+3)
+Tx	[15:31:08] - Tx	PACCAR Configuration Seed Request
+Info	[15:31:08]	PACCAR_TCU
+Info	[15:31:08]	Seed: "0xA6 0x6B 0xD8 0xDE"
+Rx	[15:31:08] - Rx	Positive response:
+Rx	    SecuritySeed	    0xA66BD8DE
+Info	[15:31:10]	Seed&Key DLL: "C:\CANoe_Config_etc\32_Simulation_All\Seed_Key\paccar_seedkey_CANoe.dll"
+Info		
+Tx	[15:31:10] - Tx	PACCAR Configuration Key Send
+Tx	    SecurityKey	    0xFD675559
+Info	[15:31:10]	PACCAR_TCU
+Rx	[15:31:10] - Rx	Positive response.
+
+
+

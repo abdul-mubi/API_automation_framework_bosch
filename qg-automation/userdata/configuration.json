@@ -1,0 +1,12 @@
+{
+    "jira":{
+        "credentials":"dmVlNWZlOk1DJFR0YW5zMjAyMw==",
+        "token":"Bearer MjU2OTczNzg2OTM3OtlzFeDUCvMD+RV3uH/kI5swXLTq"
+      },
+    "confluence":{
+      "token":"Bearer NzU3MDU5NjkyNTU4Opc600yFstzJAmtiwQvKoEGUDwkh"
+    },
+    "socialcoding":{
+      "token":"Bearer NzY0ODQ2Njg2MDQzOuULaoMVUC833Gd7M1iwbM+kDnnD"
+    }
+}

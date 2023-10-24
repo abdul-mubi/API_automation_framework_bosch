@@ -1,0 +1,77 @@
+{
+    "rebootDevice" :{
+      "CCU": "reboot.sh 0"
+    },
+  
+    "readDeviceCustomer":{
+      "CCU":"cfgclient -r -t CS -p 0x03F0"
+    },
+
+    "getCCUVersion":{
+        "CCU" : "cat /etc/topas/ctpg_version.json"
+    },
+
+    "getDeviceVIN":{
+      "CCU" : "cat /data/encrypted/pea_app/vin.cfg"
+    },
+
+    "eraseDeviceVIN":{
+      "CCU" : "cfgclient -w -t CS -p 0x1304 -v 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30"
+    },
+
+    "implantDeviceVIN":{
+      "CCU" : "cfgclient -w -t CS -p 0x1304 -v "
+    },
+    
+    "zipCrtFolder":{
+      "CCU" : "zip -r /data/encrypted/crt.zip /data/encrypted/crt"
+    },
+
+    "delCrtZip":{
+        "CCU" : "rm -rf /data/encrypted/crt.zip"
+    },
+  
+    "getCrtFolder":{
+      "CCU" : "/data/encrypted/crt.zip"
+    },
+
+    "tailCommand":{
+        "CCU" : "tail -f /var/log/messages | grep topas_sw"
+    },
+
+    "delCrtFolder":{
+        "CCU" : "rm -rf /data/encrypted/crt"
+    },
+  
+    "implantDeviceProfileIdPACCAR":{
+      "CCU" : "cfgclient -w -t CS -p 0x03F0 -v 0x50 0x01"
+    },
+  
+    "implantDeviceProfileIdHINO":{
+      "CCU" : "cfgclient -w -t CS -p 0x03F0 -v 0x48 0x01"
+    },
+  
+    "implantDeviceProfileIdPACCAR_NON_NGD":{
+      "CCU" : "cfgclient -w -t CS -p 0x03F0 -v 0x50 0x02"
+    },
+  
+    "implantEsim":{
+      "CCU" : "cfgclient -w -t CS -p 0x1210 -v 01"
+    },
+  
+    "implantLTEAntenna":{
+      "CCU" : "cfgclient -w -t CS -p 0x1267 -v 02"
+    },
+  
+    "implantDeviceSerialNumber":{
+      "CCU" : "cfgclient -w -t CS -p 0x3E87 -v "
+    },
+  
+    "getmprmFile":{
+      "CCU" : "cat /data/unsigned/mbs/mprm.prs"
+    },
+
+    "delmprmFile":{
+        "CCU" : "rm -rf /data/unsigned/mbs/mprm.prs"
+    }
+  }

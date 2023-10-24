@@ -1,0 +1,4 @@
+ETAS GmbH & Co. KG						08/21/1998
+==========================================================================
+
+default directory for security DLLs (Seed & Key, ...)

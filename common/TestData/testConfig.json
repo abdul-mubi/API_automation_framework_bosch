@@ -1,0 +1,100 @@
+{
+  "takeScreenshots": true,
+  "exception_time": 0.25,
+  "timeouts": {
+    "general": 20000,
+    "short": 5000,
+    "oneMinute": 60000,
+    "screenshots": 200,
+    "jobActivation": 600000
+  },
+  "proxy": {
+    "http": "http://10.4.103.69:8080"
+  },
+  "systemUnderTest": {
+    "device-provisioning": {
+      "baseUrl": "https://ota.eu.bosch-mobility-cloud.com/",
+      "ApiBaseURI": "https://ota.eu.bosch-mobility-cloud.com/api/applications",
+      "login": {
+        "userName": "automated-test@bosch.com",
+        "password": "a2FpU2Vyc2NobWFycm4rMTk=",
+        "tenant": "EU_MC_PROD",
+        "keycloakURI": "https://p2.authz.bosch.com/auth/realms/"
+      }
+    },
+    "azure_na": {
+      "baseUrl": "https://ota.na.bosch-mobility-cloud.com/",
+      "ApiBaseURI": "https://ota.na.bosch-mobility-cloud.com/api/applications",
+      "login": {
+        "userName": "automated-test@bosch.com",
+        "password": "a2FpU2Vyc2NobWFycm4rMTk=",
+        "tenant": "US_MC_E2E_Test",
+        "keycloakURI": "https://na2.authz.bosch.com/auth/realms/"
+      }
+    },
+    "azure_eu": {
+      "baseUrl": "https://ota.eu.bosch-mobility-cloud.com/",
+      "ApiBaseURI": "https://ota.eu.bosch-mobility-cloud.com/api/applications",
+      "login": {
+        "userName": "automated-test@bosch.com",
+        "password": "a2FpU2Vyc2NobWFycm4rMTk=",
+        "tenant": "EU_MC_INTEGRATION",
+        "keycloakURI": "https://p2.authz.bosch.com/auth/realms/"
+      }
+    },
+    "azure_eu_bi": {
+      "baseUrl": "https://ota.ota-systest.qa.eu.bosch-mobility-cloud.com/",
+      "redirect_uri": "https://qa.vms.bosch-cs.com/",
+      "ApiBaseURI": "https://ota.ota-systest.qa.eu.bosch-mobility-cloud.com/api/applications",
+      "login": {
+        "userName": "regression-tester",
+        "password": "QnpWQk8zLXFsNENDYSQ5YzB+Yw==",
+        "tenant": "S_EU_INT_OTART1",
+        "keycloakURI": "https://p2.authz.bosch.com/auth/realms/"
+      }
+    },
+    "azure_eu_qa": {
+      "baseUrl": "https://ota.qa.eu.bosch-mobility-cloud.com/",
+      "ApiBaseURI": "https://ota.qa.eu.bosch-mobility-cloud.com/api/applications",
+      "login": {
+        "userName": "automated-test@bosch.com",
+        "password": "a2FpU2Vyc2NobWFycm4rMTk=",
+        "tenant": "Q_EU_INT_OTAE2E1",
+        "keycloakURI": "https://p2.authz.bosch.com/auth/realms/"
+      }
+    },
+      "azure_na_paccar":{
+        "baseUrl": "https://ota.na.bosch-mobility-cloud.com/",
+        "ApiBaseURI": "https://ota.na.bosch-mobility-cloud.com/api/applications",
+        "login": {
+          "userName": "automated-test@bosch.com",
+          "password": "a2FpU2Vyc2NobWFycm4rMTk=",
+          "tenant": "NA_PACCAR_TEST",
+          "keycloakURI": "https://na2.authz.bosch.com/auth/realms/" 
+      }
+    }
+  },
+  "jira":{
+    "credentials":"Basic dmVlNWZlOk1DJFR0YW5zMjAyMw==",
+    "token":"Bearer MTY2MTU5NjQ0MjUwOhn+eVSwxz0an7IkcwWsex4hJ1vZ",
+    "qg_token":"Bearer ODg3MDg0NDkwNzYxOqoYgSvuAgSSgKreN8cUPP1ToaMv",
+    "ApiBaseURI":"https://rb-tracker.bosch.com/tracker15"
+  },
+  "confluence":{
+    "token":"Bearer NzU3MDU5NjkyNTU4Opc600yFstzJAmtiwQvKoEGUDwkh",
+    "ApiBaseURI":"https://inside-docupedia.bosch.com/confluence"
+  },
+  "TCU_artifactory":{
+    "url":"https://rb-artifactory.bosch.com/artifactory/vms-ccu-build-local/",
+    "credentials":"dmVlNWZlOlRlZCRUaXRhbnMyMDIz"
+  },
+  "TCU2_artifactory":{
+    "url":"https://rb-artifactory.bosch.com/artifactory/sdv-ccu-m-build-local/",
+    "credentials":"dmVlNWZlOlRlZCRUaXRhbnMyMDIz"
+  },
+  "healthcheck":{
+    "url":"https://prod.auth.pacc.grade-x.com/oauth2/token",
+    "health_check_url":"https://prod.pacc.grade-x.com/rest/server/healthcheck",
+    "credentials":"NTYxcDF2MGw2MnFidmducjdzYTAyYXRmN3I6MWI0azRjbGdrY3VlbGR2c3FpazEzaTM2NWhmNmRlcTQ4c2Rjc3Q2MjNyODV1b3VpbTVobA=="
+  }
+}

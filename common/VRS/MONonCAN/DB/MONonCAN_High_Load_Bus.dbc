@@ -1,0 +1,116 @@
+VERSION " "
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: AUT REF_ECU
+
+
+BO_ 131 F_STD_0x83: 8 REF_ECU
+ SG_ S_STD_0x83_S08 : 56|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S07 : 48|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S06 : 40|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S05 : 32|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S04 : 24|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S03 : 16|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S02 : 8|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x83_S01 : 0|8@1+ (1,0) [0|255] ""  AUT
+
+BO_ 132 F_STD_0x84: 8 REF_ECU
+ SG_ S_STD_0x84_S08 : 56|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S07 : 48|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S06 : 40|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S05 : 32|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S04 : 24|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S03 : 16|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S02 : 8|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x84_S01 : 0|8@1+ (1,0) [0|255] ""  AUT
+
+BO_ 133 F_STD_0x85: 8 REF_ECU
+ SG_ S_STD_0x85_S08 : 56|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S07 : 48|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S06 : 40|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S05 : 32|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S04 : 24|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S03 : 16|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S02 : 8|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x85_S01 : 0|8@1+ (1,0) [0|255] ""  AUT
+
+BO_ 130 F_STD_0x82: 8 REF_ECU
+ SG_ S_STD_0x82_S08 : 56|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S07 : 48|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S06 : 40|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S05 : 32|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S04 : 24|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S03 : 16|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S02 : 8|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x82_S01 : 0|8@1+ (1,0) [0|255] ""  AUT
+
+BO_ 129 F_STD_0x81: 8 REF_ECU
+ SG_ S_STD_0x81_S08 : 56|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S07 : 48|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S06 : 40|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S05 : 32|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S04 : 24|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S03 : 16|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S02 : 8|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x81_S01 : 0|8@1+ (1,0) [0|255] ""  AUT
+
+BO_ 128 F_STD_0x80: 8 REF_ECU
+ SG_ S_STD_0x80_S08 : 56|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S07 : 48|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S06 : 40|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S05 : 32|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S04 : 24|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S03 : 16|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S02 : 8|8@1+ (1,0) [0|255] ""  AUT
+ SG_ S_STD_0x80_S01 : 0|8@1+ (1,0) [0|255] ""  AUT
+
+
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_ "BusType" "CAN";
+

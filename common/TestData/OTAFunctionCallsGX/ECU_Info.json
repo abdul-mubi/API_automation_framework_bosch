@@ -1,0 +1,121 @@
+{
+  "2DTCs": [
+    {
+      "name": "A9C17",
+      "status": "AC"
+    },
+    {
+      "name": "80522",
+      "status": "AC"
+    }
+  ],
+  "UDS_Resp_2DTCs_RD": [
+    {
+      "name": "A9C17",
+      "status": "AC"
+    },
+    {
+      "name": "80522",
+      "status": "AC"
+    }
+  ],
+  "UDS_Resp_2DTCs_RD_ES740": [
+    {
+      "name": "A9C17",
+      "status": "AC"
+    },
+    {
+      "name": "80522",
+      "status": "AC"
+    }
+  ],
+  "BCM_ECU": [
+    {
+      "name": "A9B55",
+      "status": "FF"
+    },
+    {
+      "name": "705A5",
+      "status": "FF"
+    }
+  ],
+  "2ECUs": [
+    {
+      "id": "BCM",
+      "name": "Body Control Module",
+      "sw": "BV06875.777.54CX",
+      "hw": "DENSO0200G76GBC0",
+      "serial": "98765456789765678976555545",
+      "vendor": "DENSO"
+    },
+    {
+      "id": "ECM",
+      "name": "Engine Control Module",
+      "sw": "RV03000.100.54BX",
+      "hw": "BOSCH010098AZ750",
+      "serial": "9806480332687445773",
+      "vendor": "BOSCH"
+    }
+  ],
+  "ECUs":{
+    "ECM_ECU":{
+      "id":"ECM",
+      "name":"Engine Control Module",
+      "sw":"RV03000.100.54BX",
+      "hw":"BOSCH010098AZ750",
+      "serial":"9806480332687445773",
+      "vendor":"BOSCH"
+    },
+   "BCM_ECU":{
+      "id":"BCM",
+      "name":"Body Control Module",
+      "sw":"BV06875.777.54CX",
+      "hw":"DENSO0200G76GBC0",
+      "serial":"98765456789765678976555545",
+      "vendor":"DENSO"
+    },
+    "VCM_ECU":{
+      "id":"VCM",
+      "name":"Vehicle Control Unit",
+      "sw":"BA100/200/300/76",
+      "hw":"DELCO0300CG765BB",
+      "serial":"Vehicle Control Unit",
+      "vendor":"BOSCH"
+    },
+    "PS_ECU":{
+      "id":"PS",
+      "name":"Power System",
+      "sw":"HEXCV3000055",
+      "hw":"i323490024824803",
+      "serial":"5000.2345.545425252525.545",
+      "vendor":"HIRAIN"
+    },
+    "TPMS_ECU":{
+      "id":"TPMS",
+      "name":"Tire Pressure Measurement System",
+      "sw":"KL7  IP8  CF8  A ",
+      "hw":"MM100032423GG333",
+      "serial":"pilotECU 369",
+      "vendor":"MAGNETI MARELLI"
+    }
+  },
+
+  "ECU_Data":[
+    {
+      "request":"22F195",
+      "response":"22F195"
+    },
+    {
+      "request":"22F196",
+      "response":"22F196"
+    },
+    {
+      "request":"22F197",
+      "response":"22F197"
+    },
+     {
+      "request":"22F198",
+      "response":"22F198"
+    }
+  ]
+}

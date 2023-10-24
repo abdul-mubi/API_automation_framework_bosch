@@ -1,0 +1,110 @@
+{
+  "inventoryDetails" : {
+    "SOFTWARE" : [ {
+      "swUid" : "Device SW",
+      "swVersion" : "FETCHED DIRECTLY FROM CONTEXT",
+      "name" : "Device SW",
+      "associatedFrom" : [ {
+        "nodeId" : "Device SW",
+        "nodeType": "SOFTWARE"
+      } ],
+      "associatedTo" : [ {
+        "nodeId" : "456bb97b-755b-4f60-9a55-33279485dad3",
+        "nodeType": "SOFTWARE"
+      },{
+        "nodeId" : "Device SW",
+        "nodeType" : "SOFTWARE"
+      }]
+    },{
+      "swUid": "VCU",
+      "swVersion": "9876FEDCBA",
+      "name": "VCU",
+      "associatedFrom": [
+        {
+          "nodeId" : "VCU",
+          "nodeType": "SOFTWARE"
+        }
+      ],
+      "associatedTo": [
+        {
+          "nodeId" : "VCU",
+          "nodeType": "SOFTWARE"
+        }
+      ] 
+    },{
+      "swUid": "EMS",
+        "swVersion": "ABCDEF0123",
+        "name": "EMS",
+        "associatedFrom": [
+          {
+            "nodeId" : "EMS",
+            "nodeType": "SOFTWARE"
+          }],
+        "associatedTo": [
+          {
+            "nodeId" : "EMS",
+            "nodeType": "SOFTWARE"
+          }]
+    },{
+      "swUid": "456bb97b-755b-4f60-9a55-33279485dad3",
+          "swVersion": "1",
+          "name": "Inventory",
+          "associatedFrom": [
+            {
+              "nodeId" : "Device SW",
+              "nodeType": "SOFTWARE"
+            }
+          ],
+          "associatedTo" : [ ]
+    }
+  ],
+    "HARDWARE" : [ {
+      "hwUid" : "Device SW",
+      "hwVersion" : "",
+      "name" : "GENERIC_CCU",
+      "associatedFrom" : [ {
+        "nodeId" : "Device SW",
+        "nodeType": "SOFTWARE"
+      } ],
+      "associatedTo" : [ {
+        "nodeId" : "456bb97b-755b-4f60-9a55-33279485dad3",
+        "nodeType": "SOFTWARE"
+      },{
+        "nodeId" : "Device SW",
+        "nodeType" : "SOFTWARE"
+      } ]
+    },{
+      "hwUid": "VCU",
+        "hwVersion": "9876543210",
+        "name": "NA",
+        "associatedFrom": [
+          {
+            "nodeId" : "VCU",
+            "nodeType": "SOFTWARE"
+          }
+        ],
+        "associatedTo": [
+          {
+            "nodeId" : "VCU",
+            "nodeType": "SOFTWARE"
+          }
+        ]
+    },{
+      "hwUid": "EMS",
+      "hwVersion": "0123456789",
+      "name": "NA",
+      "associatedFrom": [
+        {
+          "nodeId" : "EMS",
+          "nodeType": "SOFTWARE"
+        }
+      ],
+      "associatedTo": [
+        {
+          "nodeId" : "EMS",
+          "nodeType": "SOFTWARE"
+        }
+      ]
+    } ]
+  }
+}

@@ -1,0 +1,417 @@
+def paccar_test_execution_ids =[]
+def hino_test_execution_ids =[]
+def paccar_test_plan_ids = ""
+def hino_test_plan_ids = ""
+def TP_maps = [:]
+TP_maps["TP_Regression-HINO"] = "ETEMC-1427"
+TP_maps["TP_Regression-PACCAR"] = "ETEMC-1346"
+//Order of TPs is Paccar and Hino
+TP_maps["TP_Regression-All_device_types"] = "ETEMC-1346,ETEMC-1427"
+TP_maps["TP_Smoke-HINO"] = "ETEMC-1351"
+TP_maps["TP_Smoke-PACCAR"] = "ETEMC-1347"
+TP_maps["TP_Smoke-All_device_types"] = "ETEMC-1347,ETEMC-1351"
+TP_maps["TP_Load-HINO"] = "ETEMC-2865"
+TP_maps["TP_Load-PACCAR"] = "ETEMC-2866"
+TP_maps["TP_Load-All_device_types"] = "ETEMC-2866,ETEMC-2865"
+TP_maps["TP_Installation-HINO"] = "ETEMC-3114"
+TP_maps["TP_Installation-PACCAR"] = "ETEMC-3113"
+TP_maps["TP_Installation-All_device_types"] = "ETEMC-3113,ETEMC-3114"
+
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+    }
+
+    agent {node "LB-C-00026"}
+
+    parameters {
+        gitParameter branch: '', branchFilter: '.*', defaultValue: 'origin/execution', description: 'Select the Git branch to execute tests using branch.', listSize: '0', name: 'GITBranch', quickFilterEnabled: false, selectedValue: 'DEFAULT', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH', useRepository: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git'
+        choice choices: ['Smoke', 'Regression', 'VC1', 'VC2', 'VC3', 'Load', 'Installation'], description: 'Select the Test Suite to execute.\nDefault - Smoke', name: 'Test_suite'
+        choice choices: ['All_device_types', 'HINO', 'PACCAR'], description: 'Select the Device to use for execution.\nDefault - All_types', name: 'Device_type'
+        choice choices: ['Yes','No'], description: 'Do you like to create new Test Execution for current Test trigger? (Yes/No)\nDefault - Yes', name: 'New_Test_Execution'
+        string name:'TestPlan_ID', description: 'Enter Test Plan Id where current Test Execution result needs to be linked.\n Example: ETEMC-1346', defaultValue:''
+        string name:'Desired_FW_Version', description: 'Enter the desired device FW to execute the test.\n If kept empty, test will execute on already installed Device FW', defaultValue:''
+        string name:'SU_Up_version', description: 'Enter the Up device FW to execute the test.\n Enter this value only for installation test Suite', defaultValue:''
+        string name:'SU_Down_version', description: 'Enter the Up device FW to execute the test.\n Enter this value only for installation test Suite', defaultValue:''
+        choice choices: ['Delta_Update', 'Full_Update', 'USB_Update'], description: 'Select the type of update which will be performed on the device if device has unexpected device version.\nDefault - Delta_Update', name: 'Type_of_update'
+    }
+
+    // pre {
+    //     //calling python script to check distinct scenario names
+    //     //BTW, 'pre' doesn't exist, need to look for solution of executing pre-requisites
+    // }
+
+    stages {
+        stage('Stage - GIT checkout'){
+            steps{
+                echo "GIT checkout of selected branch - ${params.GITBranch}"
+                checkout([$class: 'GitSCM', branches: [[name: "${params.GITBranch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '816c4b91-f2e7-431c-95a4-f9de22721f2a', url: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git']]])
+            }
+        }
+
+        stage('XRay - Update Tests from repo' ){
+            steps{
+                echo 'Updating JIRA tests from repository'
+            }
+        }
+
+        stage('JIRA - Prepare test suite for execution from test execution'){
+            steps {
+                script{
+                    test_suite="${params.Test_suite}-${params.Device_type}"
+                    test_plan_key = "TP_${test_suite}"
+                    if (params.TestPlan_ID !='')
+                        test_plan_ids = TP_maps[test_plan_key] +","+ params.TestPlan_ID
+                    else
+                        test_plan_ids = TP_maps[test_plan_key]
+                    command = "python jira_rest_apis.py ${test_suite} ${params.New_Test_Execution} ${test_plan_ids}"
+                    def output = bat(script: "cd API_Test/features/steps/utils && ${command}",returnStdout: true).trim()
+                    def execution_id_details = (output =~ /\<(.*?)>/)
+                    if (execution_id_details[0][1].contains("Paccar")){
+                        def paccar_test_execution_details = (execution_id_details[0][1] =~ /\[(.*?)]/)
+                        paccar_test_execution_ids = paccar_test_execution_details[0][1].replace("\'","").split(',')    
+                    }
+                    if (execution_id_details.size()>1){
+                        def hino_test_execution_details = (execution_id_details[1][1] =~ /\[(.*?)]/)
+                        hino_test_execution_ids = hino_test_execution_details[0][1].replace("\'","").split(',')
+                        
+                    }
+                    else if (execution_id_details[0][1].contains("Hino")){
+                        def hino_test_execution_details = (execution_id_details[0][1] =~ /\[(.*?)]/)
+                        hino_test_execution_ids = hino_test_execution_details[0][1].replace("\'","").split(',')    
+                    }
+                    if (params.Device_type == "All_device_types"){
+                        paccar_test_plan_ids = (test_plan_ids.split(','))[0]
+                        hino_test_plan_ids = (test_plan_ids.split(','))[1]
+                    }
+                    else{
+                        paccar_test_plan_ids = test_plan_ids
+                        hino_test_plan_ids = test_plan_ids
+                    }
+                }
+            }
+        }
+
+        stage('Export features from Xray'){
+            steps {
+                echo 'exporting tests from GIT repo to JIRA'
+                //step([$class: 'XrayExportBuilder', filePath: './API_Test/features/xRay', issues: 'ETEMC-1117', serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f'])
+            }
+        }
+        
+        stage('Regression Test- VC1') {
+            when {
+                expression { params.Test_suite == 'Regression' || params.Test_suite == 'VC1'}
+            }
+            parallel {
+                stage('PACCAR') {
+
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'PACCAR'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group1 = [:]
+                                group1['PC5'] = {
+                                    build(job: 'Pipeline_PACCAR_Regression_Executor', parameters: [string(name:'JIRA_ID', value:paccar_test_execution_ids[0]), string(name:'MACHINE', value:'FE2Z00SN'), string(name:'GITBranch', value:"${params.GITBranch}"), string(name:'Test_plan_id', value:paccar_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                                group1['PC27'] = {
+                                    build(job: 'Pipeline_PACCAR_Regression_Executor', parameters: [string(name:'JIRA_ID', value:paccar_test_execution_ids[1]), string(name:'MACHINE', value:'LB-C-00027'), string(name:'GITBranch', value:"${params.GITBranch}"), string(name:'Test_plan_id', value:paccar_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                            parallel group1
+                            }
+                        }
+                    }
+                    post{
+                        always{
+                            echo 'Stage VC1 post action: We can skip stage - VC2 in case VC1 has FAILED'
+                        }
+                    }
+                }
+                stage('HINO') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'HINO'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group2 = [:]
+                                group2['PC24'] = {
+                                    build(job: 'Pipeline_HINO_Regression_Executor', parameters: [string(name:'JIRA_ID', value:hino_test_execution_ids[0]), string(name:'MACHINE', value:'LB-C-00024'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:hino_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                                group2['PC22'] = {
+                                    build(job: 'Pipeline_HINO_Regression_Executor', parameters: [string(name:'JIRA_ID', value:hino_test_execution_ids[1]), string(name:'MACHINE', value:'LB-C-00022'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:hino_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")]) 
+                                }
+                                parallel group2
+                            }
+                        }
+                    }
+                }
+            }
+            post {
+                success {
+                    echo 'Test Reports'
+                }
+            }
+        }
+
+        stage('Smoke Test- VC1') {
+            when {
+                expression { params.Test_suite == 'Smoke'}
+            }
+            parallel {
+                stage('PACCAR') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'PACCAR'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group1 = [:]
+                                group1['PC1'] = {
+                                    build(job: 'Pipeline_PACCAR_Smoke_Executor', parameters: [string(name:'JIRA_ID', value:paccar_test_execution_ids[0]), string(name:'MACHINE', value:'FE2Z00SN'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:paccar_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                            parallel group1
+                            }
+                        }
+                    }
+                    post{
+                        always{
+                            echo 'Stage VC1 post action: We can skip stage - VC2 in case VC1 has FAILED'
+                        }
+                    }
+                }
+                stage('HINO') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'HINO'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group2 = [:]
+                                group2['PC24'] = {
+                                    build(job: 'Pipeline_HINO_Smoke_Executor', parameters: [string(name:'JIRA_ID', value:hino_test_execution_ids[0]), string(name:'MACHINE', value:'LB-C-00024'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:hino_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")]) 
+                                }
+                                parallel group2
+                            }
+                        }
+                    }
+                }
+            }
+            post {
+                success {
+                    echo 'Test Reports'
+                }
+            }
+        }
+        stage('Load Tests') {
+            when {
+                expression { params.Test_suite == 'Load'}
+            }
+            parallel {
+                stage('PACCAR') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'PACCAR'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group1 = [:]
+                                group1['PC5'] = {
+                                    build(job: 'Pipeline_PACCAR_Load_Executor', parameters: [string(name:'JIRA_ID', value:paccar_test_execution_ids[0]), string(name:'MACHINE', value:'FE2Z00SN'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:paccar_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                                group1['PC27'] = {
+                                    build(job: 'Pipeline_PACCAR_Load_Executor', parameters: [string(name:'JIRA_ID', value:paccar_test_execution_ids[1]), string(name:'MACHINE', value:'LB-C-00027'), string(name:'GITBranch', value:"${params.GITBranch}"), string(name:'Test_plan_id', value:paccar_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                            parallel group1
+                            }
+                        }
+                    }
+                    post{
+                        always{
+                            echo 'Stage VC1 post action: We can skip stage - VC2 in case VC1 has FAILED'
+                        }
+                    }
+                }
+                stage('HINO') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'HINO'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group2 = [:]
+                                group2['PC24'] = {
+                                    build(job: 'Pipeline_HINO_Load_Executor', parameters: [string(name:'JIRA_ID', value:hino_test_execution_ids[0]), string(name:'MACHINE', value:'LB-C-00024'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:hino_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                                group2['PC22'] = {
+                                    build(job: 'Pipeline_HINO_Load_Executor', parameters: [string(name:'JIRA_ID', value:hino_test_execution_ids[1]), string(name:'MACHINE', value:'LB-C-00022'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:hino_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")]) 
+                                }
+                                parallel group2
+                            }
+                        }
+                    }
+                }
+            }
+            post {
+                success {
+                    echo 'Test Reports'
+                }
+            }
+        }
+        stage('Installation Tests') {
+            when {
+                expression { params.Test_suite == 'Installation'}
+            }
+            parallel {
+                stage('PACCAR') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'PACCAR'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group1 = [:]
+                                group1['PC2'] = {
+                                    build(job: 'Pipeline_PACCAR_Installation_Executor', parameters: [string(name:'JIRA_ID', value:paccar_test_execution_ids[0]), string(name:'MACHINE', value:'FE2Z00XT'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:paccar_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                            parallel group1
+                            }
+                        }
+                    }
+                    post{
+                        always{
+                            echo 'Stage VC1 post action: We can skip stage - VC2 in case VC1 has FAILED'
+                        }
+                    }
+                }
+                stage('HINO') {
+                    when {
+                        expression { params.Device_type == 'All_device_types' || params.Device_type == 'HINO'}
+                    }
+                    steps {
+                        catchError{
+                            script {
+                                def group2 = [:]
+                                group2['PC28'] = {
+                                    build(job: 'Pipeline_HINO_Installation_Executor', parameters: [string(name:'JIRA_ID', value:hino_test_execution_ids[0]), string(name:'MACHINE', value:'LB-C-00028'), string(name:'GITBranch', value:"${params.GITBranch}"),string(name:'Test_plan_id', value:hino_test_plan_ids), string(name:'Desired_FW_Version', value:"${params.Desired_FW_Version}"), string(name:'SU_Up_version', value:"${params.SU_Up_version}"), string(name:'SU_Down_version', value:"${params.SU_Down_version}"), string(name:'Type_of_update', value:"${params.Type_of_update}")])
+                                }
+                                parallel group2
+                            }
+                        }
+                    }
+                }
+            }
+            post {
+                success {
+                    echo 'Test Reports'
+                }
+            }
+        }
+
+
+        // stage('Regression Test- VC2') {
+        //     when {
+        //         expression { params.Test_suite == 'Regression' || params.Test_suite == 'VC2'}
+        //     }
+        //     parallel {
+        //         stage('PACCAR') {
+        //             when {
+        //                 expression { params.Device_type == 'All_device_types' || params.Device_type == 'PACCAR'}
+        //             }
+        //             steps {
+        //                 catchError{
+        //                     script {
+        //                         def group1 = [:]
+        //                         group1['PC1'] = {
+        //                             build(job: 'Pipeline_PACCAR_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'master'), string(name:'GITBranch', value:"${params.GITBranch}")])
+        //                         }
+        //                         group1['PC27'] = {
+        //                             build(job: 'Pipeline_PACCAR_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'FE2Z00SN'), string(name:'GITBranch', value:"${params.GITBranch}")])
+        //                         }
+        //                         parallel group1
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         stage('HINO') {
+        //             when {
+        //                 expression { params.Device_type == 'All_device_types' || params.Device_type == 'HINO'}
+        //             }
+        //             steps {
+        //                 catchError{
+        //                     script {
+        //                         def group2 = [:]
+        //                         group2['PC6'] = {
+        //                             build(job: 'Pipeline_HINO_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'FE2-C-0000A'), string(name:'GITBranch', value:"${params.GITBranch}")])
+        //                         }
+        //                         group2['PC22'] = {
+        //                             build(job: 'Pipeline_HINO_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'LB-C-00022'), string(name:'GITBranch', value:"${params.GITBranch}")]) 
+        //                         }
+        //                         parallel group2
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     post {
+        //         success {
+        //             echo 'Test Reports'
+        //         }
+        //     }
+        // }
+
+        // stage('Regression Test- VC3') {
+        //     when {
+        //         expression { params.Test_suite == 'Regression' || params.Test_suite == 'VC3'}
+        //     }
+        //     parallel {
+        //         stage('PACCAR') {
+        //             when {
+        //                 expression { params.Device_type == 'All_device_types' || params.Device_type == 'PACCAR'}
+        //             }
+        //             steps {
+        //                 catchError{
+        //                     script {
+        //                         def group1 = [:]
+        //                         group1['PC1'] = {
+        //                             build(job: 'Pipeline_PACCAR_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'master'), string(name:'GITBranch', value:"${params.GITBranch}")])
+        //                         }
+        //                         group1['PC27'] = {
+        //                             build(job: 'Pipeline_PACCAR_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'FE2Z00SN'), string(name:'GITBranch', value:"${params.GITBranch}")])
+        //                         }
+        //                         parallel group1
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         stage('HINO') {
+        //             when {
+        //                 expression { params.Device_type == 'All_device_types' || params.Device_type == 'HINO'}
+        //             }
+        //             steps {
+        //                 catchError{
+        //                     script {
+        //                         def group2 = [:]
+        //                         group2['PC6'] = {
+        //                             build(job: 'Pipeline_HINO_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'FE2-C-0000A'), string(name:'GITBranch', value:"${params.GITBranch}")])
+        //                         }
+        //                         group2['PC22'] = {
+        //                             build(job: 'Pipeline_HINO_Regression_Executor', parameters: [string(name:'JIRA_ID', value:'ETEMC-1117'), string(name:'MACHINE', value:'LB-C-00022'), string(name:'GITBranch', value:"${params.GITBranch}")]) 
+        //                         }
+        //                         parallel group2
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     post {
+        //         success {
+        //             echo 'Test Reports'
+        //         }
+        //     }
+        // }
+    }
+}

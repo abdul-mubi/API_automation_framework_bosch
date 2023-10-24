@@ -1,0 +1,22 @@
+(py39env) PS C:\Git\SoCo_VMS\vms-toolbox\python-tools\build_exe\dist> .\seed_key_cli.exe -h
+usage: seed_key_cli.exe [-h] [--mode MODE] SEED
+
+
+Seed&Key Generator for CCU Projects
+
+
+positional arguments:
+  SEED         (required) the Seed obtained from the CCU
+
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --mode MODE  (optional) S&K method:
+                   0 = PACCAR Extended (default)
+                   1 = Generic/Hino Production
+                   2 = Generic/Hino Extended
+
+
+(py39env) PS C:\Git\SoCo_VMS\vms-toolbox\python-tools\build_exe\dist> .\seed_key_cli.exe A66BD8DE
+Seed: A6 6B D8 DE --> Key: FD 67 55 59
+(py39env) PS C:\Git\SoCo_VMS\vms-toolbox\python-tools\build_exe\dist>

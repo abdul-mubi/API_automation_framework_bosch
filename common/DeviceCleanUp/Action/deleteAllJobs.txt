@@ -1,0 +1,7 @@
+rm -rf /media/bosch/mbs/FOTA/*/*
+rm -rf /media/bosch/data/*/*/*
+rm -rf /data/encrypted/cdp_app/*/*
+rm -rf /data/encrypted/rda_app/*/*
+rm -rf /data/encrypted/temptpfs/cdp_app/*/*
+rm -rf /data/encrypted/temptpfs/rda_app/*/*
+rm -rf /data/unsigned/mbs/FOTA/*/*

@@ -1,0 +1,63 @@
+;============================================================================
+; XCELLSIS - Programmieren des Programmspeichers und der Datenbereichs
+;============================================================================
+; mit ID schreiben
+#include "common.pri"
+#include "e_mess.pri"
+
+#include "%3.pri"
+#include "%4.pri"
+
+;----------------------------------------------------------------------------
+; Hauptprogramm
+;----------------------------------------------------------------------------
+
+[START]
+   EXTENDED_MESSAGE(FALSE)
+   SET_RE_ENTRY (START)
+   DEFAULT_SCREEN_LAYOUT (0)
+   case TRUE : start2
+   default : DSP_ERROR
+[START_END]
+
+[start2]
+;   CHECK_INCA_CONFIGURATION
+   DISPLAY_MESSAGE ("!!! remove CHECK_INCA_CONFIGURATION in UDS (KWP2000 Command) in INCA < V6.2.0",FALSE)
+   case TRUE : CONV1
+   default: err_start2
+[start2_END]
+
+[err_start2]
+   CALL(err_m)
+   DISPLAY_MESSAGE ("Check connected INCA Device (KIC, MAC, SIC) please",FALSE)
+   default: DSP_ERROR
+[err_start2_END]
+
+[CONV1]
+   CALL (convert)
+   case TRUE : INIT
+   default: DSP_ERROR
+[CONV1_END]
+
+[INIT]
+   INIT_FLASH_PROGRAMMING (ECU_ADDRESS,1, CONFIG)
+   case TRUE : START_PROG
+   default: DSP_ERROR
+[INIT_END]
+
+[START_PROG]
+   CALL (programECUFlash)
+   case TRUE :	success
+   case ESCAPE: DSP_break
+   default :	DSP_ERROR
+[START_PROG_END]
+
+[success]
+  DISPLAY_MESSAGE ("Exit with Close",FALSE);
+  EXTENDED_MESSAGE(FALSE)
+  default : EXIT
+[success_END]
+
+
+
+

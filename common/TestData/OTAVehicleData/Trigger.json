@@ -1,0 +1,2534 @@
+{
+    "trigger":{
+        "e2e_test_trigger":{
+            "triggerName" : "E2E_Test_Trigger",
+            "triggerDescription" : "Trigger description",
+            "preTriggerTime" : 0
+        }
+    },
+    
+    "triggerTestData":{
+        "defaultTemplateStartGroup":{
+            "name":"triggerStartGroup",
+            "description":"groupDescription",
+            "operatorType": "AND",
+            "mode": "TRANSIENT",
+            "logic": "NON_INVERTING",
+            "count": 1,
+            "type": "OPERATOR"
+        },
+        "defaultTemplateStopGroup":{
+            "name":"triggerStopGroup",
+            "description":"groupDescription",
+            "operatorType": "AND",
+            "mode": "TRANSIENT",
+            "logic": "NON_INVERTING",
+            "count": 1,
+            "type": "OPERATOR"
+        },
+        "defaultTemplateSignalCondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_SIGNAL",
+            "triggerMode":"COMPARE_CONSTANT",
+            "signalId":"S_STD_0x201_S8",
+            "sourceId":"",
+            "reference":"25",
+            "mode":"TRANSIENT",
+            "logic":"NON_INVERTING",
+            "count":1,
+            "countPeriod":60
+        },
+        "defaultDafTemplateSignalCondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_SIGNAL",
+            "triggerMode":"NOT_APPEARING",
+            "durationTime":5,
+            "signalId":"WarningId16",
+            "sourceId":"",
+            "reference":"000000000000",
+            "mask": "111111111111",
+            "logic":"NON_INVERTING",
+            "count":1
+        },
+        "defaultTemplateSignalCondition_1":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_SIGNAL",
+            "triggerMode":"COMPARE_CONSTANT",
+            "signalId":"S_STD_0x200_S5",
+            "sourceId":"",
+            "reference":"25",
+            "mode":"TRANSIENT",
+            "logic":"NON_INVERTING",
+            "count":1,
+            "countPeriod":60
+        },
+        "defaultTemplateMessageCondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_MESSAGE",
+            "triggerMode":"VARIATION",
+            "messageId":"F_EXT_0x1000000",
+            "sourceId":"",
+            "logic":"NON_INVERTING",
+            "count":1,
+            "countPeriod":60,
+            "reference":""
+        },
+        "defaultTemplateWakeUpCondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_WAKEUP",
+            "triggerMode":"TIMER",
+            "delay":900,
+            "logic":"NON_INVERTING"
+        },
+        "defaultTemplateIntervalCondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_INTERVAL",
+            "triggerMode":"TIME_INTERVAL",
+            "logic":"NON_INVERTING",
+            "interval":"30"
+        },
+        "defaultTemplateSignalVariationCondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_SIGNAL",
+            "triggerMode":"VARIATION",
+            "signalId":"S_EXT_0x1000001_S8",
+            "sourceId":"",
+            "logic":"NON_INVERTING",
+            "count":1
+        },
+        "defaultTemplateVehiclepropertycondition":{
+            "name":"triggerCondition",
+            "description":"conditionDescription",
+            "type":"CONDITION_VEHICLE_PROPERTY",
+            "mode":"STATIC"
+        },
+        "signalConstantConfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">="
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "75"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_EXT_0x1000001_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[24,25,26]],
+                    "stop_value":[[74,75,76]]
+                },
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[24,25,26]],
+                    "stop_value":[[74,75,76]]
+                }
+            ]
+        },
+        "TL15TriggerWithoutDelay":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateWakeUpCondition",
+                        "triggerMode":"T15",
+                        "delay":0                         
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "operator" : ">=",
+                        "reference": "200"                                         
+                    }
+                ]
+            }
+        },
+        "TimerTriggerWithoutDelay":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateWakeUpCondition",
+                        "delay":0                         
+                    }
+                ]
+            }
+        },
+        "TL15TriggerWithDelay":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateWakeUpCondition",
+                        "triggerMode":"T15",
+                        "delay":180                         
+                    }
+                ]
+            }
+        },
+        "TimerTriggerWithDelay":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateWakeUpCondition",
+                        "delay":180                         
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "operator" : ">=",
+                        "reference": "200"                                         
+                    }
+                ]
+            }
+
+        },
+    
+        "And_cCONSt":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",   
+                "triggerElements" : [ 
+                    {
+                        "template":"defaultTemplateSignalCondition",                                             
+                        "signalId" : "S_STD_0x303_S24",                      
+                        "operator" : "=="                                     
+                    },
+                    {
+                        "template":"defaultTemplateSignalCondition",                                     
+                        "signalId" : "S_STD_0x301_S8",                                           
+                        "operator" : "<="                           
+                    },
+                    {
+                        "template":"defaultTemplateSignalCondition",                                          
+                        "operator" : ">="                           
+                    }
+                ]
+            }
+
+        },
+        "TimerTriggerWithoutDelayInv":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",   
+                "triggerElements" : [ 
+                    {
+                        "template":"defaultTemplateWakeUpCondition",
+                        "delay": "0",
+					    "logic":"INVERTING"
+                    }
+                ]
+            }
+        },
+        "KL15TriggerWithoutDelayInv":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",   
+                "triggerElements" : [ 
+                    {
+                        "template":"defaultTemplateWakeUpCondition",
+                        "triggerMode": "T15",
+                        "delay": "0",
+					    "logic":"INVERTING"
+                    }
+                ]
+            }
+        },
+        "SignalConstInvconfig": {
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "reference" : "15",    
+                        "logic":"INVERTING",
+                        "signalId" : "S_STD_0x200_S4",
+                        "operator" : "<="
+                    }
+                ]
+            }
+        },   
+        "SignalgroupConstInvconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "logic": "INVERTING",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "reference" : "15",    
+                        "signalId" : "S_STD_0x200_S4",
+                        "operator" : "<="
+                    }
+                ]
+            }
+        },
+        "SignalDebouncetime":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",    
+                        "signalId" : "S_STD_0x201_S8",
+                        "operator" : ">=",
+                        "reference": "20",    				
+                        "debounceTime":10                     
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",    
+                        "signalId" : "S_STD_0x201_S8",
+                        "operator" : "==",
+                        "reference": "225"   				                   
+                    }
+                ]
+            }
+        },
+        "SignalconfigwithDebounceTime":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",    
+                        "signalId" : "S_STD_0x201_S8",
+                        "operator" : "==",
+                        "reference" : "20",
+                        "debounceTime":5    				                             
+                    }
+                ]
+            }
+        },
+                
+        "messageVariationconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"VARIATION",
+                        "mask":"00001000",
+                        "messageId":"F_EXT_0x1000001"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"VARIATION",
+                        "mask":"10000000",
+                        "messageId":"F_EXT_0x1000001"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"MESSAGE",
+                    "name":"F_EXT_0x1000001",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[["0x07","0x08","0x09"],["0x87","0x88","0x89"]],
+                    "stop_value":[["0x7F","0x80","0x81"],["0XFF","0x00","0X01"]]
+                }
+            ]
+        },
+        
+        "WrongstartTriggerconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"VARIATION",
+                        "mask":"00000000",
+                        "messageId":"F_EXT_0x1000001"
+                    }
+                ]
+            }
+        },
+        "signalVariationconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00001000",
+                        "signalId":"S_EXT_0x1000001_S8"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00010000",
+                        "signalId":"S_EXT_0x1000001_S8"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_EXT_0x1000001_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[7,8,9],[23,24,25]],
+                    "stop_value":[[15,16,17],[31,32,33]]
+                }
+            ]
+        },
+
+        "Canraw_comparebitmask_J1939_Appears_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"00011000",
+                        "messageId":"F_EXT_0x1000001",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"J1939Message8Byte",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            }
+
+        },
+
+        "Canraw_comparebitmask_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"00011000",
+                        "messageId":"F_EXT_0x1000001",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"10000000",
+                        "messageId":"F_EXT_0x1000001",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"MESSAGE",
+                    "name":"F_EXT_0x1000001",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[["0x17","0x18","0x19"]],
+                    "stop_value":[["0x7F","0x80","0x81"]]
+                }
+            ]
+        },
+
+        "J1939_comparebitmask_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"00011000",
+                        "messageId":"J1938Message1Byte",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"01000000",
+                        "messageId":"J1938Message1Byte",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"MESSAGE",
+                    "name":"J1938Message1Byte",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[["0x17","0x18","0x19"]],
+                    "stop_value":[["0x3F","0x40","0x41"]]
+                }
+            ]
+        },
+
+        "Canraw_J1939_Comparebitmask_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"00011000",
+                        "messageId":"F_EXT_0x1000001",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"COMPARE_BITMASK",
+                        "reference":"01000000",
+                        "messageId":"J1938Message1Byte",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"MESSAGE",
+                    "name":"F_EXT_0x1000001",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[["0x17","0x18","0x19"]],
+                    "stop_value":[]
+                },
+                {
+                    "signalType":"MESSAGE",
+                    "name":"J1938Message1Byte",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[],
+                    "stop_value":[["0x3F","0x40","0x41"]]
+                }
+
+            ]
+        },
+
+        "Canraw_J1939_Appears_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"F_EXT_0x1000001",
+                        "sourceId":""
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"J1939Message8Byte",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "message_appear_start_check":"F_EXT_0x1000001",
+                    "message_appear_stop_check":"J1939Message8Byte"
+                }
+            ]
+        },
+
+        "Canraw_Appears_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"F_EXT_0x1000001",
+                        "sourceId":""
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"F_STD_0x200",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "message_appear_start_check":"F_EXT_0x1000001",
+                    "message_appear_stop_check":"F_STD_0x200"
+                }
+            ]
+        },
+
+        "J1939_Appears_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"J1939Message8Byte",
+                        "sourceId":""
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"J1939Message",
+                        "sourceId":"",
+                        "mask":"11111111"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "message_appear_start_check":"J1939Message8Byte",
+                    "message_appear_stop_check":"J1939Message"
+                }
+            ]
+        },
+        "wrong_Canraw_appears_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"APPEARS",
+                        "reference":"",
+                        "messageId":"J1939Message8Byte",
+                        "sourceId":"",
+                        "logic": "INVERTING"
+                    }
+                ]
+            }
+        },
+        "oneTimeMessageconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"ONE_TIME",
+                        "reference":"",
+                        "messageId":"F_EXT_0x1000001",
+                        "mask":"00001000",
+                        "timeout":20                  
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"ONE_TIME",
+                        "reference":"",
+                        "messageId":"F_EXT_0x1000001",
+                        "mask":"00010000",
+                        "timeout":20
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"MESSAGE",
+                    "name":"F_EXT_0x1000001",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[["0x07","0x08","0x09"],["0x17","0x18","0x19"]],
+                    "stop_value":[["0x0F","0x10","0x11"],["0x1F","0x20","0x21"]]
+                }
+            ]
+        },
+        "oneTimeMessageWithHighTimeoutconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"ONE_TIME",
+                        "reference":"",
+                        "messageId":"F_EXT_0x1000001",
+                        "mask":"00001000",
+                        "timeout":50                  
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"ONE_TIME",
+                        "reference":"",
+                        "messageId":"F_EXT_0x1000001",
+                        "mask":"00010000",
+                        "timeout":50
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"MESSAGE",
+                    "name":"F_EXT_0x1000001",
+                    "min":"0x00",
+                    "max":"0xFF",
+                    "factor":1,
+                    "start_value":[["0x07","0x08","0x09"]],
+                    "stop_value":[["0x0F","0x10","0x11"]]
+                }
+            ]     
+        },
+        "group_count_triggercond_count_Config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "count": "2",
+                "countPeriod":600,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "count" :3,
+                        "countPeriod":600,
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "cycle":7,
+                    "start_value":[[4,5,6]],
+                    "stop_value":[[24,25,26]]
+                }
+            ]
+        },
+        "group_count_triggercond_debounce":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "count": "2",
+                "countPeriod":150,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "debounceTime":2 ,    
+                        "reference" : "10"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "30"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "cycle":1,
+                    "start_value":[[15,16,17]],
+                    "stop_value":[[29,30,31]]
+                }
+            ]
+        },
+        "group_count_countperiod_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "count": "2",
+                "countPeriod":150,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=", 
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "cycle":2,
+                    "start_value":[[4,5,6]],
+                    "stop_value":[[24,25,26]]
+                }
+            ]
+        },
+        "group_inverting_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "logic": "INVERTING",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=", 
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "start_value":[[0,1,2]],
+                    "stop_value":[[24,25,26]]
+                }
+            ]
+        },
+        "triggercondt_debounce_inv_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "logic":"INVERTING",
+                        "debounceTime":2,
+                        "reference" : "11"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "30"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "start_value":[[5,6,7]],
+                    "stop_value":[[29,30,31]]
+                }
+            ]
+        },
+        "trigger_start_debounce_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : "==",
+                        "debounceTime":2,
+                        "reference" : "11"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "30"
+                    }
+                ]
+            }    
+        },
+        "triggercondt_static_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "mode":"STATIC",
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "start_value":[[4,5,6]],
+                    "stop_value":[[24,25,26]]
+                }
+            ]  
+        },
+        "triggercondt_debounce_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "debounceTime":5,
+                        "reference" : "20"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "150"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[33,34,35]],
+                    "stop_value":[[149,150,151]]
+                }
+            ]
+        },
+        "triggercondt_debouncehigh_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "debounceTime":10,
+                        "reference" : "50"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "150"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[77,78,79]],
+                    "stop_value":[[149,150,151]]
+                }
+            ]
+        },
+        "timeout_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "count":"6",
+                        "countPeriod":60,
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            }
+        },
+        "triggercondtn_Inv_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "logic":"INVERTING",
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "start_value":[[0,1,2]],
+                    "stop_value":[[24,25,26]]
+                }
+            ]  
+        },
+        "triggercondtn_count_timeout":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "count":2,
+                        "countPeriod":500,
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x200_S5",
+                    "min":0,
+                    "max":31,
+                    "factor":1,
+                    "cycle":2,
+                    "start_value":[[4,5,6]],
+                    "stop_value":[[24,25,26]]
+                }
+            ]  
+        },
+        "grouptriggercondtn_count":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "count":2,
+                "countPeriod":150,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "count":3,
+                        "countPeriod":300,
+                        "reference" : "5"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition_1",
+                        "type":"CONDITION_SIGNAL",
+                        "operator" : ">=",
+                        "reference" : "25"
+                    }
+                ]
+            }        
+        },
+        "Value_interval_config_Singleshot":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {                
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"50",
+                        "reference": "20",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"vcu_HVBattSOC",
+                    "min":255,
+                    "max":0,
+                    "factor":1,
+                    "start_value":[["19.0","20.0","21.0"],["69.0","70.0","71.0"],["119.0","120.0","121.0"]],
+                    "stop_value":[]
+                }
+            ]
+        },
+        "Time_interval_config_Singleshot":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"TIME_INTERVAL",
+                        "interval":"1",
+                        "signalId": "vcu_HVBattSOC"
+                    }
+                ]
+            }
+        },
+        "Value_interval_decrement_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"-20",
+                        "reference": "230",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"-20",
+                        "reference": "220",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"vcu_HVBattSOC",
+                    "min":255,
+                    "max":0,
+                    "factor":1,
+                    "start_value":[["229.0","230.0","231.0"],["209.0","210.0","211.0"],["189.0","190.0","191.0"],["169.0","170.0","171.0"],["149.0","150.0","151.0"]],
+                    "stop_value":[["219.0","220.0","221.0"],["199.0","200.0","201.0"],["179.0","180.0","181.0"],["159.0","160.0","161.0"],["139.0","140.0","141.0"]]
+                }
+            ]
+        },
+        "Value_interval_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {                  
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"50",
+                        "reference": "20",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"50",
+                        "reference": "40",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"vcu_HVBattSOC",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[["19.0","20.0","21.0"],["69.0","70.0","71.0"]],
+                    "stop_value":[["39.0","40.0","41.0"],["89.0","90.0","91.0"]]
+                }
+            ]
+        },
+        "Time_interval_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"TIME_INTERVAL",
+                        "interval":"1",
+                        "signalId": "vcu_HVBattSOC"
+                    }
+                ]
+            }
+        },
+        "Time_interval_config_CCUVoltage":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"TIME_INTERVAL",
+                        "interval":"1",
+                        "signalId": "SupplyVoltage"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"TIME_INTERVAL",
+                        "interval":"1",
+                        "signalId": "SupplyVoltage"
+                    }
+                ]
+            }
+        },
+        "Wrong_Value_interval_config_Singleshot":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {                
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"40",
+                        "reference": "260",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            }
+        },
+        "Wrong_Value_interval_config_Singleshot_increment":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {                
+                        "template":"defaultTemplateIntervalCondition",
+                        "triggerMode":"SIGNAL_INTERVAL",
+                        "interval":"-10",
+                        "reference":"20",
+                        "signalId": "vcu_HVBattSOC",
+                        "sourceId": ""
+                    }
+                ]
+            }
+        },
+        "enrich_RM_Continuous_4levels8conditions":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "countPeriod":60,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "name":"S_201GreaterThanEqual20",
+                        "signalId" :"S_STD_0x201_S8",
+                        "operator" : ">=", 
+                        "reference" : "20"
+                    },
+                    {
+                        "template":"defaultTemplateStartGroup",
+                        "name":"S_1000001OR",
+                        "operatorType":"OR",
+                        "countPeriod":60,
+                        "triggerElements":[
+                            {
+                                "template":"defaultTemplateStartGroup",
+                                "name":"S_201ANDBetween50_150",
+                                "countPeriod":60,
+                                "triggerElements":[
+                                    {
+                                        "template":"defaultTemplateSignalCondition",
+                                        "name":"S_201GreaterThanEqual50",
+                                        "signalId" :"S_STD_0x201_S8",
+                                        "operator" : ">=", 
+                                        "reference" : "50"
+                                    },
+                                    {
+                                        "template":"defaultTemplateSignalCondition",
+                                        "name":"S_201LessThanEqual150",
+                                        "signalId" :"S_STD_0x201_S8",
+                                        "operator" : "<=", 
+                                        "reference" : "150"
+                                    },
+                                    {
+                                        "template":"defaultTemplateStartGroup",
+                                        "name":"S_201OR",
+                                        "operatorType":"OR",
+                                        "countPeriod":60,
+                                        "triggerElements":[
+                                            {
+                                                "template":"defaultTemplateSignalCondition",
+                                                "name":"S_201BitmaskEqual51",
+                                                "signalId" :"S_STD_0x201_S8",
+                                                "triggerMode":"COMPARE_BITMASK",
+                                                "reference":"00110011",
+                                                "mask":"11111111"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                
+                                "template":"defaultTemplateSignalCondition",
+                                "name":"S_BitmaskEqual50",
+                                "signalId" :"S_STD_0x201_S8",
+                                "triggerMode":"COMPARE_BITMASK",
+                                "reference":"00110010",
+                                "mask":"11111111"
+                            },
+                            {
+                                "template":"defaultTemplateSignalCondition",
+                                "name":"S_201Equal50",
+                                "signalId" :"S_STD_0x201_S8",
+                                "operator" : "==", 
+                                "reference" : "50"
+                            },
+                            {
+                                "template":"defaultTemplateSignalCondition",
+                                "name":"S_1000001GreaterThanEqual190",
+                                "signalId" :"S_STD_0x205_S8",
+                                "operator" : ">=", 
+                                "reference" : "190"
+                            },
+                            {
+                                "template":"defaultTemplateSignalCondition",
+                                "name":"S_1000001BitMaskEqual60",
+                                "signalId" :"S_STD_0x205_S8",
+                                "triggerMode":"COMPARE_BITMASK",
+                                "reference":"01100000",
+                                "mask":"11111111"
+                            }
+                        ] 
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "name":"RootStopConditionGroup",
+                "countPeriod":60,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "name":"S_201Equal250",
+                        "signalId" :"S_STD_0x201_S8",
+                        "operator" : "==",
+                        "reference" : "250"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[49,50,51]],
+                    "stop_value":[[249,250,251]]
+                }
+            ],
+            "Enrich_RM_Reason_Validation":{
+                "start_trigger_condition" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "S_201GreaterThanEqual20" : "TRUE",
+                    "S_1000001OR": "TRUE",
+                    "S_201ANDBetween50_150" : "FALSE",
+                    "S_201GreaterThanEqual50" : "TRUE",
+                    "S_201LessThanEqual150" : "TRUE",
+                    "S_201OR" : "FALSE",
+                    "S_201BitmaskEqual51" : "FALSE",
+                    "S_BitmaskEqual50" : "TRUE",
+                    "S_201Equal50" : "FALSE",
+                    "S_1000001GreaterThanEqual190" : "FALSE",
+                    "S_1000001BitMaskEqual60" : "FALSE"
+                },
+                "stop_trigger_condition":{
+                    "RootStopConditionGroup" : "TRUE",
+                    "S_201Equal250" : "TRUE"
+                }
+            }
+        },
+        "enrich_RM_Continuous_2levels3conditions":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "countPeriod":60,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "name":"S_201GreaterThanEqual20",
+                        "signalId" :"S_STD_0x201_S8",
+                        "operator" : ">=", 
+                        "reference" : "20",
+                        "debounceTime":5
+                    },
+                    {
+                        "template":"defaultTemplateStartGroup",
+                        "name":"50OR60",
+                        "operatorType":"OR",
+                        "countPeriod":60,
+                        "triggerElements":[
+                            {
+                                "template":"defaultTemplateSignalCondition",
+                                "name":"Equal60",
+                                "signalId" :"S_STD_0x201_S8",
+                                "operator" : "==", 
+                                "reference" : "60"
+                            },
+                            {
+                                "template":"defaultTemplateSignalCondition",
+                                "name":"Equal50",
+                                "signalId" :"S_STD_0x201_S8",
+                                "operator" : "==", 
+                                "reference" : "50"
+                            } 
+                        ] 
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "name":"RootStopConditionGroup",
+                "countPeriod":60,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "name" : "GreaterThanEqual180",
+                        "signalId" :"S_STD_0x201_S8",
+                        "operator" : ">=",
+                        "reference" : "180"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[49,50,51]],
+                    "stop_value":[[179,180,181]]
+                }
+            ],
+            "Enrich_RM_Reason_Validation":{
+                "start_trigger_condition" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "S_201GreaterThanEqual20" : "TRUE",
+                    "50OR60": "TRUE",
+                    "Equal60" : "FALSE",
+                    "Equal50" : "TRUE"
+                },
+                "stop_trigger_condition":{
+                    "RootStopConditionGroup" : "TRUE",
+                    "GreaterThanEqual180" : "TRUE"
+                }
+            }
+        },
+        "enrich_RM_Singleshot_1levels2conditions":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "countPeriod":60,
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "name":"GreaterThanEqual50",
+                        "signalId" :"S_STD_0x201_S8",
+                        "operator" : ">=", 
+                        "reference" : "50"
+                    },
+                    {
+                        "template":"defaultTemplateSignalCondition",
+                        "name":"LessThanEqual70",
+                        "signalId" :"S_STD_0x201_S8",
+                        "operator" : "<=", 
+                        "reference" : "70"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[49,50,51]],
+                    "stop_value":[]
+                }
+            ],
+            "Enrich_RM_Reason_Validation":{
+                "start_trigger_condition" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "GreaterThanEqual50" : "TRUE",
+                    "LessThanEqual70": "TRUE"
+                }
+            }
+        },
+        "wakeup_sms_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "triggerElements":[
+                    {
+                        "delay": 60,
+                        "template":"defaultTemplateWakeUpCondition",
+                        "name":"Trigger condition",
+                        "reason": "wakeup",
+                        "triggerMode": "REMOTE",
+                        "type":"CONDITION_WAKEUP"
+                    }
+                ]
+            }  
+        },
+        "timer_wakeup_sms_config":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "triggerElements":[
+                    {
+                        "delay": 120,
+                        "template":"defaultTemplateWakeUpCondition",
+                        "name":"Trigger condition",
+                        "reason": "wakeup",
+                        "triggerMode": "REMOTE",
+                        "type":"CONDITION_WAKEUP"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "name":"RootStopConditionGroup",
+                "triggerElements":[
+                    {
+                        "delay": 160,
+                        "template":"defaultTemplateWakeUpCondition"
+                    }
+                ]
+            } 
+        },
+        
+        "Signal_variation_config_2signals":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00001000",
+                        "signalId":"S_EXT_0x1000001_S8"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00010000",
+                        "signalId":"S_STD_0x201_S8"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_EXT_0x1000001_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[7,8,9],[23,24,25]],
+                    "stop_value":[[15,16,17],[31,32,33]]
+                },
+                {
+                    "signalType":"SIGNAL",
+                    "name":"S_STD_0x201_S8",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[],
+                    "stop_value":[[15,16,17]]
+                }
+
+            ]
+
+        },
+
+        "multiplexedsignalVariationconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00000001",
+                        "signalId":"Multiplexed_Signal_1"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00000100",
+                        "signalId":"Multiplexed_Signal_1"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"Multiplexed_Signal_1",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[16,17,18],[20,21,22]],
+                    "stop_value":[[19,20,21],[15,16,17]]
+                }
+            ]
+        }
+        ,
+        "wrongsignalVariationconfig":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00000000",
+                        "signalId":"S_EXT_0x1000001_S8"
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "mask":"00010000",
+                        "signalId":"S_EXT_0x1000001_S8"
+                    }
+                ]
+            }
+        },
+        "DM1_All_Source_addresses":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"DM1",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                            "type": "MASK_SOURCE_ADDRESS",
+                            "mask": "00000000",
+                            "reference": "00000000"
+                        },
+                        "forceRetriggerAfterSeconds": 120,
+                        "resetDtcOccurenceAfterSeconds": 10              
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["10.0","11.0","12.0"]],
+                    "stop_value":[["59.0","60.0","61.0"]]
+                }
+            ],
+            "DM1_data":{
+                "DM1Engine":[["SuspectParameterNumberEngine", "DM1_RAISED", "[100]"]],
+                "DM1Engine_RPM_range":[[10,41]],
+                "DM1Scd":[["SuspectParameterNumber", "DM1_RERAISED", "[4369 74274 78643]"]],
+                "DM1Scd_RPM_range":[[[21,32],[51,57]]]
+            }
+        },
+        "DM1_Singleshot_ResetDTC":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"DM1",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 30,
+                        "resetDtcOccurenceAfterSeconds": 10              
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["7.0"],["24.0"]],
+                    "stop_value":[]
+                }
+            ],
+            "DM1_data":{
+                "DM1Engine":[["SuspectParameterNumberEngine", "SINGLESHOT", "[100]"],["SuspectParameterNumberEngine", "SINGLESHOT", "[100]"]],
+                "DM1Engine_RPM_range":[[7],[24]],
+                "DM1Scd":[[],[]],
+                "DM1Scd_RPM_range":[[],[]]
+            }
+        },
+        "DM1_Active_Force_Retrigger_and_ResetDTC":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"DM1",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 15,
+                        "resetDtcOccurenceAfterSeconds": 2              
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"DM1",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "4B"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 120,
+                        "resetDtcOccurenceAfterSeconds": 60              
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["10.0","11.0","12.0"],["26.0","27.0","28.0"]],
+                    "stop_value":[["20.0","21.0","22.0"],["59.0","60.0","61.0"]]
+                }
+            ],
+            "DM1_data":{
+                "DM1Engine":[["SuspectParameterNumberEngine", "DM1_RAISED", "[100]"],["SuspectParameterNumberEngine", "DM1_RAISED", "[100]"]],
+                "DM1Engine_RPM_range":[[10,22],[26,41]],
+                "DM1Scd":[[],["SuspectParameterNumber", "DM1_RERAISED", "[4369 74274 78643]"]],
+                "DM1Scd_RPM_range":[[],[[25,32],[50,57]]]
+            }
+        },
+        "DM1_Singleshot_Force_Retrigger_Inactive":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerMode":"DM1",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 40,
+                        "resetDtcOccurenceAfterSeconds": 10              
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["10.0","11.0","12.0"]],
+                    "stop_value":[]
+                }
+            ],
+            "DM1_data":{
+                "DM1Engine":[["SuspectParameterNumberEngine", "SINGLESHOT", "[100]"]],
+                "DM1Engine_RPM_range":[[10,11,12]],
+                "DM1Scd":[[]],
+                "DM1Scd_RPM_range":[[]]
+            }
+        },
+        "vehicle_property_triggers_01":
+        {
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"IGNITION_ON",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"IGNITION_OFF",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "Validation":[
+                {
+                    "start_trigger": "Ignition_on",
+                    "exception_time_in_seconds":0
+                }
+            ]
+        },
+        "vehicle_property_triggers_02":
+        {
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"IGNITION_ON",
+                        "mode":"TRANSIENT"
+                    }
+                ],"countPeriod":60
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"IGNITION_OFF",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "Validation":[
+                {   
+                    "start_trigger": "Ignition_on",
+                    "exception_time_in_seconds":60
+                }
+            ]
+        },
+        
+        "vehicle_property_triggers_03":
+        {
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"IGNITION_OFF",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"IGNITION_ON",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "Validation":[
+                {   
+                    "start_trigger": "Ignition_off",
+                    "exception_time_in_seconds":0
+                }
+            ]
+        },
+        "vehicle_property_triggers_04":
+        {
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"MOBILE_NETWORK_UNAVAILABLE",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":
+                [
+                    {
+                        "template":"defaultTemplateVehiclepropertycondition",
+                        "triggerMode":"MOBILE_NETWORK_AVAILABLE",
+                        "mode":"STATIC"
+                    }
+                ],"countPeriod":60
+            },
+            "Validation":[
+                {   
+                    "start_trigger": "MOBILE_NETWORK_UNAVAILABLE",
+                    "exception_time_in_seconds":0
+                }
+            ]
+        },
+        "dafWarningContinuous":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultDafTemplateSignalCondition"             
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultDafTemplateSignalCondition",
+                        "signalId":"WarningId06"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"Seconds",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[63.0,64.0,65.0]],
+                    "stop_value":[[83.0,84.0,85.0]]
+                }
+            ]
+        },
+        "dafWarningSingleShot":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultDafTemplateSignalCondition", 
+                        "signalId":"WarningId01"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"Seconds",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[89.0,90.0,91.0]],
+                    "stop_value":[]
+                }
+            ],
+            "dataValidation":[
+                {
+                    "DISAPPEARED": ["[2578.0 2595.0 2612.0 2629.0 2646.0]"]
+                }
+            ]
+        },
+        "dafWarningMultiConditions":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "operatorType": "OR",
+                "triggerElements":[
+                    {
+                        "template":"defaultDafTemplateSignalCondition",
+                        "name":"NotAppearingTriggerCondition",
+                        "signalId": "WarningId16"
+                    },
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "name":"VariationTriggerCondition",
+                        "mask": "111111111111",
+                        "signalId": "WarningId17"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"Seconds",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[17.0,18.0,19.0],[21,22,23],[25,26,27],[19,30,31],[35,36,37]],
+                    "stop_value":[]
+                }
+            ],
+            "Enrich_RM_Reason_Validation":{
+                "start_trigger_condition_1" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "NotAppearingTriggerCondition" : "TRUE",
+                    "VariationTriggerCondition": "FALSE"
+                },
+                "start_trigger_condition_2" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "NotAppearingTriggerCondition" : "FALSE",
+                    "VariationTriggerCondition": "TRUE"
+                },
+                "start_trigger_condition_3" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "NotAppearingTriggerCondition" : "FALSE",
+                    "VariationTriggerCondition": "TRUE"
+                },
+                "start_trigger_condition_4" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "NotAppearingTriggerCondition" : "FALSE",
+                    "VariationTriggerCondition": "TRUE"
+                },
+                "start_trigger_condition_5" :{
+                    "RootStartConditionGroup" : "TRUE",
+                    "NotAppearingTriggerCondition" : "FALSE",
+                    "VariationTriggerCondition": "TRUE"
+                }
+            },
+            "dataValidation":[
+                {
+                    "APPEARED": [],
+                    "DISAPPEARED": []
+                },
+                {
+                    "APPEARED": [],
+                    "DISAPPEARED": ["[3363.0 3380.0]"]
+                },
+                {
+                    "APPEARED": ["[3363.0 3380.0]"],
+                    "DISAPPEARED": []
+                },
+                {
+                    "APPEARED": [],
+                    "DISAPPEARED": ["[3363.0]"]
+                },
+                {
+                    "APPEARED": ["[3363.0]"],
+                    "DISAPPEARED": []
+                }
+            ]
+        },
+        "tellTalesMultiConditions":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "name":"RootStartConditionGroup",
+                "operatorType": "OR",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "name":"VariationTriggerCondition1",
+                        "mask": "111111111111111111111111111111111111111111111111111111111111",
+                        "signalId": "TT01_to_TT15"
+                    },
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "name":"VariationTriggerCondition2",
+                        "mask": "111111111111111111111111111111111111111111111111111111111111",
+                        "signalId": "TT16_to_TT30"
+                    },
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "name":"VariationTriggerCondition3",
+                        "mask": "111111111111111111111111111111111111111111111111111111111111",
+                        "signalId": "TT31_to_TT45"
+                    },
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "name":"VariationTriggerCondition4",
+                        "mask": "111111111111111111111111111111111111111111111111111111111111",
+                        "signalId": "TT46_to_TT60"
+                    },
+                    {
+                        "template":"defaultTemplateSignalVariationCondition",
+                        "name":"VariationTriggerCondition5",
+                        "mask": "111111111111111111111111111111111111111111111111111111111111",
+                        "signalId": "TT61_to_TT75"
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"Seconds",
+                    "min":0,
+                    "max":255,
+                    "factor":1,
+                    "start_value":[[10.0,11.0,12.0],[19.0,20.0,21.0],[29.0,30.0,31.0],[39.0,40.0,41.0],[49.0,50.0,51.0],[61.0,62.0,63.0],[70.0,71.0,72.0]],
+                    "stop_value":[]
+                }
+            ],
+            "dataValidation":[
+                {   
+                    "FULL_LIST":["[7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[30.0]"],
+                    "APPEARED":["[7.0]"],
+                    "DISAPPEARED":["[0.0]"]
+                },
+                {   
+                    "FULL_LIST":["[7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 0.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[45.0 60.0 75.0]"],
+                    "APPEARED":["[7.0 7.0 7.0]"],
+                    "DISAPPEARED":["[1.0 2.0 3.0]"]
+                },
+                {   
+                    "FULL_LIST":["[7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 0.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 1.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 2.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 3.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[3.0]"],
+                    "APPEARED":["[7.0]"],
+                    "DISAPPEARED":["[3.0]"]
+                },
+                {   
+                    "FULL_LIST":["[7.0 7.0 3.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 0.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 1.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 2.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 3.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[4.0 10.0 11.0 13.0]"],
+                    "APPEARED":["[7.0 7.0 7.0 7.0]"],
+                    "DISAPPEARED":["[1.0 2.0 2.0 3.0]"]
+                },
+                {   
+                    "FULL_LIST":["[7.0 7.0 3.0 2.0 7.0 7.0 7.0 7.0 7.0 1.0 2.0 7.0 3.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 0.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 1.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 2.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 3.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[4.0 10.0 11.0 13.0]"],
+                    "APPEARED":["[1.0 2.0 2.0 3.0]"],
+                    "DISAPPEARED":["[7.0 7.0 7.0 7.0]"]
+                },
+                {   
+                    "FULL_LIST":["[7.0 7.0 3.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 0.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 1.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 2.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 3.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[3.0]"],
+                    "APPEARED":["[3.0]"],
+                    "DISAPPEARED":["[7.0]"]
+                },
+                {   
+                    "FULL_LIST":["[7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 0.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 1.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 2.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 7.0 3.0]"],
+                    "CHANGED_POSITIONS_LIST": ["[30.0 45.0 60.0 75.0]"],
+                    "APPEARED":["[0.0 1.0 2.0 3.0]"],
+                    "DISAPPEARED":["[7.0 7.0 7.0 7.0]"]
+                }
+            ]
+        },
+        "DM1_Extend_Continuous_First_ECU_Appeared_Second_ECU_Disappeared":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerType": "MESSAGE",
+                        "triggerMode":"DM1",
+                        "dtcStatus": "APPEARED",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 10,
+                        "resetDtcOccurenceAfterSeconds": 5              
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerType": "MESSAGE",
+                        "triggerMode":"DM1",
+                        "dtcStatus": "DISAPPEARED",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "4B"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 12,
+                        "resetDtcOccurenceAfterSeconds": 5             
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["5.0","6.0","7.0"],["27.0","28.0","29.0"],["38.0","39.0","40.0"],["76.0","77.0","78.0"]],
+		            "stop_value":[["21.0","22.0","23.0"],["29.0","30.0","31.0"],["75.0","76.0","77.0"],["104.0","105.0","106.0"]]
+                }
+            ]
+        },
+        "DM1_Extend_Continuous_Multiple_ECU_AppearedDisappeared_Second_ECU_Appeared":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerType": "MESSAGE",
+                        "triggerMode":"DM1",
+                        "dtcStatus": "APPEARED_AND_DISAPPEARED",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00","4B"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 10,
+                        "resetDtcOccurenceAfterSeconds": 5              
+                    }
+                ]
+            },
+            "stopTrigger":{
+                "template":"defaultTemplateStopGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerType": "MESSAGE",
+                        "triggerMode":"DM1",
+                        "dtcStatus": "APPEARED",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "4B"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 12,
+                        "resetDtcOccurenceAfterSeconds": 5             
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["5.0","6.0","7.0"],["16.0","17.0","18.0"],["27.0","28.0","29.0"],["66.0","67.0","68.0"],["75.0","76.0","77.0"]],
+                    "stop_value":[["10.0","11.0","12.0"],["21.0","22.0","23.0"],["60.0","61.0","62.0"],["73.0","74.0","75.0"],["104.0","105.0","106.0"]]
+                }
+            ]
+        },
+        "DM1_Extend_SingleShot_Single_ECU_AppearedDisappeared":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerType": "MESSAGE",
+                        "triggerMode":"DM1",
+                        "dtcStatus": "APPEARED_AND_DISAPPEARED",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 30,
+                        "resetDtcOccurenceAfterSeconds": 5              
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["5.0","6.0","7.0"],["36.0","37.0","38.0"],["41.0","42.0","43.0"],["66.0","67.0","68.0"],["71.0","72.0","73.0"],["76.0","77.0","78.0"],["81.0","82.0","83.0"],["91.0","92.0","93.0"],["96.0","97.0","98.0"]],
+		            "stop_value":[]
+                }
+            ]
+        },
+        "DM1_Extend_SingleShot_Multiple_ECU_Disappeared":{
+            "startTrigger":{
+                "template":"defaultTemplateStartGroup",
+                "triggerElements":[
+                    {
+                        "template":"defaultTemplateMessageCondition",
+                        "triggerType": "MESSAGE",
+                        "triggerMode":"DM1",
+                        "dtcStatus": "DISAPPEARED",
+                        "reference":"",
+                        "messageId":"",
+                        "sourceFilter": {
+                                            "type": "SOURCE_ADDRESS_LIST",
+                                            "sourceAddresses": [
+                                                                "00","4B"
+                                                                ], 
+                                            "mask": "11111111",
+                                            "reference": "00000000"
+                                        },
+                        "forceRetriggerAfterSeconds": 30,
+                        "resetDtcOccurenceAfterSeconds": 5              
+                    }
+                ]
+            },
+            "Validation":[
+                {
+                    "signalType":"SIGNAL",
+                    "name":"EngineSpeed",
+                    "min":0,
+                    "max":8031,
+                    "factor":1,
+                    "start_value":[["22.0","23.0","24.0"],["29.0","30.0","31.0"],["41.0","42.0","43.0"],["71.0","72.0","73.0"],["76.0","77.0","78.0"],["81.0","82.0","83.0"],["91.0","92.0","93.0"],["96.0","97.0","98.0"]],
+		            "stop_value":[]
+                }
+            ]
+        }
+    }   
+}

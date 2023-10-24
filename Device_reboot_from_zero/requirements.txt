@@ -1,0 +1,14 @@
+pip
+paramiko
+parse
+parse-type
+pip-tools
+pycparser
+python-dateutil
+requests
+urllib3
+scp
+beautifulsoup4
+bs4
+pyunpack
+patool

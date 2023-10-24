@@ -1,0 +1,113 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU ESP BCM TCU EPS
+
+
+BO_ 490 VCU_MOTOR_TORQUE_CONTROL: 7 VCU
+ SG_ vcu_MotRPM : 31|14@0+ (1,0) [0|16383] "U/min"  TCU,ESP
+
+BO_ 840 VCU_MOTOR_STATUS_1: 8 VCU
+ SG_ vcu_ETAT_MT : 43|4@0+ (1,0) [0|15] ""  TCU,EPS
+
+BO_ 904 VCU_MOTOR_STATUS_2: 3 VCU
+ SG_ vcu_VehicleSpeedGearbox : 7|16@0+ (0.01,0) [0|655.34] "km/h"  TCU,BCM,EPS
+
+BO_ 1136 VCU_GWBCM_INFO_1: 6 VCU
+
+BO_ 1137 VCU_GWBCM_INFO_2: 8 VCU
+ SG_ vcu_BatteryPower : 48|12@1+ (0.1,-120) [-120|120] "kW"  TCU,BCM
+ SG_ vcu_Motorpower : 0|10@1+ (0.2,-40) [-50|120] "kW"  TCU,BCM
+ SG_ vcu_RangePrediction : 16|10@1+ (1,0) [0|1020] "km "  TCU,BCM
+ SG_ vcu_CoolantTemperature : 32|10@1+ (0.2,-50) [-50|100] "°C "  TCU,BCM
+
+BO_ 1138 VCU_GWBCM_INFO_3: 6 VCU
+ SG_ vcu_IcMileage : 0|24@1+ (0.1,0) [0|999999] "km"  TCU,BCM
+
+BO_ 1298 VCU_GWBCM_INFO_5: 4 VCU
+ SG_ vcu_HVBattVoltageAct : 0|10@1+ (0.5,0) [0|450] "V"  TCU,BCM
+ SG_ vcu_HVBattSOC : 16|8@1+ (1,0) [0|100] "%"  TCU,BCM
+ SG_ vcu_ParkLockState : 24|2@1+ (1,0) [0|3] ""  TCU,BCM
+
+
+
+CM_ SG_ 490 vcu_MotRPM "Motor speed. Both rotation directions to be send as positive value.";
+CM_ SG_ 840 vcu_ETAT_MT "Motorzustand";
+CM_ SG_ 1138 vcu_IcMileage "Gesamtlaufleistung des Fahrzeugs in 100m Schritten für 
+die Anzeige im Displas sowie die Tageskimoleter";
+CM_ SG_ 1298 vcu_HVBattVoltageAct "Aktuelle Spannung der Hochvoltbatterie";
+CM_ SG_ 1298 vcu_HVBattSOC "Aktueller Ladezustand der HV Batterie";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "Baudrate" INT 0 1000000;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event";
+BA_DEF_ SG_  "GenSigStartValue" INT -2147483648 2147483647;
+BA_DEF_ BU_  "ILUsed" ENUM  "NO","YES";
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "NO","YES";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "Baudrate" 500000;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgSendType" "";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "ILUsed" "NO";
+BA_DEF_DEF_  "GenMsgILSupport" "NO";
+BA_ "BusType" "CAN";
+BA_ "GenMsgSendType" BO_ 490 0;
+BA_ "GenMsgCycleTime" BO_ 490 20;
+BA_ "GenMsgSendType" BO_ 840 0;
+BA_ "GenMsgCycleTime" BO_ 840 10;
+BA_ "GenMsgSendType" BO_ 904 0;
+BA_ "GenMsgCycleTime" BO_ 904 40;
+BA_ "GenMsgSendType" BO_ 1136 0;
+BA_ "GenMsgCycleTime" BO_ 1136 100;
+BA_ "GenMsgSendType" BO_ 1137 0;
+BA_ "GenMsgCycleTime" BO_ 1137 100;
+BA_ "GenMsgSendType" BO_ 1138 0;
+BA_ "GenMsgCycleTime" BO_ 1138 1000;
+BA_ "GenMsgSendType" BO_ 1298 0;
+BA_ "GenMsgCycleTime" BO_ 1298 200;
+BA_ "GenSigStartValue" SG_ 840 vcu_ETAT_MT 1;
+BA_ "GenSigStartValue" SG_ 904 vcu_VehicleSpeedGearbox 25500;
+BA_ "GenSigStartValue" SG_ 1137 vcu_BatteryPower 1200;
+BA_ "GenSigStartValue" SG_ 1137 vcu_Motorpower 200;
+BA_ "GenSigStartValue" SG_ 1137 vcu_RangePrediction 0;
+BA_ "GenSigStartValue" SG_ 1137 vcu_CoolantTemperature 250;
+BA_ "GenSigStartValue" SG_ 1138 vcu_IcMileage 0;
+BA_ "GenSigStartValue" SG_ 1298 vcu_HVBattVoltageAct 0;
+BA_ "GenSigStartValue" SG_ 1298 vcu_HVBattSOC 0;
+BA_ "GenSigStartValue" SG_ 1298 vcu_ParkLockState 0;
+VAL_ 840 vcu_ETAT_MT 3 "Engine running" 1 "Cut" ;
+VAL_ 1298 vcu_ParkLockState 0 "unlocked" 1 "locked" 3 "Error" ;
+

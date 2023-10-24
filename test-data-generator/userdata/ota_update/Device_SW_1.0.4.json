@@ -1,0 +1,10 @@
+{
+    "softwareNodes": [
+        {
+            "id": "Device SW",
+            "name": "Device SW",
+            "type": 1,
+            "version": "1.0.4"
+        }
+    ]
+}

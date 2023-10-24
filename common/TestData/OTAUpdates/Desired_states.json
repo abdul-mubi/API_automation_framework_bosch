@@ -1,0 +1,148 @@
+{
+    "packages": {
+        "test_desired_state_creation": {
+            "name": "test_desired_state_creation",
+            "specification": {
+                "baselines": [],
+                "domains": [
+                    {
+                        "id": "containers",
+                        "components": [
+                            {
+                                "id": "trimble",
+                                "version": "1.0",
+                                "config": [
+                                    {
+                                        "key": "image",
+                                        "value": "oci.connect.devices.na.bosch-mobility-cloud.com/system-demo/trimble:1.0"
+                                    },
+                                    {
+                                        "key": "allowVehicleGrpc",
+                                        "value": "true"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "atos",
+                                "version": "1.0",
+                                "config": [
+                                    {
+                                        "key": "image",
+                                        "value": "oci.connect.devices.na.bosch-mobility-cloud.com/system-demo/atos:1.0"
+                                    },
+                                    {
+                                        "key": "allowVehicleGrpc",
+                                        "value": "true"
+                                    }
+                                ]
+                            }
+                        ],
+                        "config": []
+                    },
+                    {
+                        "id": "safetyApp",
+                        "components": [],
+                        "config": []
+                    },
+                    {
+                        "id": "safetyEcu",
+                        "components": [],
+                        "config": []
+                    },
+                    {
+                        "id": "selfUpdate",
+                        "components": [],
+                        "config": []
+                    }
+                ]
+            }
+        },
+        "invalid_container_application_update": {
+            "name": "invalid_container_application_update",
+            "specification": {
+                "baselines": [],
+                "domains": [
+                    {
+                        "id": "containers",
+                        "components": [
+                            {
+                                "id": "internet_check",
+                                "version": "1.0",
+                                "config": [
+                                    {
+                                        "key": "image",
+                                        "value": "oci.connect.devices.na.bosch-mobility-cloud.com/system-demo/trimble:11.0"
+                                    },
+                                    {
+                                        "key": "allowVehicleGrpc",
+                                        "value": "true"
+                                    }
+                                ]
+                            }
+                        ],
+                        "config": []
+                    },
+                    {
+                        "id": "safetyApp",
+                        "components": [],
+                        "config": []
+                    },
+                    {
+                        "id": "safetyEcu",
+                        "components": [],
+                        "config": []
+                    },
+                    {
+                        "id": "selfUpdate",
+                        "components": [],
+                        "config": []
+                    }
+                ]
+            }
+        },
+        "invalid_container_application_version_update": {
+            "name": "invalid_container_application_version_update",
+            "specification": {
+                "baselines": [],
+                "domains": [
+                    {
+                        "id": "containers",
+                        "components": [
+                            {
+                                "id": "trimble",
+                                "version": "200.0",
+                                "config": [
+                                    {
+                                        "key": "image",
+                                        "value": "oci.connect.devices.na.bosch-mobility-cloud.com/system-demo/trimble:200.0"
+                                    },
+                                    {
+                                        "key": "allowVehicleGrpc",
+                                        "value": "true"
+                                    }
+                                ]
+                            }
+                        ],
+                        "config": []
+                    },
+                    {
+                        "id": "safetyApp",
+                        "components": [],
+                        "config": []
+                    },
+                    {
+                        "id": "safetyEcu",
+                        "components": [],
+                        "config": []
+                    },
+                    {
+                        "id": "selfUpdate",
+                        "components": [],
+                        "config": []
+                    }
+                ]
+            }
+        }
+        
+    }
+}

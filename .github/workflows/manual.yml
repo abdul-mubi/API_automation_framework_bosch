@@ -1,0 +1,27 @@
+name: Add Default Checklist to Pull Requests
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  add-checklist:
+    runs-on: [ BCN ]
+    steps:
+      - name: Check if checklist exists
+        run: |
+          PR_TEMPLATE=".github/pull_request_template.md"
+          if [ -f "$PR_TEMPLATE" ]; then
+            echo "Checklist file already exists."
+          else
+            echo "Creating checklist file..."
+            echo "### Pull Request Checklist" >> "$PR_TEMPLATE"
+            echo "- [ ] Ensure code is properly formatted." >> "$PR_TEMPLATE"
+            echo "- [ ] Review and test the changes." >> "$PR_TEMPLATE"
+            echo "- [ ] Update documentation if needed." >> "$PR_TEMPLATE"
+            echo "- [ ] Add relevant tests." >> "$PR_TEMPLATE"
+            echo "- [ ] Assign reviewers." >> "$PR_TEMPLATE"
+            echo "- [ ] Verify that all CI/CD checks pass." >> "$PR_TEMPLATE"
+          fi
+        working-directory: ${{ github.workspace }}

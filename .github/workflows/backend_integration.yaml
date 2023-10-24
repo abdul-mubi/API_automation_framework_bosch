@@ -1,0 +1,123 @@
+name: Backend Integration Test Suite Executor
+
+on:
+  workflow_dispatch:
+    inputs:
+        Filter_ID:
+          description: Enter JIRA Filter ID
+          required: true
+          type: string
+        Team_Name:
+          description: Team Name
+          required: true
+          type: choice
+          options:
+            - Mercur
+            - BeTs
+            - BE1
+jobs:
+  Test_Execution:
+    
+    runs-on: 
+      - self-hosted
+      - TT-Automation
+      - FE2Z00XT
+
+    env:
+      HTTP_PROXY: ${{ secrets.PROXY_URL }}
+      HTTPS_PROXY: ${{ secrets.PROXY_URL }}
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com
+      new_test_execution: Not_Required
+      device_type: PACCAR
+
+    steps:  
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Prerequisites
+      id: install_prerequisites
+      shell: bash
+      run: |
+        cd API_Test
+        pip install -r requirements.txt --proxy=https://rb-proxy-de.bosch.com:8080
+
+    - name: JIRA - Prepare Test suite for Execution
+      id: test_suite_data
+      shell: bash
+      run: |
+        echo "Prepare Jira Test Execution for Specified Filter ID - ${{github.event.inputs.Filter_ID}}"
+        OUTPUT=$(python API_Test/features/jira_operations.py prepare_test_executions_backend_workflow --filter_id "${{github.event.inputs.Filter_ID}}"  --team_name="${{github.event.inputs.Team_Name }}")
+        echo $OUTPUT
+        echo "out_data=$OUTPUT" >> $GITHUB_OUTPUT
+
+    - name: Import Tests from JIRA (Xray)
+      id: import_features_xray
+      shell: bash
+      run: |
+        echo  Test execution ID = '${{ steps.test_suite_data.outputs.out_data }}'
+        cd API_Test/features 
+        python jira_operations.py import_test_from_jira --jira_id="${{ steps.test_suite_data.outputs.out_data }}"
+
+    - name: Execute Tests
+      id: Test_Executor
+      shell: bash
+      run: |
+        echo "Building"
+        echo "start_time=$(date +%s)" >> $GITHUB_OUTPUT
+        cd API_Test/features
+        behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D rerun_failed_test='true' -D jira_test="true" -D TEST_EXECUTION_ID=${{steps.test_suite_data.outputs.out_data}} --no-capture --no-capture-stderr --no-logcapture
+
+    - name: Post build actions
+      if: ${{ always() }}
+      shell: bash
+      id: post_execution_actions
+      run: |
+        python report.py
+        
+        end_time=$(date +%s)
+        total_time=$(date -u -d "0 $end_time seconds - ${{steps.Test_Executor.outputs.start_time}} seconds" +"%H:%M:%S")
+
+        report_data=$(cat << EOF
+        Execution Time: $total_time
+        <br>
+        Check console output at ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        <br>
+        Check Test Execution in JIRA
+        <a href="https://rb-tracker.bosch.com/tracker15/browse/${{ steps.test_suite_data.outputs.out_data }}", showTruncatedLines=false, substText="ETEMC-$1"}">${{ steps.test_suite_data.outputs.out_data }} </a>
+        <br>
+        EOF)
+        echo "$(echo -n $report_data; cat report.html)" > report.html
+
+        cd API_Test/features
+        python jira_operations.py update_test_execution_summary --title=Team_${{github.event.inputs.Team_Name }}_Test_Execution_For_Backend_Integration_Workflow --test_exec_key="${{ steps.test_suite_data.outputs.out_data }}" --run_id=${{github.run_id}} --job_name="${{env.device_type}}_${{github.job}}"
+
+    - name: Email Test Execution Report
+      if: ${{ always() }}
+      id: Email_Publisher
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{secrets.SMTP_SERVER}}
+        server_port: 25
+        username: ${{secrets.JIRA_USERNAME}}
+        password: ${{secrets.JIRA_PASSWORD}}
+        subject: Backend Integration Workflow ${{github.job}} by ${{github.actor}} on ${{runner.name}}
+        to: ${{github.actor}}@bosch.com
+        from: Github actions <Serv01.Serviceaccount@etas.com>
+        html_body: file://report.html
+        ignore_cert: true
+
+    - name: Upload Result Data
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: execution_report
+        if-no-files-found: ignore
+        retention-days: 10
+        path: |-
+          cucumber_formated_result.json
+          temp/test_with_defects.json
+          API_Test/features/Test_Execution.log
+          report.html
+    

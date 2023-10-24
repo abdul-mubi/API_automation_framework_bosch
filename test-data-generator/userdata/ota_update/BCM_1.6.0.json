@@ -1,0 +1,10 @@
+{
+    "softwareNodes": [
+        {
+            "id": "BCM",
+            "name": "Body Control Module",
+            "type": 1,
+            "version": "1.6.0"
+        }
+    ]
+}

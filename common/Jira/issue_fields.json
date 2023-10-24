@@ -1,0 +1,12 @@
+{  
+   "fields":{  
+      "project":{  
+         "key":"ETEMC"
+      },
+      "summary":"",
+      "description":"",
+      "issuetype":{  
+         "name":"Test Execution"
+      }
+   }
+}

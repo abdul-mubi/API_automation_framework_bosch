@@ -1,0 +1,16 @@
+{
+    "ES740":{
+        "keystore":{
+            "device_path":"/etc/crt/dcrt/",
+            "filename":"keystore",
+            "fileformate":".jks"
+        }
+    },
+    "CCU":{
+        "keystore":{
+            "device_path":"/data/encrypted/mbs_app/",
+            "filename":"context.deviceId",
+            "fileformate":".jks"
+        }
+    }
+}

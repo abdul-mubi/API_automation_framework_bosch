@@ -1,0 +1,6 @@
+{
+  "artifactory":{
+      "url":"https://rb-artifactory.bosch.com/artifactory/vms-ccu-build-local/",
+      "credentials":"dmVlNWZlOk1DJFR0YW5zMjAyMw=="
+    }
+}

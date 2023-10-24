@@ -1,0 +1,19 @@
+---
+name: remote_tacho_download
+major-version: 1
+minor-version: 0
+description: OTA Function Calls Interface of Device-Side Remote Tacho Download (RDL) App
+methods:
+  - name: set_enabled
+    description: Enable or disable RDL feature
+    in:
+      - name: enabled
+        description: True iff. RDL feature is to be enabled
+        datatype: boolean
+
+  - name: get_enabled
+    description: Returns whether RDL feature is enabled
+    out:
+      - name: enabled
+        description: True iff. RDL feature is enabled
+        datatype: boolean

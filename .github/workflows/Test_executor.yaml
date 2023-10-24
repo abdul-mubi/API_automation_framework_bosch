@@ -1,0 +1,140 @@
+name: Test Executor
+
+on:
+  workflow_dispatch:
+    inputs:
+      Issue_ID:
+        description: Enter JIRA Issue ID
+        required: false
+        type: string
+        default: ""
+      Filter_ID:
+        description: Enter JIRA Filter ID
+        required: false
+        type: string
+      machine_name:
+        description: Machine Name
+        required: false
+        type: choice
+        options:
+          - LB-C-000N1
+          - FE-Z1O03
+          - FE2Z00XT
+          - FE-Z1VCG
+          - FE2Z00SN
+          - LB-C-00021
+          - LB-C-00022
+          - LB-C-00023
+          - LB-C-00024
+          - LB-C-00026
+          - LB-C-00027
+          - LB-C-00029
+          - LB-C-000N4
+          - BF4-C-001XT
+        default: ""
+      TestDevice:
+        description: Select the TestDevice
+        type: choice
+        options:
+          - CCU
+          - CCU2
+          - virtual_device1
+          - virtual_device2
+        default: CCU
+      TEST_EXECUTION_ID:
+        description: Select the test execution id
+        required: false
+        type: string
+      SU_Up_version:
+        description: Device Up Version (Example:5.5.1)
+        required: false
+        type: string
+        default: ""
+      SU_Down_version:
+        description: Device Down Version (Example:5.5.1)
+        required: false
+        type: string
+        default: ""
+        
+jobs:
+  Test_Execution:
+    runs-on: 
+      - self-hosted
+      - TT-Automation
+      - ${{ inputs.machine_name }}
+    timeout-minutes: 4320
+    env:
+      HTTP_PROXY: ${{ secrets.PROXY_URL }}
+      HTTPS_PROXY: ${{ secrets.PROXY_URL }}
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com
+    steps:
+    
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Install Prerequisites
+      id: Install_Prerequisites
+      run: |
+        cd API_Test
+        pip install -r requirements.txt
+    - name: Import Tests from JIRA (Xray)
+      shell: bash
+      run: |
+        cd API_Test/features
+        if [ "${{inputs.Issue_ID}}" == "" ]; then
+          python jira_operations.py import_test_from_jira --filter_id="${{inputs.Filter_ID}}"
+        else
+          python jira_operations.py import_test_from_jira --jira_id="${{inputs.Issue_ID}}"
+        fi
+    - name: Execute Tests
+      id: Test_Executor
+      shell: bash
+      run: |
+        echo "start_time=$(date +%s)" >> $GITHUB_OUTPUT
+        cd API_Test/features
+        behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D specimen_device=${{inputs.TestDevice}} -D jira_test="true" -D TEST_EXECUTION_ID=${{inputs.TEST_EXECUTION_ID}} -D SU_Up_version=${{inputs.SU_Up_version}} -D SU_Down_version=${{inputs.SU_Down_version}} --no-capture --no-logcapture
+    - name: Generate Report
+      if: ${{ always() }}
+      id: Report_Generator
+      shell: bash
+      run: |
+        python report.py
+
+        end_time=$(date +%s)
+        total_time=$(date -u -d "0 $end_time seconds - ${{steps.Test_Executor.outputs.start_time}} seconds" +"%H:%M:%S")
+
+        report_data=$(cat << EOF
+        Execution Time: $total_time
+        <br>
+        Check console output at ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        <br>
+        EOF)
+        echo "$(echo -n $report_data; cat report.html)" > report.html
+        
+    - name: Email Test Execution Report
+      if: ${{ always() }}
+      id: Email_Publisher
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{secrets.SMTP_SERVER}}
+        server_port: 25
+        username: ${{secrets.JIRA_USERNAME}}
+        password: ${{secrets.JIRA_PASSWORD}}
+        subject: ${{github.job}} by ${{github.actor}} on ${{runner.name}}
+        to: ${{github.actor}}@bosch.com
+        from: Github actions <Serv01.Serviceaccount@etas.com>
+        html_body: file://report.html
+        ignore_cert: true
+
+    - name: Upload Result Data
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: execution_report
+        if-no-files-found: ignore
+        retention-days: 3
+        path: |
+          cucumber_formated_result.json
+          temp/test_with_defects.json
+          API_Test/features/Test_Execution.log

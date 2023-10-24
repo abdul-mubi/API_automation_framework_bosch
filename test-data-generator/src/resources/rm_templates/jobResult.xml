@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config:config schemaMajor="2" schemaMinor="21" xmlns:config="http://bosch.de/AA_AS/Telediag/Configuration" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <config:content xsi:type="config:CdpJobResult" measurementId="cadc469d-f484-490d-957b-21ed1f5a7b53" lastPackage="false" jobVersion="23" measurementInstanceId="86fab39a-9b89-4524-9aac-8a0f21104c56" applicationSessionId="02179688-26f2-46c4-b1f5-6f649b2545c7" packageIndex="0" bootCycleId="7714b412-f1a6-4000-b4cf-e129309503ee">
+    <config:errorInfo>
+      <config:success>true</config:success>
+      <config:timestamp>CURRENT_TIME</config:timestamp>
+    </config:errorInfo>
+    <config:executionEnd>RESULT_END_TIME</config:executionEnd>
+    <config:executionReason xsi:type="config:CdpBootCycleExecution"/>
+    <config:executionStart>RESULT_START_TIME</config:executionStart>
+    <config:remainingDiskSpace>373636</config:remainingDiskSpace>
+    <config:usedCdpDiskSpace>18</config:usedCdpDiskSpace>
+  </config:content>
+</config:config>

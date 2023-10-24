@@ -1,0 +1,7 @@
+PySocks
+paho-mqtt
+protobuf
+xmltodict
+pandas
+schedule
+requests

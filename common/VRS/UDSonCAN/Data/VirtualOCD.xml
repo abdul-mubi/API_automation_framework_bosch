@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<VOCD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="VirtualOcd.xsd">
+  <Tree>
+    <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH" NodeType="CSI_NODE_INTERMEDIATE_INTERFACE" UriName="ETH">
+      <API>
+        <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+        <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+        <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+      </API>
+      <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0" NodeType="CSI_NODE_SYSTEM" UriName="CANFD_DummySystem:0">
+        <API>
+          <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+          <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+          <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+        </API>
+        <LIC_LicenceValues>
+          <LIC_LicenceValue Id="LIC_OPERATES_WITH_INCA" Value="1"/>
+        </LIC_LicenceValues>
+        <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/LIC" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="LIC">
+          <API>
+            <Syntax Uuid="UUID_LIC" Version="1.0.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+        </Protocol>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:1" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:1/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:1/SEQ_CAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="SEQ_CAN">
+            <API>
+              <Syntax Uuid="UUID_SEQ_CAN" Version="1.0.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:2" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:2/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:3" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:3">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:3/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:4" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:4">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:4/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:5" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:5">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:5/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:6" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:6">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:6/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:7" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:7">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:7/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:8" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:8">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/CANFD_DummySystem:0/CAN:8/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+      <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123" NodeType="CSI_NODE_SYSTEM" UriName="ES593_D:123">
+        <API>
+          <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+          <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+          <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+        </API>
+        <LIC_LicenceValues>
+          <LIC_LicenceValue Id="LIC_OPERATES_WITH_INCA" Value="1"/>
+        </LIC_LicenceValues>
+        <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/LIC" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="LIC">
+          <API>
+            <Syntax Uuid="UUID_LIC" Version="1.0.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+        </Protocol>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:1" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:1/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:1/SEQ_CAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="SEQ_CAN">
+            <API>
+              <Syntax Uuid="UUID_SEQ_CAN" Version="1.0.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:2" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:2/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:3" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:3">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:3/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:4" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:4">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES593_D:123/CAN:4/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+      <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123" NodeType="CSI_NODE_SYSTEM" UriName="ES523:123">
+        <API>
+          <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+          <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+          <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+        </API>
+        <LIC_LicenceValues>
+          <LIC_LicenceValue Id="LIC_OPERATES_WITH_INCA" Value="1"/>
+        </LIC_LicenceValues>
+        <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/LIC" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="LIC">
+          <API>
+            <Syntax Uuid="UUID_LIC" Version="1.0.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+        </Protocol>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:1" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:1/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:1/SEQ_CAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="SEQ_CAN">
+            <API>
+              <Syntax Uuid="UUID_SEQ_CAN" Version="1.0.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:2" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:2/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:3" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:3">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:3/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:4" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:4">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES523:123/CAN:4/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+      <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123" NodeType="CSI_NODE_SYSTEM" UriName="ES595:123">
+        <API>
+          <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+          <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+          <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+        </API>
+        <LIC_LicenceValues>
+          <LIC_LicenceValue Id="LIC_OPERATES_WITH_INCA" Value="1"/>
+        </LIC_LicenceValues>
+        <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/LIC" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="LIC">
+          <API>
+            <Syntax Uuid="UUID_LIC" Version="1.0.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+        </Protocol>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/CAN:1" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/CAN:1/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/CAN:1/SEQ_CAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="SEQ_CAN">
+            <API>
+              <Syntax Uuid="UUID_SEQ_CAN" Version="1.0.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/CAN:2" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/CAN:2/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <FlexRayPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/FLX:1" BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_FlexRayControllerCapabilities SupportedBusMode="11"/>
+          <OCI_FlexRayControllerStatusCommon ProtocolOperationControlStatus="1"/>
+          <OCI_FlexRayControllerStatusChannel/>
+          <OCI_FlexRayControllerStatusNetwork/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/FLX:1/OCIFLX" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCIFLX">
+            <API>
+              <Syntax Uuid="UUID_OCI_FLX" Version="1.1.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </FlexRayPort>
+        <FlexRayPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/FLX:2" BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_FlexRayControllerCapabilities SupportedBusMode="11"/>
+          <OCI_FlexRayControllerStatusCommon ProtocolOperationControlStatus="1"/>
+          <OCI_FlexRayControllerStatusChannel/>
+          <OCI_FlexRayControllerStatusNetwork/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://ETH/ES595:123/FLX:2/OCIFLX" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCIFLX">
+            <API>
+              <Syntax Uuid="UUID_OCI_FLX" Version="1.1.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </FlexRayPort>
+      </Node>
+      <Node NodeType="CSI_NODE_SYSTEM" UriName="ES800-STACK:0c-0d-00">
+        <Node NodeType="CSI_NODE_SUBSYSTEM" UriName="ES891:100006">
+          <Node NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FETK:1">
+            <API>
+              <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            </API>
+          </Node>
+          <Node NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FETK:2">
+            <API>
+              <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            </API>
+          </Node>
+          <DEV_LicenceValues>
+            <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+          </DEV_LicenceValues>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+            <API>
+              <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+            </API>
+          </Protocol>
+          <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+            <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+            <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:3">
+            <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:4">
+            <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:5">
+            <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <FlexRayPort BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:1">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </FlexRayPort>
+          <FlexRayPort BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:2">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </FlexRayPort>
+        </Node>
+      </Node>
+      <Node NodeType="CSI_NODE_SYSTEM" UriName="ES910.3:123">
+        <Node NodeType="CSI_NODE_SUBSYSTEM" UriName="ES920">
+          <DEV_LicenceValues>
+            <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+          </DEV_LicenceValues>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+            <API>
+              <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+            </API>
+          </Protocol>
+          <FlexRayPort BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:1">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCIFLX">
+              <API>
+                <Syntax Uuid="UUID_OCI_AUTO_FLX"/>
+              </API>
+            </Protocol>
+          </FlexRayPort>
+          <FlexRayPort BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:2">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCIFLX">
+              <API>
+                <Syntax Uuid="UUID_OCI_AUTO_FLX"/>
+              </API>
+            </Protocol>
+          </FlexRayPort>
+        </Node>
+        <DEV_LicenceValues>
+          <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+        </DEV_LicenceValues>
+        <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+          <API>
+            <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+          </API>
+        </Protocol>
+        <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <LINPort BusId="LINBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="LIN:1">
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCILIN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_LIN"/>
+            </API>
+          </Protocol>
+        </LINPort>
+        <LINPort BusId="LINBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="LIN:2">
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCILIN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_LIN"/>
+            </API>
+          </Protocol>
+        </LINPort>
+      </Node>
+      <Node NodeType="CSI_NODE_SYSTEM" UriName="ES800Stack:123">
+        <Node NodeType="CSI_NODE_SUBSYSTEM" UriName="ES891:123">
+          <Node NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FETK:1">
+            <API>
+              <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            </API>
+          </Node>
+          <Node NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FETK:2">
+            <API>
+              <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            </API>
+          </Node>
+          <DEV_LicenceValues>
+            <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+          </DEV_LicenceValues>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+            <API>
+              <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+            </API>
+          </Protocol>
+          <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+            <OCI_CANControllerCapabilities canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+            <OCI_CANControllerCapabilities canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:3">
+            <OCI_CANControllerCapabilities canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:4">
+            <OCI_CANControllerCapabilities canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:5">
+            <OCI_CANControllerCapabilities canFDSupport="15"/>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_CAN_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_CAN_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </CANPort>
+          <LINPort BusId="LINBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="LIN:1">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCILIN">
+              <API>
+                <Syntax Uuid="UUID_OCI_AUTO_LIN"/>
+              </API>
+            </Protocol>
+          </LINPort>
+          <LINPort BusId="LINBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="LIN:2">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCILIN">
+              <API>
+                <Syntax Uuid="UUID_OCI_AUTO_LIN"/>
+              </API>
+            </Protocol>
+          </LINPort>
+          <FlexRayPort BusId="FLXBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:1">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </FlexRayPort>
+          <FlexRayPort BusId="FLXBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:2">
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_CTRL">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_CTRL" Version="1.0.0.0"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_TCP">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_TCP_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_LAN"/>
+              </API>
+            </Protocol>
+            <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="EDE_FLX_DATA_CPULG">
+              <API>
+                <Syntax Uuid="UUID_EDE_FLX_DATA" Version="1.0.0.0"/>
+                <Binding Uuid="UUID_CPULG_BIND" Version="1.1.0.0"/>
+                <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+              </API>
+            </Protocol>
+          </FlexRayPort>
+        </Node>
+      </Node>
+    </Node>
+    <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS" NodeType="CSI_NODE_INTERMEDIATE_INTERFACE" UriName="VIRTUAL:ETAS">
+      <API>
+        <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+        <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+        <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+      </API>
+      <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1" NodeType="CSI_NODE_SYSTEM" UriName="VDEVICE:1">
+        <API>
+          <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+          <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+          <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+        </API>
+        <LIC_LicenceValues>
+          <LIC_LicenceValue Id="LIC_OPERATES_WITH_INCA" Value="1"/>
+        </LIC_LicenceValues>
+        <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/LIC" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="LIC">
+          <API>
+            <Syntax Uuid="UUID_LIC" Version="1.0.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+        </Protocol>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:1" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:1/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.1.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:2" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:2/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.1.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:3" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:3">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:3/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:4" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:4">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7" canFDSupport="3"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/CAN:4/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_CAN" Version="1.3.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <FlexRayPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/FLX:1" BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_FlexRayControllerCapabilities SupportedBusMode="11"/>
+          <OCI_FlexRayControllerStatusCommon ProtocolOperationControlStatus="1"/>
+          <OCI_FlexRayControllerStatusChannel/>
+          <OCI_FlexRayControllerStatusNetwork/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/FLX:1/OCIFLX" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCIFLX">
+            <API>
+              <Syntax Uuid="UUID_OCI_FLX" Version="1.1.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </FlexRayPort>
+        <FlexRayPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/FLX:2" BusId="FLXBUS1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="FLX:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_FlexRayControllerCapabilities SupportedBusMode="11"/>
+          <OCI_FlexRayControllerStatusCommon ProtocolOperationControlStatus="1"/>
+          <OCI_FlexRayControllerStatusChannel/>
+          <OCI_FlexRayControllerStatusNetwork/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://VIRTUAL:ETAS/VDEVICE:1/FLX:2/OCIFLX" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCIFLX">
+            <API>
+              <Syntax Uuid="UUID_OCI_FLX" Version="1.1.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </FlexRayPort>
+      </Node>
+    </Node>
+    <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB" NodeType="CSI_NODE_INTERMEDIATE_INTERFACE" UriName="USB">
+      <API>
+        <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+        <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+        <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+      </API>
+      <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123" NodeType="CSI_NODE_SYSTEM" UriName="ES581:123">
+        <API>
+          <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+          <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+          <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+        </API>
+        <LIC_LicenceValues>
+          <LIC_LicenceValue Id="LIC_OPERATES_WITH_INCA" Value="1"/>
+        </LIC_LicenceValues>
+        <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123/LIC" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="LIC">
+          <API>
+            <Syntax Uuid="UUID_LIC" Version="1.0.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+        </Protocol>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123/CAN:1" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123/CAN:1/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.2.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123/CAN:1/SEQ_CAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="SEQ_CAN">
+            <API>
+              <Syntax Uuid="UUID_SEQ_CAN" Version="1.0.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123/CAN:2" BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <API>
+            <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+            <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+            <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+          </API>
+          <OCI_CANControllerCapabilities MessageFlags="5" PhysicalMedia="1" Reserved="10" SyncEdge="7"/>
+          <OCI_TimerCapabilities/>
+          <Protocol AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB/ES581:123/CAN:2/OCICAN" NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_RPC_CAN" Version="1.2.0.0"/>
+              <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+              <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+      <Node NodeType="CSI_NODE_SYSTEM" UriName="ES581:12345">
+        <DEV_LicenceValues>
+          <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+        </DEV_LicenceValues>
+        <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+          <API>
+            <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+          </API>
+        </Protocol>
+        <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort BusId="CANBus1" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+    </Node>
+  </Tree>
+  <OCI_QueueCapabilities MaxCapacity="4096" MinCapacity="4096"/>
+  <RPCServer Port="18015" UniqueID="1DED6E50-1769-11E1-BDDB-0800200C9A66"/>
+  <CanSubstituteMsgs>
+    <SubstituteMsg EventType="CANErrorFrameMessage" Id="00000042"/>
+    <SubstituteMsg EventType="CANEventMessage" Id="00000043"/>
+    <SubstituteMsg EventType="TimerEventMessage" Id="00000044"/>
+    <SubstituteMsg EventType="TxQueueEventMessage" Id="00000045"/>
+    <SubstituteMsg EventType="RxQueueEventMessage" Id="00000046"/>
+    <SubstituteMsg EventType="InternalErrorEventMessage" Id="00000047"/>
+  </CanSubstituteMsgs>
+</VOCD>

@@ -1,0 +1,20 @@
+{ 
+    "DiagnosticFunction":{
+        "EDIT_VALID_INPUT":{
+            "name":"13Func",
+            "description":"reads all DTCs"
+        },
+        "RE-EDIT_VALID_INPUT":{
+            "description":"It reads all DTCs"
+        }
+    },
+    "DiagnosticConfiguration":{
+        "EDIT_VALID_INPUT":{
+            "name":"11Config",
+            "description":"reads all DTCs"
+        },
+        "RE-EDIT_VALID_INPUT":{
+            "description":"It reads all DTCs"
+        }
+    }
+}

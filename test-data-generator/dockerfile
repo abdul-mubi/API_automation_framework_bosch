@@ -1,0 +1,7 @@
+FROM python:3.10.5-slim
+ENV device_data=" "
+COPY ./src ./src
+COPY requirements.txt requirements.txt
+COPY start_data_generator.py start_data_generator.py
+RUN pip install -r requirements.txt
+CMD python3 start_data_generator.py ${device_data}

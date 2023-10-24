@@ -1,0 +1,72 @@
+ame: verify provider test and check can-i-deply 
+
+on:
+  workflow_dispatch:
+    inputs:
+      new_version:
+        description: Enter consumer pact version to be verified
+        required: true
+        default: ''
+        type: string
+      To_environment:
+        description: Enter environment to which it has to be deployed
+        required: false
+        default: ''
+        type: string
+      machine_name:
+        description: Machine Name
+        required: false
+        type: choice
+        options:
+          - FE-Z1O03
+          - FE2Z00XT
+          - FE2Z00SN
+          - FE-Z1VCG
+          - LB-C-00027
+          - LB-C-00024
+          - LB-C-00022
+          - LB-C-00025
+        default: ""
+
+jobs:
+
+  Verify_provider_test:
+    runs-on:
+      - self-hosted
+      - ${{ inputs.machine_name }}
+      
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
+        
+      - name: verify provider test
+        continue-on-error: true
+        shell: bash
+        run: |
+          cd API_Test/contract_test
+          python verify_provider_tests.py ${{ inputs.new_version }}
+  Can_i_deploy:
+    needs: Verify_provider_test  
+    runs-on:
+      - self-hosted
+      - ${{ inputs.machine_name }}
+    env:
+      HTTP_PROXY: http://127.0.0.1:3128/
+      HTTPS_PROXY: http://127.0.0.1:3128/
+    steps:
+      - name: can-i-deploy
+        shell : bash
+        run: |
+          pact-broker.bat can-i-deploy --pacticipant TedTitans_Consumer --broker-base-url https://mc.pactflow.io --version ${{inputs.new_version}} --broker-token ${{secrets.PACT_BROKER_TOKEN}}
+  Deploy:
+    needs: Can_i_deploy
+    runs-on:
+      - self-hosted
+      - ${{ inputs.machine_name }}
+    steps:
+      - name: deploy
+        shell : bash
+        run: |
+          echo "Deployed" 

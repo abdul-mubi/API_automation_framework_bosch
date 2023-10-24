@@ -1,0 +1,55 @@
+name: Jira Test Sync (Xray)
+on:
+  workflow_dispatch:
+    inputs:
+        machine_name:
+          description: 'Machine Name'
+          required: false
+          type: choice
+          options:
+            - FE-Z1O03
+            - FE2Z00XT
+            - FE2Z00SN
+            - FE-Z1VCG
+            - LB-C-00027
+            - LB-C-00024
+          default: "FE-Z1O03"
+        feature_name:
+          description: Name of feature file (If particular feature should be updated)
+          required: false
+          type: string
+          default: ""
+        files_updated_hr:
+          description: File updated in Last (number of) hours
+          required: false
+          type: number
+
+jobs:
+  Jira_XRay_Sync:
+    runs-on: 
+      - self-hosted
+      - TT-Automation
+      - ${{ inputs.machine_name }}
+    env:
+      HTTP_PROXY: http://10.4.103.69:8080
+      HTTPS_PROXY: http://10.4.103.69:8080
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Xray Cucumber Feature Import task to JIRA
+      shell: bash
+      run: |
+        feature_dir_path="API_Test/features"
+        cd API_Test/features
+        if [ "${{inputs.feature_name}}" == "" ]; then
+          if [ "${{inputs.files_updated_hr}}" != ""]; then
+            python jira_operations.py export_feature_to_jira --directory_path="$feature_dir_path" --time_hr=${{inputs.files_updated_hr}}
+          else
+            python jira_operations.py export_feature_to_jira --directory_path="$feature_dir_path"
+          fi
+        else
+          python jira_operations.py export_feature_to_jira --directory_path="$feature_dir_path" --file_name=${{inputs.feature_name}}
+        fi

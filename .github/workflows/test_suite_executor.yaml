@@ -1,0 +1,323 @@
+name: Test Suite Executor
+on:
+  workflow_call:
+    inputs:
+      test_suite:
+        type: string
+        required: true
+      device_type:
+        type: string
+        required: true
+      new_test_execution:
+        type: string
+        required: true
+      suite_type:
+        type: string
+        required: false
+      trigger_event:
+        type: string
+        required: true
+      branch_name:
+        type: string
+        required: true
+    secrets:
+      JIRA_URL:
+        required: true
+      JIRA_USERNAME:
+        required: true
+      JIRA_PASSWORD:
+        required: true
+      SMTP_SERVER:
+        required: true
+      WORKFLOW_TOKEN:
+        required: true
+      PROXY_URL:
+        required: true
+
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: Test Suite
+        type: choice
+        options:
+        - Smoke
+        - Regression
+        - Load
+        - Smoke,Regression,Load
+        default: Smoke
+        required: true
+      device_type:
+        description: Device Type
+        type: choice
+        options:
+        - All_device_types
+        - HINO
+        - PACCAR
+        - TCU2_NA_PACR
+        - TCU2_EU_PACR
+        default: All_device_types
+        required: true
+      TestDevice:
+        description: Select the TestDevice
+        type: choice
+        options:
+          - CCU
+          - CCU2
+        default: CCU
+      new_test_execution:
+        description: New Test Execution
+        type: choice
+        options:
+        - Required
+        - Not_Required
+        default: Required
+        required: true
+      test_plan_id:
+        description: Test Plan Id (Eg:ETEMC-1347 / new (for new TP Creation)
+        required: false
+        type: string
+      suite_type:
+        description: Test suite (Applicable only for Load, Regression)?
+        type: choice
+        required: false
+        options:
+        - All
+        - RM
+        - Non-RM
+        default: All
+      machine_name:
+        description: Machine Name
+        required: false
+        type: string
+        default: ''
+      Desired_FW_Version:
+        description: Desired device version (Empty => uses current device FW version)
+        required: false
+        type: string
+        default: ''
+      Type_of_update:
+        description: Type of update
+        type: choice
+        required: false
+        options:
+        - Delta_Update
+        - Full_Update
+        - USB_Update
+        default: Delta_Update
+
+  schedule:
+    # Update prepare_schedule_data step when updating cron
+  - cron: 30 16 * * 0-4     # Smoke Schedule
+  - cron: 30 17 * * 5     # Regression Schedule
+  - cron: 30 17 * * 6     # Load Schedule
+permissions:
+  contents: write
+  security-events: write
+  actions: read
+
+jobs:
+
+  Preparation_of_JIRA_XRay:
+    runs-on:
+    - self-hosted
+    - TT-Automation
+    env:
+      HTTP_PROXY: ${{ secrets.PROXY_URL }}
+      HTTPS_PROXY: ${{ secrets.PROXY_URL }}
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com
+      PYTHONPATH: .
+      CUSTOMERS: HINO,PACCAR,TCU2_NA_PACR,TCU2_EU_PACR
+      SUITE_TYPES: RM,Non-RM
+      SUITE_TYPE_APPLICABILITY: Regression,Load
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Update feature to Xray
+      env:
+        JIRA_SERVER_URL: ${{ secrets.JIRA_URL }}
+        JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+        JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
+      run: echo "XRAY Update is to be done"
+    - name: Prepare Schedule Data
+      id: prepare_schedule_data
+      if: ${{ (github.event_name == 'schedule') }}
+      shell: bash
+      run: |
+        if [ "${{github.event.schedule}}" == "30 16 * * 0-4" ]; then
+          echo "Preparing Smoke test execution schedule"
+          echo "test_suite=Smoke" >> $GITHUB_OUTPUT
+          echo "device_type=All_device_types" >> $GITHUB_OUTPUT
+          echo "new_test_execution=Required" >> $GITHUB_OUTPUT
+          echo "suite_type=All" >> $GITHUB_OUTPUT
+        elif [ "${{github.event.schedule}}" == "30 17 * * 5" ]; then
+          echo "Preparing Regression test execution schedule"
+          echo "test_suite=Regression" >> $GITHUB_OUTPUT
+          echo "device_type=All_device_types" >> $GITHUB_OUTPUT
+          echo "new_test_execution=Required" >> $GITHUB_OUTPUT
+          echo "suite_type=All" >> $GITHUB_OUTPUT
+        elif [ "${{github.event.schedule}}" == "30 17 * * 6" ]; then
+          echo "Preparing Load Test execution schedule"
+          echo "test_suite=Load" >> $GITHUB_OUTPUT
+          echo "device_type=All_device_types" >> $GITHUB_OUTPUT
+          echo "new_test_execution=Required" >> $GITHUB_OUTPUT
+          echo "suite_type=All" >> $GITHUB_OUTPUT
+        else
+          echo "Please provide valid cron data"
+          exit 1
+        fi
+        echo "test_plan_id=" >> $GITHUB_OUTPUT
+    - name: Prepare Test suite for Execution
+      id: test_suite_data
+      shell: bash
+      run: |
+        prepare_test_executions () {
+          echo "Update JIRA Test Execution for $1 ${{inputs.test_suite || steps.prepare_schedule_data.outputs.test_suite || inputs.test_suite}} suite for $2 type"
+          cd API_Test/features
+          OUTPUT=$(python jira_operations.py prepare_data_for_github_actions --suite ${{inputs.test_suite || steps.prepare_schedule_data.outputs.test_suite || inputs.test_suite}} --device_type "$1" --new_test_execution ${{inputs.new_test_execution || steps.prepare_schedule_data.outputs.new_test_execution || inputs.new_test_execution}} --suite_type "$2" --matrix="True" --test_plan="${{inputs.test_plan_id ||steps.prepare_schedule_data.outputs.test_plan_id || inputs.test_plan_id}}" --version="${{inputs.Desired_FW_Version}}" --suite_type_applicability="${{env.SUITE_TYPE_APPLICABILITY}}") 
+          echo $OUTPUT
+          echo "execution_data=$OUTPUT" >> $GITHUB_OUTPUT
+        }
+        if [[ ${{env.SUITE_TYPE_APPLICABILITY }} == *"${{inputs.test_suite || steps.prepare_schedule_data.outputs.test_suite || inputs.test_suite}}"* ]]; then
+          if [ "${{inputs.suite_type || steps.prepare_schedule_data.outputs.suite_type}}" == "All" ]; then
+            suite_type=${{ env.SUITE_TYPES }}
+          else
+            suite_type=${{inputs.suite_type || steps.prepare_schedule_data.outputs.suite_type}}
+          fi
+          echo "Suite Type is $suite_type"
+        else
+          suite_type=NA
+        fi
+
+        if [ "${{inputs.device_type || steps.prepare_schedule_data.outputs.device_type || inputs.device_type}}" == "All_device_types" ]; then
+        echo "Preparing test execution for All customers"
+          prepare_test_executions ${{ env.CUSTOMERS }} $suite_type
+        else
+          prepare_test_executions ${{inputs.device_type || steps.prepare_schedule_data.outputs.device_type}} $suite_type
+        fi
+    - name: Prepare matrix
+      id: prepare_matrix
+      shell: bash
+      run: |
+        echo "matrix={\"include\": ${{ steps.test_suite_data.outputs.execution_data}}}" >> $GITHUB_OUTPUT
+    outputs:
+      matrix: ${{ steps.prepare_matrix.outputs.matrix }}
+
+  Test_Executor:
+    needs: Preparation_of_JIRA_XRay
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.Preparation_of_JIRA_XRay.outputs.matrix)}}
+    runs-on:
+    - self-hosted
+    - ${{ matrix.customer }}
+    - ${{ inputs.machine_name||matrix.machine_type||'Regression-PC' }}
+    - TT-Automation
+    timeout-minutes: 7200
+    env:
+      HTTP_PROXY: ${{ secrets.PROXY_URL }}
+      HTTPS_PROXY: ${{ secrets.PROXY_URL }}
+      NO_PROXY: rb-artifactory.bosch.com,rb-tracker.bosch.com
+
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.WORKFLOW_TOKEN }}
+
+    - name: Install Prerequisites
+      id: install_prerequisites
+      shell: bash
+      run: |
+        cd API_Test
+        pip install -r requirements.txt
+
+    - name: Import Tests from JIRA (Xray)
+      shell: bash
+      run: |
+        cd API_Test/features 
+        python jira_operations.py import_test_from_jira --jira_id="${{ matrix.test_execution }}"
+
+    - name: Check device version
+      id: check_device_version
+      shell: bash
+      run: |
+        echo 'Checking device FW version with Desired_FW_Version'
+        cd API_Test/features
+        if [ "${{github.event_name}}" == "workflow_dispatch" ] && [ "${{inputs.Desired_FW_Version}}" == "" ]; then
+          echo "Intentionally avoiding device FW version check as per user input"
+        elif [ "${{github.event_name}}" == "workflow_dispatch" ] && [ "${{inputs.Desired_FW_Version}}" != "" ]; then
+          behave API_check_device_version.feature -D specimen_device="${{inputs.TestDevice}}" -D Desired_FW_Version=${{ inputs.Desired_FW_Version }} -D Type_of_update=${{ inputs.Type_of_update }} -D device_type=${{ matrix.customer }} --no-capture --no-capture-stderr --no-logcapture
+        elif [ "${{github.event_name}}" == "schedule" ] || [ "${{inputs.trigger_event}}" == "Pull_Request" ]; then
+          behave API_check_device_version.feature -D specimen_device="${{inputs.TestDevice}}" -D Type_of_update=Delta_Update -D device_type=${{ matrix.customer }} --no-capture --no-capture-stderr --no-logcapture
+        fi
+
+    - name: Execute Tests
+      id: test_executor
+      shell: bash
+      continue-on-error: true
+      run: |
+        echo "start_time=$(date +%s)" >> $GITHUB_OUTPUT
+        cd API_Test/features
+        version_file="../../version.json"
+        if test -f "$version_file"; then
+          python jira_operations.py update_test_execution_summary --test_exec_key="${{ matrix.test_execution }}" --run_id=${{github.run_id}} --job_name="${{matrix.customer}}_${{matrix.suite}}_${{github.job}}"
+        fi
+        if [ "${{ matrix.suite }}" == "Load" ]; then
+          behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D specimen_device="${{inputs.TestDevice}}" -D jira_test="true" -D TEST_EXECUTION_ID=${{ matrix.test_execution }} --no-capture --no-logcapture
+        else
+          behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D specimen_device="${{inputs.TestDevice}}" -D rerun_failed_test='true' -D jira_test="true" -D TEST_EXECUTION_ID=${{ matrix.test_execution }} --no-capture --no-logcapture
+        fi
+    - name: Post build actions
+      if: ${{ always() }}
+      shell: bash
+      id: post_execution_actions
+      run: |
+        python report.py
+        end_time=$(date +%s)
+        total_time=$(date -u -d "0 $end_time seconds - ${{steps.test_executor.outputs.start_time}} seconds" +"%H:%M:%S")
+        report_data=$(cat << EOF
+        Execution Time: $total_time
+        <br>
+        Check console output at ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        <br>
+        Check Test Execution in JIRA
+        <a href="https://rb-tracker.bosch.com/tracker15/browse/${{ matrix.test_execution }}", showTruncatedLines=false, substText="ETEMC-$1"}">${{ matrix.test_execution }} </a>
+        <br>
+        EOF)
+        echo "$(echo -n $report_data; cat report.html)" > report.html
+        cd API_Test/features
+        python jira_operations.py update_test_execution_summary --test_exec_key="${{ matrix.test_execution }}" --run_id=${{github.run_id}} --job_name="${{matrix.customer}}_${{matrix.suite}}_${{github.job}}"
+
+    - name: Email Test Execution Report
+      if: ${{ always() }}
+      id: Email_Publisher
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{secrets.SMTP_SERVER}}
+        server_port: 25
+        username: ${{secrets.JIRA_USERNAME}}
+        password: ${{secrets.JIRA_PASSWORD}}
+        subject: ${{matrix.customer}}_${{matrix.suite}}_${{inputs.trigger_event||github.job}}
+          on ${{runner.name}} ${{inputs.branch_name}}
+        to: Be18_CS_CS_MC_TEAM_E2EGAME@bcn.bosch.com
+        from: Github actions <Serv01.Serviceaccount@etas.com>
+        html_body: file://report.html
+        ignore_cert: true
+
+    - name: Upload Result Data
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: execution_report_${{ matrix.test_execution }}
+        if-no-files-found: ignore
+        retention-days: 10
+        path: |-
+          cucumber_formated_result.json
+          temp/test_with_defects.json
+          API_Test/features/Test_Execution.log
+          report.html

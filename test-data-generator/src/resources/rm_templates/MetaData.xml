@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config:config schemaMajor="2" schemaMinor="21" xmlns:config="http://bosch.de/AA_AS/Telediag/Configuration" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <config:content xsi:type="config:MetaData">
+    <config:deviceId>DEVICE_ID</config:deviceId>
+    <config:resultMetaData xsi:type="config:DataLoggerResultMetaData">
+      <config:jobId>JOB_ID</config:jobId>
+      <config:jobName>JOB_NAME</config:jobName>
+      <config:sourceComponentId>CDP</config:sourceComponentId>
+      <config:sourceComponentVersion>21.48.4</config:sourceComponentVersion>
+      <config:dataLoggerResultEntries>
+        <config:endMileage>-1.0</config:endMileage>
+        <config:endTime>RESULT_END_TIME</config:endTime>
+        <config:resultFolderName></config:resultFolderName>
+        <config:startMileage>-1.0</config:startMileage>
+        <config:startTime>RESULT_START_TIME</config:startTime>
+        <config:executionStatus>STATUS_OF_RM</config:executionStatus>
+      </config:dataLoggerResultEntries>
+    </config:resultMetaData>
+    <config:vin>VIN</config:vin>
+  </config:content>
+</config:config>

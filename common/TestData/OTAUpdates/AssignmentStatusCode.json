@@ -1,0 +1,16 @@
+{
+    "assignmentStatusCode": {
+        "UPDATE_ASSIGNED": [null, null],
+        "UPDATE_TRIGGERED": [100, "Idle/Start"],
+        "DOWNLOADING":[101, "Download Progressing"],
+        "DOWNLOAD_SUCCESS": [102, "Download Complete"],
+        "WAITING_FOR_UPDATE_CONDITION": [301, "Wait for Install Conditions"],
+        "UPDATING": [103, "Installation Progressing"],
+        "UPDATE_SUCCESS": [1200, "Successful"],
+        "DOWNLOAD_FAILURE": [1400, "Client Error"],
+        "UPDATE_FAILURE": [1405, "Installation Failed"],
+        "1403"  :"AuthenticationFailed",
+        "1407": "Signature check",
+        "1414": "Corrupted package"
+    }
+}

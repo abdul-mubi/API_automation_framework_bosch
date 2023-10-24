@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config:config schemaMajor="2" schemaMinor="7" xmlns:config="http://bosch.de/AA_AS/Telediag/Configuration" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <config:content xsi:type="TaskIndex">
+    <config:taskIndexEntry>
+      <config:file>task.xml</config:file>
+      <config:signature>0000000000000000000000000000000000000000000000000000000000000000</config:signature>
+      <config:type>TASK_REQUEST</config:type>
+    </config:taskIndexEntry>
+    <config:taskIndexEntry>
+      <config:file>cdpJobConfig.xml</config:file>
+      <config:signature>0000000000000000000000000000000000000000000000000000000000000000</config:signature>
+      <config:type>JOB_CONFIG</config:type>
+    </config:taskIndexEntry>
+  </config:content>
+</config:config>

@@ -1,0 +1,7 @@
+date Mon Feb 11 13:30:58 PM 2019
+base hex timestamps absolute
+no internal events logged
+// version 8.5.0
+    0.000000 1  1CFF0527x Rx   d 8 10 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 486475047x
+	1.000000 1  1CFF0527x Rx   d 8 10 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 486475047x
+	2.000000 1  1CFF0527x Rx   d 8 10 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 486475047x

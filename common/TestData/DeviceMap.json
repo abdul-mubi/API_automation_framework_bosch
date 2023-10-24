@@ -1,0 +1,390 @@
+{
+  "FE-Z1O03": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.205.10",
+      "vrs_port": "ETAS://ETH/ES593_D:2202286/CAN:1",
+      "vrs_port_2": "ETAS://ETH/ES593_D:2202286/CAN:3",
+      "vrs_port_3": "ETAS://USB/ES582.1:100116/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:100116/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_1020000011",
+      "device_env": "azure_eu",
+      "vin": "AUT20232606025331",
+      "device_config" :"PACCAR_TCU2_EU_PROD"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.42.6",
+      "vrs_port": "ETAS://ETH/ES593_D:2202286/CAN:2",
+      "vrs_port_2": "ETAS://ETH/ES593_D:2202286/CAN:4",
+      "vrs_port_3": "ETAS://USB/ES582.1:109314/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:109314/CAN:2",
+      "switch_port_cl15": "1",
+      "switch_port_cl30": "0",
+      "device_type": "CCU",
+      "device_name": "CCU_2760003357",
+      "device_env": "azure_eu",
+      "vin": "AUT20230208025331",
+      "device_config" :"PACCAR_TCU2_EU_PROD"
+    }
+  },
+  "FE2Z00XT": {
+    "switch_IP": "Cleware_FE2Z00SN",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://USB/ES582.1:4217033/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217033/CAN:2",
+      "switch_port_cl15": "5",
+      "switch_port_cl30": "4",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003553",
+      "device_env": "azure_eu",
+      "vin": "AUT20201027063505",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    },
+    "CCU2":{
+      "CCU_IP": "192.168.205.10",
+      "vrs_port": "",
+      "vrs_port_2": "",
+      "switch_port_cl15": "1",
+      "switch_port_cl30": "0",
+      "device_type": "CCU",
+      "device_name": "CCU_2750003566",
+      "device_env": "azure_na_paccar",
+      "vin": "AUT20232706030825",
+      "device_config" :"PACCAR_TCU2_NA_PROD"
+    }
+  },
+  "FE-Z1VCG": {
+    "switch_IP": "Cleware_FE2Z00SN",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://USB/ES582.1:4217167/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217167/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003527",
+      "device_env": "azure_eu",
+      "vin": "AUT20201027063506",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    }
+  },
+  "FE2Z00SN": {
+    "switch_IP": "Cleware",
+    "CCU2": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://ETH/ES523:2203936/CAN:1",
+      "vrs_port_2": "ETAS://ETH/ES523:2203936/CAN:3",
+      "vrs_port_3": "ETAS://USB/ES581.4:2200082/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES581.4:2200082/CAN:2",
+      "switch_port_cl15": "1",
+      "switch_port_cl30": "0",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003532",
+      "device_env": "azure_eu",
+      "vin": "AUT20201027063500",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    },
+    "CCU": {
+      "CCU_IP": "192.168.10.50",
+      "vrs_port": "ETAS://ETH/ES523:2203936/CAN:2",
+      "vrs_port_2": "ETAS://ETH/ES523:2203936/CAN:4",
+      "switch_port_cl15": "7",
+      "switch_port_cl30": "6",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003535",
+      "device_env": "azure_eu",
+      "vin": "AUT20201027063501",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    }
+  },
+  "LB-C-00029": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port_3": "ETAS://ETH/ES523:2204520/CAN:1",
+      "vrs_port_4": "ETAS://ETH/ES523:2204520/CAN:3",
+      "vrs_port": "ETAS://USB/ES582.1:4217087/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217087/CAN:2",
+      "switch_port_cl15": "5",
+      "switch_port_cl30": "4",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006230",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063511",
+      "device_config" :"HINO_TCU_DEBUG"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.10.50",
+      "vrs_port_3": "ETAS://ETH/ES523:2204520/CAN:2",
+      "vrs_port_4": "ETAS://ETH/ES523:2204520/CAN:4",
+      "vrs_port": "ETAS://USB/ES582.1:4216995/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4216995/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006466",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063512",
+      "device_config" :"HINO_TCU_DEBUG"
+    }
+  },
+  "LB-C-00023":{
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://ETH/ES593_D:9900019/CAN:1",
+      "vrs_port_2": "ETAS://ETH/ES593_D:9900019/CAN:3",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217364/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:4217364/CAN:2",
+      "switch_port_cl15": "5",
+      "switch_port_cl30": "4",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006505",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063551",
+      "device_config" :"HINO_TCU_DEBUG"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.10.50",
+      "vrs_port": "ETAS://ETH/ES593_D:9900019/CAN:2",
+      "vrs_port_2": "ETAS://ETH/ES593_D:9900019/CAN:4",
+      "vrs_port_3": "ETAS://USB/ES582.1:109309/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:109309/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006498",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063552",
+      "device_config" :"HINO_TCU_DEBUG"
+    }
+  },
+  "LB-C-00025": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://USB/ES582.1:4217346/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217346/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006503",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063514",
+      "device_config" :"HINO_TCU_DEBUG"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.10.50",
+      "vrs_port": "ETAS://USB/ES582.1:4217363/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217363/CAN:2",
+      "switch_port_cl15": "1",
+      "switch_port_cl30": "0",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006512",
+      "device_env": "azure_na",
+      "vin": "",
+      "device_config" :"HINO_TCU_DEBUG"
+    }
+  },
+  "LB-C-00026": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://USB/ES582.1:4217172/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217172/CAN:2",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217025/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:4217025/CAN:2",
+      "device_IP": "",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003714",
+      "device_env": "azure_eu",
+      "vin": "AUT20201027066666",
+      "device_config" :"PACCAR_TCU_NON_NGD"
+    }
+  },
+  "LB-C-00027": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://ETH/ES523:2204516/CAN:1",
+      "vrs_port_2": "ETAS://ETH/ES523:2204516/CAN:3",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217119/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:4217119/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003548",
+      "device_env": "azure_eu",
+      "vin": "AUT20230424053838",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.10.50",
+      "vrs_port": "ETAS://ETH/ES523:2204516/CAN:2",
+      "vrs_port_2": "ETAS://ETH/ES523:2204516/CAN:4",
+      "switch_port_cl15": "5",
+      "switch_port_cl30": "4",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003539",
+      "device_env": "azure_eu",
+      "vin": "AUT20201027063517",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    }
+  },
+  "LB-C-00024": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://ETH/ES593_D:9900019/CAN:2",
+      "vrs_port_2": "ETAS://ETH/ES593_D:9900019/CAN:4",
+      "vrs_port_3": "ETAS://USB/ES582.1:109308/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:109308/CAN:2",
+      "switch_port_cl15": "4",
+      "switch_port_cl30": "5",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006229",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063509",
+      "device_config" :"HINO_TCU_DEBUG"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.10.50",
+      "vrs_port": "ETAS://ETH/ES593_D:9900019/CAN:1",
+      "vrs_port_2": "ETAS://ETH/ES593_D:9900019/CAN:3",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217088/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:4217088/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2710006508",
+      "device_env": "azure_na",
+      "vin": "AUT20201027063510",
+      "device_config" :"HINO_TCU_DEBUG"
+    }
+  },
+  "LB-C-00021": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.205.10",
+      "vrs_port": "ETAS://USB/ES582.1:4217166/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217088/CAN:2",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217088/CAN:1",
+      "switch_port_cl15": "5",
+      "switch_port_cl30": "4",
+      "device_type": "CCU",
+      "device_name": "CCU_2750001244",
+      "device_env": "azure_na_paccar",
+      "vin": "E2EYDL1H4D9000001",
+      "device_config" :"PACCAR_TCU2_NA_PROD"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.1.40",
+      "vrs_port": "ETAS://ETH/ES523:2204528/CAN:1",
+      "vrs_port_2": "ETAS://ETH/ES523:2204528/CAN:3",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217092/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:4217092/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2740003567",
+      "device_env": "azure_eu_bi",
+      "vin": "AUT20201027063521",
+      "device_config" :"PACCAR_TCU_DEBUG"
+    }
+  },
+  "LB-C-000N1": {
+    "switch_IP": "Cleware",
+    "CCU2": {
+      "CCU_IP": "192.168.205.10",
+      "vrs_port": "ETAS://USB/ES582.1:4217345/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217345/CAN:2",
+      "switch_port_cl15": "2",
+      "switch_port_cl30": "3",
+      "device_type": "CCU",
+      "device_name": "CCU_2750001235",
+      "device_env": "azure_na_paccar",
+      "vin": "RRSYDL1H4D9000005",
+      "device_config" :"PACCAR_TCU2_NA_PROD"
+    },
+    "CCU": {
+      "CCU_IP": "192.168.42.1",
+      "vrs_port": "ETAS://USB/ES582.1:109308/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:109308/CAN:2",
+      "vrs_port_3":"ETAS://USB/ES582.1:4217171/CAN:1",
+      "switch_port_cl15": "6",
+      "switch_port_cl30": "7",
+      "device_type": "CCU",
+      "device_name": "CCU_1020000020",
+      "device_env": "azure_eu",
+      "vin": "AUT20230623012017",
+      "device_config" :"PACCAR_TCU2_EU_PROD"
+    }
+  },
+  "BF4-C-001XT": {
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.205.10",
+      "vrs_port": "ETAS://USB/ES582.1:4227810/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4227810/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_2760003357",
+      "device_env": "azure_eu",
+      "vin": "AUT20231710121505",
+      "device_config" :"PACCAR_TCU2_EU_PROD"
+    }
+  },
+  "LB-C-000N4":{
+    "switch_IP": "Cleware",
+    "CCU": {
+      "CCU_IP": "192.168.42.1",
+      "vrs_port": "ETAS://USB/ES582.1:4217037/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217037/CAN:2",
+      "switch_port_cl15": "3",
+      "switch_port_cl30": "2",
+      "device_type": "CCU",
+      "device_name": "CCU_1020000004",
+      "device_env": "azure_eu",
+      "vin": "AUT20232606025315",
+      "device_config" :"PACCAR_TCU2_EU_PROD"
+    },
+    "CCU2": {
+      "CCU_IP": "192.168.205.10",
+      "vrs_port": "ETAS://USB/ES582.1:4217025/CAN:1",
+      "vrs_port_2": "ETAS://USB/ES582.1:4217025/CAN:2",
+      "vrs_port_3": "ETAS://USB/ES582.1:4217170/CAN:1",
+      "vrs_port_4": "ETAS://USB/ES582.1:4217170/CAN:2",
+      "switch_port_cl15": "0",
+      "switch_port_cl30": "1",
+      "device_type": "CCU",
+      "device_name": "CCU_2750003419",
+      "device_env": "azure_na_paccar",
+      "vin": "RRSYDL1H4D9000007",
+      "device_config" :"PACCAR_TCU2_NA_PROD"
+    }
+  },
+  "virtual_devices":
+  {
+    "virtual_device1": {
+      "device_name": "E2E_OTA_DEVICE_007",
+      "device_env": "azure_eu",
+      "device_customer": "PACCAR",
+      "vin": "AUT20161019879894",
+      "device_config" :"VIRTUAL_DEVICE"
+    },
+    "virtual_device2": {
+      "device_name": "E2E_OTA_DEVICE_008",
+      "device_env": "azure_eu",
+      "device_customer": "PACCAR",
+      "vin":"AUT20161019879895",
+      "device_config" :"VIRTUAL_DEVICE"
+    }
+  }
+}

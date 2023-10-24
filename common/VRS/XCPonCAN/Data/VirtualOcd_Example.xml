@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<VOCD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="VirtualOcd.xsd">
+  <Tree>
+    <Node AccessParam="DLL=VirtualOcd.dll;URI=ETAS://USB" NodeType="CSI_NODE_INTERMEDIATE_INTERFACE" UriName="USB">
+      <API>
+        <Syntax Uuid="UUID_CSI_ESS" Version="1.1.0.0"/>
+        <Binding Uuid="UUID_DLL_BIND" Version="1.0.0.0"/>
+        <Affinity Uuid="AFFINITY_CURRENT_SYSTEM_AND_PROCESS"/>
+      </API>
+      <Node NodeType="CSI_NODE_SYSTEM" UriName="ES582.1:0">
+        <DEV_LicenceValues>
+          <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+        </DEV_LicenceValues>
+        <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+          <API>
+            <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+          </API>
+        </Protocol>
+        <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <OCI_CANControllerCapabilities canFDSupport="15"/>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <OCI_CANControllerCapabilities canFDSupport="15"/>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+    </Node>
+    <Node NodeType="CSI_NODE_INTERMEDIATE_INTERFACE" UriName="SIM">
+      <Node NodeType="CSI_NODE_SYSTEM" UriName="SimDevice">
+        <DEV_LicenceValues>
+          <DEV_LicenceValue Id="DEV_OPERATES_WITH_INCA" Value="1"/>
+        </DEV_LicenceValues>
+        <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="DEV">
+          <API>
+            <Syntax Uuid="UUID_DEV" Version="1.1.0.0"/>
+          </API>
+        </Protocol>
+        <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:1">
+          <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+        <CANPort BusId="CANBus" NodeType="CSI_NODE_CONTROLLER_PORT" UriName="CAN:2">
+          <OCI_CANControllerCapabilities SyncEdge="7" canFDSupport="15"/>
+          <Protocol NodeType="CSI_NODE_PROTOCOL_OCI" UriName="OCICAN">
+            <API>
+              <Syntax Uuid="UUID_OCI_AUTO_CAN"/>
+            </API>
+          </Protocol>
+        </CANPort>
+      </Node>
+    </Node>
+  </Tree>
+  <OCI_QueueCapabilities MaxCapacity="4096" MinCapacity="4096"/>
+  <RPCServer Port="9876" UniqueID="1DED6E50-1769-11E1-BDDB-0800200C9A66"/>
+</VOCD>

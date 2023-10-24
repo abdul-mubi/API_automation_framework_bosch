@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config schemaMajor="2" schemaMinor="17" xmlns="http://bosch.de/AA_AS/Telediag/Configuration">
+    <content xsi:type="CdpJobConfig" jobId="cadc469d-f484-490d-957b-21ed1f5a7b53" jobVersion="23" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <jobPriority>HIGH</jobPriority>
+        <name>POWER_CTPG_new</name>
+        <measurementConfig>
+            <daq xsi:type="DeviceSignalsDAQ">
+                <name>DeviceSignals</name>
+                <signal>
+                    <name>SupplyVoltage</name>
+                    <samplingRateMs>100</samplingRateMs>
+                    <uid>CTP-SupplyVoltage</uid>
+                    <type>SUPPLY_VOLTAGE</type>
+                </signal>
+            </daq>
+        </measurementConfig>
+        <reportingConfig>
+            <reportingSettings xsi:type="ContinuousReporting">
+                <signal>CTP-SupplyVoltage</signal>
+                <uploadPeriodSeconds>60</uploadPeriodSeconds>
+            </reportingSettings>
+        </reportingConfig>
+    </content>
+</config>

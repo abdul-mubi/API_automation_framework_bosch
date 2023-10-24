@@ -1,0 +1,92 @@
+name: Multi Device Update
+on:
+  workflow_dispatch:
+    inputs:
+      machine_name:
+        description: Machine Name
+        type: choice
+        options:
+          - FE-Z1O03
+          - FE2Z00XT
+          - FE-Z1VCG
+          - FE2Z00SN
+          - LB-C-00021
+          - LB-C-00022
+          - LB-C-00023
+          - LB-C-00024
+          - LB-C-00026
+          - LB-C-00027
+          - LB-C-00029
+      Desired_FW_Version:
+        description: Desired device version for all applicable devices
+        required: true
+        type: string
+        default: ''
+      Type_of_update:
+        description: Preferred type of update
+        type: choice
+        required: false
+        options:
+        - Delta_Update
+        - Full_Update
+        default: Delta_Update
+
+jobs:
+  Device_Updater:
+    runs-on:
+    - self-hosted
+    - TT-Automation
+    - ${{ inputs.machine_name }}
+    env:
+      HTTP_PROXY: ${{ secrets.PROXY_URL }}
+      HTTPS_PROXY: ${{ secrets.PROXY_URL }}
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.WORKFLOW_TOKEN }}
+
+    - name: Install Prerequisites
+      id: install_prerequisites
+      shell: bash
+      run: |
+        cd API_Test
+        pip install -r requirements.txt
+
+    - name: Install Device FW
+      id: install_device_fw
+      shell: bash
+      run: |
+        echo 'Checking device FW version with Desired_FW_Version'
+        cd API_Test/features
+        behave API_Self_Update_via_Campaign.feature -D Desired_FW_Version=${{ inputs.Desired_FW_Version }} -D Type_of_update=${{ inputs.Type_of_update }}  --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json --no-capture --no-logcapture
+
+    - name: Post build actions
+      if: ${{ always() }}
+      shell: bash
+      id: post_execution_actions
+      run: |
+        python report.py
+        report_data=$(cat << EOF
+        Check console output at ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        <br>
+        EOF)
+        echo "$(echo -n $report_data; cat report.html)" > report.html
+
+    - name: Email Test Execution Report
+      if: ${{ always() }}
+      id: Email_Publisher
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{secrets.SMTP_SERVER}}
+        server_port: 25
+        username: ${{secrets.JIRA_USERNAME}}
+        password: ${{secrets.JIRA_PASSWORD}}
+        subject: Multi Device Update on ${{runner.name}}
+        to: ${{github.actor}}@bosch.com
+        from: Github actions <Serv01.Serviceaccount@etas.com>
+        html_body: file://report.html
+        ignore_cert: true

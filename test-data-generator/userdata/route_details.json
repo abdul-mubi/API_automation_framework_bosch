@@ -1,0 +1,5 @@
+{
+	"Route1" : ["Berlin", "Hamburg", "Bremen", "Hannover", "Leipzig", "Dresden", "Berlin"],
+	"Route2" : ["Stuttgart", "Frankfurt", "Nuremberg", "Munich", "Stuttgart"],
+	"Route3" : ["Stuttgart", "Ludwigsburg", "Ditzingen", "Stuttgart"]
+}

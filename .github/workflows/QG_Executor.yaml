@@ -1,0 +1,80 @@
+name: QG Executor
+
+on:
+  workflow_dispatch:
+    inputs:
+      TEST_EXECUTION_ID:
+        description: Enter test execution id
+        required: true
+        type: string
+      Action:
+        description: Select the Action
+        required: true
+        type: choice
+        options:
+        - VALIDATE_QG
+        - CLONE_TEST_EXECUTION
+        - EXECUTE
+        default: ""
+      machine_name:
+        description: Machine Name
+        required: false
+        type: choice
+        options:
+        - FE-Z1O03
+        - FE2Z00XT
+        - FE2Z00SN
+        - FE-Z1VCG
+        - LB-C-00027
+        - LB-C-00024
+        default: ""
+
+jobs:
+  QG_Execution:
+    runs-on:
+    - self-hosted
+    - TT-Automation
+    - ${{ inputs.machine_name }}
+    env:
+      HTTP_PROXY: http://10.4.103.69:8080
+      HTTPS_PROXY: http://10.4.103.69:8080
+      NO_PROXY: https://rb-artifactory.bosch.com,rb-tracker.bosch.com,inside-docupedia.bosch.com,rb-wam-mas.bosch.com
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Install Prerequisites
+      id: Install_Prerequisites
+      run: |
+        cd qg-automation
+        pip install -r requirements.txt --proxy=https://rb-proxy-de.bosch.com:8080
+    - name: Execute Tests
+      id: Test_Executor
+      shell: bash
+      run: |
+        cd qg-automation
+        python automated_qgs.py --te_id ${{ inputs.TEST_EXECUTION_ID }} --action ${{ inputs.Action }}
+
+    - name: Generate Report
+      if: ${{ always() }}
+      id: Report_Generator
+      run: |
+        cd qg-automation
+        python report.py ${{ inputs.TEST_EXECUTION_ID }} ${{ inputs.Action }}
+
+    - name: Email Test Execution Report
+      if: ${{ always() }}
+      id: Email_Publisher
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{secrets.SMTP_SERVER}}
+        server_port: 25
+        username: ${{secrets.JIRA_USERNAME}}
+        password: ${{secrets.JIRA_PASSWORD}}
+        subject: ${{github.actor}}_${{github.job}} on ${{runner.name}}
+        to: ${{github.actor}}@bosch.com
+        from: Github actions <Serv01.Serviceaccount@etas.com>
+        html_body: file://qg-automation//report.html
+        ignore_cert: true

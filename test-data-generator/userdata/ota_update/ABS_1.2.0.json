@@ -1,0 +1,10 @@
+{
+    "softwareNodes": [
+        {
+            "id": "ABS",
+            "name": "Anti-lock braking system",
+            "type": 1,
+            "version": "1.2.0"
+        }
+    ]
+}

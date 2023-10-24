@@ -1,0 +1,140 @@
+DEVICE_VERSION=''
+EXECUTION_DETAILS=''
+
+pipeline {
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+    }
+    parameters {
+        string (name:'JIRA_ID')
+        string (name:'MACHINE')
+        string (name:'GITBranch')
+        string (name:'Test_plan_id')
+        string (name:'Desired_FW_Version')
+        string (name:'SU_Up_version')
+        string (name:'SU_Down_version')
+        string (name:'Type_of_update')
+    }
+    agent {node "${MACHINE}"}
+
+    stages {
+        stage('Stage - GIT checkout'){
+            steps{
+                echo "GIT checkout of selected branch - ${params.GITBranch}"
+                checkout([$class: 'GitSCM', branches: [[name: "${params.GITBranch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '816c4b91-f2e7-431c-95a4-f9de22721f2a', url: 'https://github.boschdevcloud.com/MC/tedtitans-automation-repo.git']]])
+            }
+        }
+    
+        stage('Export features from Xray'){
+            steps {
+                echo 'exporting tests from GIT repo to JIRA'
+                step([$class: 'XrayExportBuilder', filePath: './API_Test/features/xRay', issues: params.JIRA_ID, serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f'])
+            }
+        }
+
+        stage('Check device version'){
+            steps {
+                echo 'Checking device FW version with Desired_FW_Version'
+                script{
+                    bat '''cd API_Test
+pip install -r requirements.txt --proxy=https://rb-proxy-in.bosch.com:8080'''
+                    command = "behave API_check_device_version.feature -D Desired_FW_Version=%Desired_FW_Version% -D Type_of_update=%Type_of_update% -D Desired_default_FW_Version=${env.Desired_default_FW_Version} --no-logcapture --no-capture"     
+                    bat(script: "cd API_Test/features && ${command}")  
+                }
+            }
+        }
+
+        stage('Build'){
+            steps {
+                catchError{
+                    script{
+                        command = "behave --format=cucumber_json:PrettyCucumberJSONFormatter -o ../../cucumber_formated_result.json xRay -D rerun_failed_test='true' -D Desired_FW_Version=%Desired_FW_Version% -D SU_Up_version=%SU_Up_version% -D SU_Down_version=%SU_Down_version% --no-logcapture --no-capture"
+                        bat(script: "cd API_Test/features && ${command}")    
+                    }
+                }
+            }
+        }
+
+        stage('Post build actions'){
+            steps{
+                catchError{
+                    script{
+                        DEVICE_VERSION = bat returnStdout: true, script: '''@ECHO OFF
+setlocal enableextensions enabledelayedexpansion
+for /f "delims=" %%x in (version.json) do set "string=!string!%%x"
+
+set DEVICE_VERSION=%string:"=\\\'%
+
+echo %DEVICE_VERSION%'''
+                    
+                        EXECUTION_DETAILS = bat returnStdout: true, script: '''@ECHO OFF
+
+setlocal enableextensions enabledelayedexpansion
+for /f "delims=" %%x in (version.json) do set "string=!string!%%x"
+
+set string=%string:"=\\\'%
+
+python execution_title.py version.json %JOB_BASE_NAME%> Output
+SET /p MYVAR=<Output
+
+ECHO %MYVAR%'''
+                    
+                        bat '''python report.py
+ForFiles /p "..\\Logs" /s /d -8 /c "cmd /c del /q @file"
+if not exist Logs mkdir Logs
+for /f "eol=: delims=" %%f in (\'dir "..\\Logs\\API*.log" /b /od\') do @set "latestlog=%%f"
+copy ..\\Logs\\%latestlog% Logs /y
+echo check the logs at %JOB_URL%ws/Logs/%latestlog%
+echo "Updating cucumber result json file"
+python cucumber_result_update.py'''
+                    }
+                }
+            }
+        }
+        
+        stage('Import results to Xray (multipart)') {
+            steps {
+                step([$class: 'XrayImportBuilder', endpointName: '/cucumber/multipart', importToSameExecution: 'true',importFilePath: 'cucumber_formated_result.json', projectKey: 'ETEMC', serverInstance: 'ee66ba9f-baba-41fa-ad60-668b06ec5d7f',inputInfoSwitcher:"fileContent", 
+                importInfo:"""{
+                "fields": {
+                    "project": {
+                        "key": "ETEMC"
+                    },
+                    "summary": "${EXECUTION_DETAILS}",
+                    "description":"Device details in the machine: \n${DEVICE_VERSION}",
+                    "issuetype": {
+                        "name":"Test Execution"
+                    },
+                    "customfield_10627":[${Test_plan_id}]
+                    }
+                }"""])
+            }
+        }
+
+        stage('Report email'){            
+            steps{
+                script{
+                    def sub = "${JOB_NAME} - Build ${BUILD_NUMBER}: PC - ${NODE_NAME}"
+                    emailext body: '$DEFAULT_CONTENT', replyTo: '$DEFAULT_REPLYTO', subject: "${sub}", to: '$DEFAULT_RECIPIENTS'
+                }
+            }
+        }
+
+        stage('Generate Cucumber report'){
+            steps{
+                cucumber buildStatus: 'UNSTABLE',
+                fileIncludePattern: '**/cucumber_formated_result.json',
+                sortingMethod: 'ALPHABETICAL'
+            }
+        }
+
+        stage('Update test execution with defects'){
+            steps {
+                script{
+                    command = "python update_test_execution_with_defects.py ${params.JIRA_ID}"     
+                    bat(script: "${command}")    
+                }
+            }
+        }
+    }
+}

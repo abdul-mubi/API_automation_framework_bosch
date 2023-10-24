@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import public "device_to_backend_message_meta.proto";
+
+message GpsPositionReportEvent {
+
+  DeviceToBackendMessageMeta meta = 3347973;
+
+  float longitude = 137365935;
+
+  float latitude = 366236566;
+
+  float altitude = 425937573;
+
+  int32 heading = 258440707;
+
+  float speed = 109641799;
+
+  float accuracy = 521094922;
+
+  int64 timestamp = 55126294;
+
+}

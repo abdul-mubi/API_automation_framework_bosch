@@ -1,0 +1,190 @@
+syntax = "proto2";
+
+package RemoteMeasurement_v3;
+
+/* 
+    Main message object 
+*/
+message Measurement {
+    optional int64 VERSION_SCHEMA = 1 [default = 3];            /* WARNING: Change default value when the schema is modified */
+
+    repeated SeriesGroup series_group = 2;
+    repeated Marker marker = 3;
+}
+
+/* 
+    A marker is representative of an event that occurs during a recording and that gives context to the measured results (ex: trigger, user pushes a button...)
+
+    --> Marker materializes the concept of Test-Step ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=489721529#RMMeasurement-Data(Concept)-teststeps )
+ */
+message Marker {
+    required sint64 timestamp = 1;          /* UTC time, unit = ms */
+    required string label = 2;
+    required MarkerType type = 3;
+    repeated MarkerData data = 4;
+}
+
+/*
+    Type of marker.
+*/
+enum MarkerType {
+    START_TRIGGER = 0;          /* Start condition has occurred */
+    STOP_TRIGGER = 1;           /* Stop condition has occurred */
+    DRIVE_CYCLE_START = 2;      /* CDP startup */
+    DRIVE_CYCLE_END = 3;        /* CDP shutdown */
+    GENERIC_EVENT = 4;          /* Event created by a MeasurementMarker in job config */ 
+    JOB_INSTALLATION = 5;       /* Job has just been installed and starts now */
+    JOB_UNINSTALLATION = 6;     /* Job is being stopped because it's uninstalled */
+}
+
+/*
+    Data associated with a marker (if marker is caused by a trigger, this corresponds to TriggerCondition elements of the trigger event).
+*/
+message MarkerData {
+    required string name = 1;
+    required string value = 2;
+}
+
+/* 
+    A SeriesGroup groups under a same structure all series that belongs together. For instance, if several signals are read from a raw CAN frame, both the raw frame values and the signals
+    values are part of the same group because they belong to the same timeline (i.e. data points are derived from the same event). 
+    In CdpJobConfig, each AbstractDAQ is a SeriesGroup (and at least one Series).
+*/
+message SeriesGroup {
+    repeated Series series = 1;
+    repeated TimePoint time_point = 2;
+}
+
+/*
+    Definition of a target value for a Series.
+
+    --> https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=489721529#RMMeasurement-Data(Concept)-feeds
+*/
+message Series {
+  required uint32 key = 1;              /* Internal id to match Series and DataPoint(field series_ref) */
+  required string name = 2;             /* Name of the Series (element CdpJobConfig.MeasurementConfig.AbstractDAQ.name) */
+  required ValueType value_type = 3;
+  required string uid = 4;              /* Unique system-wide id of the series (something name is only unique in a certain scope) */
+}
+
+/*
+    Type of values for the data points of the current Series.
+*/
+enum ValueType {
+  UNKNOWN = 0;
+  BOOL = 1;
+  BYTES = 2;
+  DOUBLE = 3;
+  SINT64 = 4;
+  STRING = 5;
+  GPSDATA = 6;
+  LIST = 7;
+  CLASSIFICATION_ND = 8;
+}
+
+/* 
+    List of values corresponding to a single time point for all series belonging to the current group.
+*/
+message TimePoint {
+    required sint64 timestamp = 1;          /* UTC time, unit = ms */
+    repeated DataPoint data_point = 2;
+}
+
+/*
+    Value of a series (identified by a reference to the series key).
+
+    --> https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=489721529#RMMeasurement-Data(Concept)-datapoints
+*/
+message DataPoint {
+    required uint32 series_ref = 1;
+    required Value value = 2;
+}
+
+/*
+    Generic value.
+*/
+message Value {
+  optional ScalarValue scalar_value = 1;
+  optional GPSData gpsdata_value = 2;
+  optional ScalarList list_value = 3;
+  optional ClassificationND classification_nd_value = 4;
+}
+
+/*
+    Scalar value.
+
+    --> https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-ScalarTypes
+*/
+message ScalarValue {
+  optional bool bool_value = 1;
+  optional bytes bytes_value = 2;
+  optional NumberValue number_value = 3;
+  optional string string_value = 4;
+}
+
+/*
+    Number value ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-NUMBER ).
+*/
+message NumberValue {
+  optional double double_value = 1;
+  optional sint64 sint64_value = 2;
+}
+
+/*
+    GPS position ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-GPS-Position ).
+*/
+message GPSData {
+    required double longitude = 1;
+    required double latitude = 2;
+    optional double elevation = 3;
+    optional uint64 gps_time = 4;
+    optional double direction = 5;
+    optional double gps_speed = 6;
+    optional sint64 last_reading_time = 7;          /* Timestamp where the GPS was last read successfully (in case it's a cached value). If the current point is valid, this field can be omitted. */
+}
+
+/*
+    List of scalar elements ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-LIST ).
+*/
+message ScalarList {
+    repeated ScalarValue value = 1;
+}
+
+/*
+    N-dimensional classification list ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-LIST.CLASSIFICATION.XD ).
+
+    * This also covers 1-dimension classification list when n = 1 ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-LIST.CLASSIFICATION.1D ).
+    * This also covers 2-dimensions classification list when n = 2 ( https://inside-docupedia.bosch.com/confluence/pages/viewpage.action?pageId=497804886#Data-types/-structures-LIST.CLASSIFICATION.2D ).
+*/
+message ClassificationND {
+    required uint32 n = 1;      /* number of dimensions. */
+    repeated ClassificationList value = 2;
+    repeated Axis axis = 3;
+}
+
+/*
+    N-dimensional matrix is composed of lists of lists.
+*/
+message ClassificationList {
+    repeated ClassificationValue value = 1;
+}
+
+/*
+    An element in an N-dimensional list is either another list or a number value.
+*/
+message ClassificationValue {
+    optional NumberValue number_value = 1;
+    optional ClassificationList classification_value = 2;
+}
+
+/*
+    Metadata for 1-dimension in the N-dimension matrix.
+*/
+message Axis {
+    required sint64 start_time = 1;             /* UTC time, unit = ms */
+    required sint64 end_time = 2;               /* UTC time, unit = ms */
+    optional GPSData start_gpsdata = 3;
+    optional GPSData end_gpsdata = 4;
+    optional uint64 start_mileage = 5;
+    optional uint64 end_mileage = 6;
+}

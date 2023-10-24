@@ -1,0 +1,9 @@
+{
+    "desiredState": {
+        "name": ""
+    },
+    "target": {
+        "id": "",
+        "targetType": "VEHICLE"
+    }
+}

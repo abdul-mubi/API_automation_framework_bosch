@@ -1,0 +1,5 @@
+Measurement (VARIABLES RAM) @ 0x00000000 / Length 0x100000
+RP (DATA FLASH) @ 0x76543210 / Length 0x100000 or XXX or YYY       [1985229328]
+    -> Mapping @ 0x00100000                                           [1048576]
+Code (CODE FLASH) @ 0x00300000 / Length 0x4000                        [3145728]
+Info (DATA FLASH) @ 0x00400000 / Length 0xFF                          [4194304]

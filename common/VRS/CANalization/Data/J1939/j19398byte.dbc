@@ -1,0 +1,69 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 2566843906 J1939Message8Byte: 8 Vector__XXX
+ SG_ Signal_01 : 0|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_02 : 8|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_03 : 16|8@1+ (1,0) [0|255] "Num" Vector__XXX
+ SG_ Signal_04 : 24|8@1+ (1,0) [0|255] "Num" Vector__XXX
+
+
+CM_ BO_ 2566843906 "J1939 Message";
+CM_ SG_ 2566843906 Signal_01 "Signal 01 of J1939 message";
+CM_ SG_ 2566843906 Signal_02 "Signal 02 of J1939 message";
+CM_ SG_ 2566843906 Signal_03 "Signal 03 of J1939 message";
+CM_ SG_ 2566843906 Signal_04 "Signal 04 of J1939 message";
+BA_DEF_ SG_  "SPN" INT 0 524287;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG";
+BA_DEF_  "DatabaseVersion" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_  "DatabaseCompiler" STRING ;
+BA_DEF_DEF_  "SPN" 0;
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_DEF_DEF_  "DatabaseVersion" "";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "ProtocolType" "";
+BA_DEF_DEF_  "DatabaseCompiler" "";
+BA_ "VFrameFormat" BO_ 2566843906 3;
+
+BA_ "SPN" SG_ 2566843906 Signal_01 1001;
+BA_ "SPN" SG_ 2566843906 Signal_02 1002;
+BA_ "SPN" SG_ 2566843906 Signal_03 1003;
+BA_ "SPN" SG_ 2566843906 Signal_04 1004;
+

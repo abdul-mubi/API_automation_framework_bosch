@@ -1,0 +1,1 @@
+%~dp0..\CANalization.exe --hardware-device=ETAS://ETH/ES593_D:2202286/CAN:4 --ini=%~dp0..\Data\CANalization_500k.ini --play=%~dp0..\Data\Edurance.asc --repeat --separation-time=10

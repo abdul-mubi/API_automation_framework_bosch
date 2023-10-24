@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+API_Test/offline_tests/logs/
+*.pyc
+API_Test/features/cucumber_formated_result.json
+*.html
+cucumber_formated_result.json
+temp/*
+version.json
+.scannerwork/
+*.pem
+*.log
+test-data-generator/temp/*

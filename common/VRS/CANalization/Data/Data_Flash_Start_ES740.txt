@@ -1,0 +1,8 @@
+date Mon Feb 11 13:30:58 PM 2019
+base hex timestamps absolute
+no internal events logged
+// version 8.5.0
+    0.000000 1  666             Rx   d 8 01 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 1638
+    0.100000 1  667             Rx   d 8 01 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 1639
+   10.000000 1  666             Rx   d 8 01 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 1638
+   10.100000 1  667             Rx   d 8 01 00 00 00 00 00 00 00  Length = 244000 BitCount = 126 ID = 1639
