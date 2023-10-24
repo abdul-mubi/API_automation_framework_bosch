@@ -1,0 +1,14 @@
+{
+  "CCU": {
+    "Version": {
+      "FW-Version": "1.0.3"
+    },
+    "Device-ID": "E2E_OTA_DEVICE_007",
+    "Customer": "VIRTUAL_DEVICE",
+    "Environment": "azure_eu",
+    "Tenant": "EU_MC_INTEGRATION",
+    "Selected": "True"
+  }
+}
+
+
